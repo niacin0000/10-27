@@ -26,21 +26,19 @@ MonoBehaviour:
     EnableProtocolFallback: 1
     AuthMode: 0
     EnableLobbyStatistics: 0
-    NetworkLogging: 5
-  DevRegion: 
-  PunLogging: 2
+    NetworkLogging: 1
+  DevRegion: kr
+  PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
   - ClickRpc
+  - DestroyButton
   - DestroyRpc
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - DestroyButton
-  - CreateCube1
-  - CreateCube2
   DisableAutoOpenWizard: 1
-  ShowSettings: 1
+  ShowSettings: 0
   DevRegionSetOnce: 1

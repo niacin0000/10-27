@@ -38,8 +38,8 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     ItemEquip itemEquip;
 
-    private GameObject settarget_I, settarget_E;
-    public GameObject itemPoint, takedownP;
+    private GameObject settarget_I;
+    public GameObject itemPoint, takedownP, body;
 
     private void Awake()
     {
@@ -53,7 +53,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
         tr = GetComponent<Transform>();
 
-        if(photonView.IsMine)
+        if (photonView.IsMine)
         {
             Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
         }
@@ -75,7 +75,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         //    return;
         //}
 
-        if(photonView.IsMine && !isDie)
+        if (photonView.IsMine && !isDie)
         {
 
             //이동
@@ -108,7 +108,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             }
 
             //자가데미지체크
-            if(Input.GetKeyDown(KeyCode.B))
+            if (Input.GetKeyDown(KeyCode.B))
             {
                 currHP -= 20;
             }
@@ -151,7 +151,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     private void RecoveryDP()
     {
-        
+
         if (currDP < 100 && dashR_c == true)
         {
             currDP += 3f;
@@ -170,6 +170,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     private void TakeDamage_c()
     {
+        body.GetComponent<MeshRenderer>().material.color = Color.blue;
         td_c = true;
     }
 
@@ -196,10 +197,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         //적이라는 태그를 가진 오브젝트와 닿았을 때
         if (collision.collider.CompareTag("ENEMY") && !isDie && td_c)
         {
-            settarget_E = collision.gameObject;
-            
+
             currHP -= 20.0f;
-            td_c = false;//어려워어어
+            td_c = false;
+            body.GetComponent<MeshRenderer>().material.color = Color.red;
             Invoke("TakeDamage_c", 2f);
 
             if (photonView.IsMine && currHP <= 0.0f)
@@ -208,8 +209,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 Debug.Log("Die");
 
             }
-
-            Destroy(settarget_E);
         }
 
         //POTAL이라는 태그를 가진 오브젝트와 닿았을 때
