@@ -752,6 +752,7 @@ MonoBehaviour:
   isPicking: 0
   itemPoint: {fileID: 9193296296459540917}
   takedownP: {fileID: 3892361861726466270}
+  body: {fileID: 3712360158771973503}
 --- !u!65 &3712360158771973501
 BoxCollider:
   m_ObjectHideFlags: 0
