@@ -20,19 +20,19 @@ public class Buff : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if(GameObject.Find("Player(Clone)") && GameObject.Find("Robo(Clone)") &&GameObject.Find("Robo_J(Clone)") )
+        if(GameObject.Find("Robo(Clone)") &&GameObject.Find("Robo_J(Clone)") )
         {
-            robo0 = GameObject.Find("Player(Clone)");
-            robo1 = GameObject.Find("Robo(Clone)");
-            robo2 = GameObject.Find("Robo_J(Clone)");
+            robo0 = GameObject.Find("Robo(Clone)");
+            robo1 = GameObject.Find("Robo_J(Clone)");
+            //robo2 = GameObject.Find("Robo_J(Clone)");
         }
 
         distance0 = Vector3.Distance(robo0.transform.position, transform.position);
         distance1 = Vector3.Distance(robo1.transform.position, transform.position);
-        distance2 = Vector3.Distance(robo2.transform.position, transform.position);
+        //distance2 = Vector3.Distance(robo2.transform.position, transform.position);
    
 
-        distance = Mathf.Min(distance0, distance1, distance2);//, distance3);
+        distance = Mathf.Min(distance0, distance1);//, distance2);
 
 
         if (Input.GetKeyDown(KeyCode.C) && buff_on_m == false)
@@ -49,7 +49,6 @@ public class Buff : MonoBehaviourPunCallbacks
         //Debug.Log(robolist[1].name + "1번째 로봇");
         if (Input.GetKeyDown(KeyCode.V) && buff_on == false)
         {
-            Min();
             FindTarget();
             photonView.RPC("setBuff", RpcTarget.AllViaServer, null);
         }
@@ -77,17 +76,7 @@ public class Buff : MonoBehaviourPunCallbacks
         buff_on_m = false;
     }
 
-    void Min()
-    {
-        if (distance == distance0)
-            distance = Mathf.Min(distance1, distance2);//, distance3);
-        else if (distance == distance1)
-            distance = Mathf.Min(distance0, distance2);//, distance3);
-        else if (distance == distance2)
-            distance = Mathf.Min(distance0, distance1);//, distance3);
-        else
-            target = null;
-    }
+
 
     void FindTarget()
     {
@@ -95,8 +84,8 @@ public class Buff : MonoBehaviourPunCallbacks
             target = robo0;
         else if (distance == distance1)
             target = robo1;
-        else if (distance == distance2)
-            target = robo2;
+        //else if (distance == distance2)
+        //    target = robo2;
         else
             target = null;
     }

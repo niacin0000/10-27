@@ -45,7 +45,6 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
     void Update()
     {
 
-        robolist = GameObject.FindGameObjectsWithTag("ROBO");
 
         if (GameObject.FindGameObjectWithTag("ROBO"))
 
