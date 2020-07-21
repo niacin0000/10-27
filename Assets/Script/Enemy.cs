@@ -13,7 +13,11 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
     private Transform tr;
     Transform target;
     float distance, distance0, distance1, distance2, distance3;
+<<<<<<< HEAD
     GameObject[] robolist;
+=======
+    GameObject robo0, robo1, robo2;
+>>>>>>> 고현하
 
     // Start is called before the first frame update
     void Start()
@@ -28,11 +32,15 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 
         //가까운놈으로 타겟 초기화
         if (distance == distance0)
+<<<<<<< HEAD
             target = robolist[0].transform;
+=======
+            target = robo0.transform;
+>>>>>>> 고현하
         else if (distance == distance1)
-            target = robolist[1].transform;
+            target = robo1.transform;
         else if (distance == distance2)
-            target = robolist[2].transform;
+            target = robo2.transform;
         else
             target = null;
 
@@ -44,15 +52,22 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
+<<<<<<< HEAD
         robolist = GameObject.FindGameObjectsWithTag("ROBO");
 
         if (GameObject.FindGameObjectWithTag("ROBO"))
+=======
+        if (GameObject.Find("Player(Clone)") && GameObject.Find("Robo(Clone)") && GameObject.Find("Robo_J(Clone)"))
+>>>>>>> 고현하
         {
-            distance0 = Vector3.Distance(robolist[0].transform.position, transform.position);
-            distance1 = Vector3.Distance(robolist[1].transform.position, transform.position);
-            distance2 = Vector3.Distance(robolist[2].transform.position, transform.position);
-            //distance3 = Vector3.Distance(robolist[3].transform.position, transform.position);
+            robo0 = GameObject.Find("Player(Clone)");
+            robo1 = GameObject.Find("Robo(Clone)");
+            robo2 = GameObject.Find("Robo_J(Clone)");
         }
+
+        distance0 = Vector3.Distance(robo0.transform.position, transform.position);
+        distance1 = Vector3.Distance(robo1.transform.position, transform.position);
+        distance2 = Vector3.Distance(robo2.transform.position, transform.position);
 
 
         distance = Mathf.Min(distance0, distance1, distance2);//, distance3);
