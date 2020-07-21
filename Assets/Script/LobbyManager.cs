@@ -47,11 +47,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         connectionInfoText.text = "마스터 서버에 접속중...";
     }
 
-    public void OnLogin()
-    {
-        
-
-    }
     private void ChangePanel(ActivePanel panel)
     {
         foreach (GameObject _panel in panels)
@@ -115,17 +110,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnCreateRoomClick()
     {
         PhotonNetwork.CreateRoom(txtRoomName.text
-                                , new RoomOptions { MaxPlayers = this.maxPlayer });
-
+                                , new RoomOptions { MaxPlayers = this.maxPlayer },TypedLobby.Default);
     }
     // (빈 방이 없어)랜덤 룸 참가에 실패한 경우 자동 실행
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        // 접속 상태 표시
-        connectionInfoText.text = "빈 방이 없음, 새로운 방 생성...";
-        // 최대 4명을 수용 가능한 빈방을 생성
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 });
-    }
+    //public override void OnJoinRandomFailed(short returnCode, string message)
+    //{
+    //    // 접속 상태 표시
+    //    connectionInfoText.text = "빈 방이 없음, 새로운 방 생성...";
+    //    // 최대 4명을 수용 가능한 빈방을 생성
+    //    PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 });
+    //}
 
     // 룸에 참가 완료된 경우 자동 실행
     public override void OnJoinedRoom()
@@ -160,6 +154,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             );
         }
     }
+
     void OnClickRoom(string roomName)
     {
         PhotonNetwork.NickName = txtUserId.text;

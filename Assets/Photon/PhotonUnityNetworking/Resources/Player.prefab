@@ -544,6 +544,7 @@ MonoBehaviour:
   isPicking: 0
   itemPoint: {fileID: 0}
   takedownP: {fileID: 0}
+  body: {fileID: 1345306393906731609}
 --- !u!54 &-6893192978830250341
 Rigidbody:
   m_ObjectHideFlags: 0
