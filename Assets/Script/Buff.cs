@@ -100,7 +100,4 @@ public class Buff : MonoBehaviourPunCallbacks
         else
             target = null;
     }
-
-
-
 }

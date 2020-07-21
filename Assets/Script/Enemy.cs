@@ -13,11 +13,7 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
     private Transform tr;
     Transform target;
     float distance, distance0, distance1, distance2, distance3;
-<<<<<<< HEAD
-    GameObject[] robolist;
-=======
     GameObject robo0, robo1, robo2;
->>>>>>> 고현하
 
     // Start is called before the first frame update
     void Start()
@@ -32,11 +28,7 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 
         //가까운놈으로 타겟 초기화
         if (distance == distance0)
-<<<<<<< HEAD
-            target = robolist[0].transform;
-=======
             target = robo0.transform;
->>>>>>> 고현하
         else if (distance == distance1)
             target = robo1.transform;
         else if (distance == distance2)
@@ -52,13 +44,13 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 
     void Update()
     {
-<<<<<<< HEAD
+
         robolist = GameObject.FindGameObjectsWithTag("ROBO");
 
         if (GameObject.FindGameObjectWithTag("ROBO"))
-=======
+
         if (GameObject.Find("Player(Clone)") && GameObject.Find("Robo(Clone)") && GameObject.Find("Robo_J(Clone)"))
->>>>>>> 고현하
+
         {
             robo0 = GameObject.Find("Player(Clone)");
             robo1 = GameObject.Find("Robo(Clone)");
