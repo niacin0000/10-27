@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using Photon;
 using Photon.Pun;
 
-public class RoomData :  MonoBehaviourPun
+public class RoomData :  MonoBehaviourPunCallbacks
 {
 
     public string roomName = "";
