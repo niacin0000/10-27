@@ -47,11 +47,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         connectionInfoText.text = "마스터 서버에 접속중...";
     }
 
-    public void OnLogin()
-    {
-        
-
-    }
     private void ChangePanel(ActivePanel panel)
     {
         foreach (GameObject _panel in panels)
@@ -78,7 +73,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 룸 접속 버튼을 비활성화
         joinButton.interactable = false;
         // 접속 정보 표시
-        connectionInfoText.text = "오프라인 : 마스터 서버와 연결되지 않음\n접속 재시도 중...";
+        //connectionInfoText.text = "오프라인 : 마스터 서버와 연결되지 않음\n접속 재시도 중...";
 
         // 마스터 서버로의 재접속 시도
         PhotonNetwork.ConnectUsingSettings();
@@ -114,8 +109,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void OnCreateRoomClick()
     {
+        if (!PhotonNetwork.IsConnected)
+            return;
+
         PhotonNetwork.CreateRoom(txtRoomName.text
-                                , new RoomOptions { MaxPlayers = this.maxPlayer });
+                                , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
 
     }
     // (빈 방이 없어)랜덤 룸 참가에 실패한 경우 자동 실행
