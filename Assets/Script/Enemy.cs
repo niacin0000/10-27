@@ -10,17 +10,16 @@ using UnityEngine.AI;
 public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
 {
     NavMeshAgent pathfinder;
-
     private Transform tr;
     Transform target;
     float distance, distance0, distance1, distance2, distance3;
-    GameObject[] robolist;
-
+    GameObject robo0, robo1, robo2;
 
     // Start is called before the first frame update
     void Start()
     {
         tr = GetComponent<Transform>();
+
     }
 
     private void FindRobo()
@@ -28,39 +27,44 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
         //target = GameObject.FindGameObjectWithTag("ROBO").transform;
 
         //가까운놈으로 타겟 초기화
-        if(distance == distance0)
-            target = robolist[0].transform;
+        if (distance == distance0)
+            target = robo0.transform;
         else if (distance == distance1)
-            target = robolist[1].transform;
+            target = robo1.transform;
         else if (distance == distance2)
-            target = robolist[2].transform;
+            target = robo2.transform;
         else
             target = null;
 
         StartCoroutine(UpdatePath());
     }
-    // Update is called once per frame
+
+
+
+
     void Update()
     {
-        robolist = GameObject.FindGameObjectsWithTag("ROBO");
-
-        if(GameObject.FindGameObjectWithTag("ROBO"))
+        if (GameObject.Find("Player(Clone)") && GameObject.Find("Robo(Clone)") && GameObject.Find("Robo_J(Clone)"))
         {
-            distance0 = Vector3.Distance(robolist[0].transform.position, transform.position);
-            distance1 = Vector3.Distance(robolist[1].transform.position, transform.position);
-            distance2 = Vector3.Distance(robolist[2].transform.position, transform.position);
-            //distance3 = Vector3.Distance(robolist[3].transform.position, transform.position);
+            robo0 = GameObject.Find("Player(Clone)");
+            robo1 = GameObject.Find("Robo(Clone)");
+            robo2 = GameObject.Find("Robo_J(Clone)");
         }
+
+        distance0 = Vector3.Distance(robo0.transform.position, transform.position);
+        distance1 = Vector3.Distance(robo1.transform.position, transform.position);
+        distance2 = Vector3.Distance(robo2.transform.position, transform.position);
 
 
         distance = Mathf.Min(distance0, distance1, distance2);//, distance3);
+
 
         if (distance <= 10.0f)
         {
             pathfinder = GetComponent<NavMeshAgent>();
 
             FindRobo();
-            //pathfinder.SetDestination(target.position);
+
         }
         else
         {
@@ -80,6 +84,7 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
                 tr.rotation = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
             }
         }
+
     }
 
     IEnumerator UpdatePath()
@@ -107,6 +112,16 @@ public class Enemy : MonoBehaviourPunCallbacks, IPunObservable
             //stream.ReceiveNext()는 오브젝트 타입이라  currPos에 맞게 vector3로 변경해준다.
             currPos = (Vector3)stream.ReceiveNext();
             currRot = (Quaternion)stream.ReceiveNext();
+        }
+    }
+
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("ROBO"))
+        {
+            Destroy(gameObject);
         }
     }
 
