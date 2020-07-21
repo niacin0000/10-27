@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon;
+using Photon.Pun;
 
-public class RoomData : MonoBehaviour {
+public class RoomData :  MonoBehaviourPun
+{
 
     public string roomName = "";
     public int playerCount = 0;
