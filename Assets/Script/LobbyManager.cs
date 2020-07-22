@@ -64,7 +64,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         joinButton.interactable = true;
         // 접속 정보 표시
         connectionInfoText.text = "온라인 : 마스터 서버와 연결됨";
-        PhotonNetwork.JoinLobby();
     }
 
     // 마스터 서버 접속 실패시 자동 실행
@@ -82,6 +81,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // 룸 접속 시도
     public void Connect()
     {
+        PhotonNetwork.JoinLobby();
         // 중복 접속 시도를 막기 위해, 접속 버튼 잠시 비활성화
         joinButton.interactable = false;
 
