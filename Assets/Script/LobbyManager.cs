@@ -109,6 +109,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void OnCreateRoomClick()
     {
+        PhotonNetwork.LeaveLobby();
         PhotonNetwork.CreateRoom(txtRoomName.text
                                 , new RoomOptions { MaxPlayers = this.maxPlayer },TypedLobby.Default);
     }
