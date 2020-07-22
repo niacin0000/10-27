@@ -12,13 +12,7 @@ public class Buff : MonoBehaviourPunCallbacks
     bool buff_on, buff_on_m = false;
 
 
-    void Start()
-    {
-
-    }
-
-
-    void Update()
+    public void Update()
     {
         if(GameObject.Find("Robo(Clone)") &&GameObject.Find("Robo_J(Clone)") )
         {
@@ -37,7 +31,6 @@ public class Buff : MonoBehaviourPunCallbacks
 
         if (Input.GetKeyDown(KeyCode.C) && buff_on_m == false)
         {
- 
             this.GetComponent<MoveCtrl>().speed += 10;
             buff_on_m = true;
 
@@ -50,12 +43,13 @@ public class Buff : MonoBehaviourPunCallbacks
         if (Input.GetKeyDown(KeyCode.V) && buff_on == false)
         {
             FindTarget();
-            photonView.RPC("setBuff", RpcTarget.AllViaServer, null);
+            Debug.Log(target.name);
+            photonView.RPC("setBuff", RpcTarget.Others, null);
         }
     }
 
     [PunRPC]
-    void setBuff()
+    public void setBuff()
     {
         Debug.Log(target.name);
 
@@ -64,13 +58,14 @@ public class Buff : MonoBehaviourPunCallbacks
         Invoke("ResetBuff", 5f);
     }
 
-
-    void ResetBuff()
+    [PunRPC]
+    public void ResetBuff()
     {
         target.GetComponent<MoveCtrl>().speed -= 10;
         buff_on = false;
     }
-    void ResetBuff_m()
+
+    public void ResetBuff_m()
     {
         this.GetComponent<MoveCtrl>().speed -= 10;
         buff_on_m = false;
@@ -78,7 +73,7 @@ public class Buff : MonoBehaviourPunCallbacks
 
 
 
-    void FindTarget()
+    private void FindTarget()
     {
         if (distance == distance0)
             target = robo0;
