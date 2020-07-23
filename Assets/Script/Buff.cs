@@ -8,25 +8,27 @@ public class Buff : MonoBehaviourPunCallbacks
 {
     GameObject target;
     float distance, distance0, distance1, distance2, distance3;
-    GameObject robo0, robo1, robo2;
+    GameObject robo0, robo1, robo2, robo3;
     bool buff_on, buff_on_m = false;
 
 
     public void Update()
     {
-        if(GameObject.Find("Robo(Clone)") &&GameObject.Find("Robo_J(Clone)") )
+        if(GameObject.Find("Player(Clone)") || GameObject.Find("Robo_J(Clone)")||GameObject.Find("Robo(Clone)") || GameObject.Find("Robo_D(Clone)"))
         {
             robo0 = GameObject.Find("Robo(Clone)");
             robo1 = GameObject.Find("Robo_J(Clone)");
-            //robo2 = GameObject.Find("Robo_J(Clone)");
+            robo2 = GameObject.Find("Robo_D(Clone)");
+            robo3 = GameObject.Find("Player(Clone)");
         }
 
         distance0 = Vector3.Distance(robo0.transform.position, transform.position);
         distance1 = Vector3.Distance(robo1.transform.position, transform.position);
-        //distance2 = Vector3.Distance(robo2.transform.position, transform.position);
-   
+        distance2 = Vector3.Distance(robo2.transform.position, transform.position);
+        distance3 = Vector3.Distance(robo3.transform.position, transform.position);
 
-        distance = Mathf.Min(distance0, distance1);//, distance2);
+
+        distance = Mathf.Min(distance0, distance1, distance2,distance3);
 
 
         if (Input.GetKeyDown(KeyCode.C) && buff_on_m == false)
@@ -44,7 +46,7 @@ public class Buff : MonoBehaviourPunCallbacks
         {
             FindTarget();
             Debug.Log(target.name);
-            photonView.RPC("setBuff", RpcTarget.Others, null);
+            photonView.RPC("setBuff", RpcTarget.OthersBuffered, null);
         }
     }
 
@@ -58,7 +60,6 @@ public class Buff : MonoBehaviourPunCallbacks
         Invoke("ResetBuff", 5f);
     }
 
-    [PunRPC]
     public void ResetBuff()
     {
         target.GetComponent<MoveCtrl>().speed -= 10;
@@ -71,16 +72,16 @@ public class Buff : MonoBehaviourPunCallbacks
         buff_on_m = false;
     }
 
-
-
     private void FindTarget()
     {
         if (distance == distance0)
             target = robo0;
         else if (distance == distance1)
             target = robo1;
-        //else if (distance == distance2)
-        //    target = robo2;
+        else if (distance == distance2)
+            target = robo2;
+        else if (distance == distance3)
+            target = robo3;
         else
             target = null;
     }
