@@ -50,7 +50,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
 
         a = 1;
-        photonView.RPC("DestroyButton", RpcTarget.All, a);
+        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
 
     }
     public void CreateCube2()
@@ -58,11 +58,11 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
         int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Robo", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Robo_D", points[idx].position, Quaternion.identity);
 
         //Ch2.SetActive(false);
         a = 2;
-        photonView.RPC("DestroyButton", RpcTarget.All, a);
+        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
 
         //DestroyButton();
     }
@@ -74,7 +74,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Robo_J", points[idx].position, Quaternion.identity);
 
         a = 3;
-        photonView.RPC("DestroyButton", RpcTarget.All, a);
+        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
         //Ch3.SetActive(false);
     }
     public void CreateCube4()
@@ -85,7 +85,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.Instantiate("Player", points[idx].position, Quaternion.identity);
 
         a = 4;
-        photonView.RPC("DestroyButton", RpcTarget.All, a);
+        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
         //Ch4.SetActive(false);
     }
 

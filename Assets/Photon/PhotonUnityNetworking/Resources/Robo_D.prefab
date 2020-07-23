@@ -661,7 +661,7 @@ GameObject:
   - component: {fileID: 15775237101186203}
   - component: {fileID: -7260374601946842653}
   m_Layer: 0
-  m_Name: Robo
+  m_Name: Robo_D
   m_TagString: ROBO
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

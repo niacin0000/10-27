@@ -38,7 +38,6 @@ MonoBehaviour:
   - DestroyRpc
   - DestroySpaceship
   - Fire
-  - ResetBuff
   - RespawnSpaceship
   - setBuff
   DisableAutoOpenWizard: 1
