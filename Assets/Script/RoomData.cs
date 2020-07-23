@@ -1,11 +1,10 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon;
-using Photon.Pun;
 
-public class RoomData :  MonoBehaviourPunCallbacks
+public class RoomData : MonoBehaviourPunCallbacks
 {
 
     public string roomName = "";
@@ -26,5 +25,6 @@ public class RoomData :  MonoBehaviourPunCallbacks
                                         , roomName
                                         , playerCount.ToString("00")
                                         , maxPlayer);
+        Debug.Log(roomDataTxt.text);
     }
 }

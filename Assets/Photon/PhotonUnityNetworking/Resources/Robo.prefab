@@ -659,6 +659,7 @@ GameObject:
   - component: {fileID: 7176535288619640255}
   - component: {fileID: 359256453547831186}
   - component: {fileID: 15775237101186203}
+  - component: {fileID: -7260374601946842653}
   m_Layer: 0
   m_Name: Robo
   m_TagString: ROBO
@@ -833,6 +834,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firePos: {fileID: 0}
   cannon: {fileID: 4385029612699478226, guid: 692db7f417c50324bbb96b47a891537c, type: 3}
+--- !u!114 &-7260374601946842653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3712360158771973503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50501f18444538b4d95c5a06245ff435, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3892361861726466270
 GameObject:
   m_ObjectHideFlags: 0

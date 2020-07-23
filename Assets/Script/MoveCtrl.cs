@@ -220,10 +220,26 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnTriggerEnter(Collider other)
     {
+        if (other.CompareTag("BLOCK") && !isDie)
+        {
+            speed = 5.0f;
+        }
+    }
+
+    public void OnTriggerStay(Collider other)
+    {
         if (other.CompareTag("ITEMS") && !isDie && isPicking == false)
         {
             Debug.Log(GameObject.FindGameObjectWithTag("ITEMS").name);
             settarget_I = other.gameObject;
+        }
+
+    }
+    public void OnTriggerExit(Collider other)
+    {
+        if(other.CompareTag("BLOCK")&&!isDie)
+        {
+            speed = 10.0f;
         }
     }
 

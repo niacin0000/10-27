@@ -11,6 +11,8 @@ TagManager:
   - Item Database
   - ITEMS
   - ITEM
+  - EquipPoint
+  - BLOCK
   layers:
   - Default
   - TransparentFX
