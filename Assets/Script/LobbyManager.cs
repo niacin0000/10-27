@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+
 // 마스터(매치 메이킹) 서버와 룸 접속을 담당
 public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public enum ActivePanel
     {
         LOGIN = 0,
-        ROOMS = 1
+        ROOMS = 1,
+        OPTION = 2,
     }
     private string gameVersion = "1"; // 게임 버전
     public string userId = "YouRang";
@@ -26,6 +29,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public GameObject room;
     public Transform gridTr;
+
+
+
     private void Awake()
     {
         // photon1과 photon2로 바뀌면서 달라진점 (같은방 동기화)
@@ -164,4 +170,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(roomName, null);
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
     }
+    public void OnEnterOption()
+    {    
+        ChangePanel(ActivePanel.OPTION);
+    }
+    public void OnReturnLobby()
+    {
+        ChangePanel(ActivePanel.ROOMS);
+    }
+
 }
