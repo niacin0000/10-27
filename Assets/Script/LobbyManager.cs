@@ -51,6 +51,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         joinButton.interactable = false;
         // 접속을 시도 중임을 텍스트로 표시
         connectionInfoText.text = "마스터 서버에 접속중...";
+
+        GetComponent<Config>().Load();
     }
 
     private void ChangePanel(ActivePanel panel)

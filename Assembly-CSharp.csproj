@@ -76,10 +76,10 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\Script\AudioControl.cs" />
-    <Compile Include="Assets\Script\AudioInit.cs" />
     <Compile Include="Assets\Script\Bliiboard.cs" />
     <Compile Include="Assets\Script\Buff.cs" />
     <Compile Include="Assets\Script\Cannon.cs" />
+    <Compile Include="Assets\Script\Config.cs" />
     <Compile Include="Assets\Script\Enemy.cs" />
     <Compile Include="Assets\Script\Enemy_S.cs" />
     <Compile Include="Assets\Script\FireCannon.cs" />

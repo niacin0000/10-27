@@ -13,12 +13,10 @@ public class AudioControl : MonoBehaviour
     public Slider bgmSlider;
     public Slider effectSlider;
 
-    public void Start()
-    {
-        masterSlider.value = 10f;
-        bgmSlider.value = 10f;
-        effectSlider.value = 10f;
-    }
+    public float master;
+    public float bgm;
+    public float effect;
+
     //Sound
     public void ToggleAudioVolune()
     {
@@ -27,16 +25,13 @@ public class AudioControl : MonoBehaviour
 
     public void OnAudioControl()
     {
-        float master = masterSlider.value;
-        if (master == 0) masterMixer.SetFloat("Master", -80);
-        else masterMixer.SetFloat("Master", master - 95);
+        if (masterSlider.value == -40) masterMixer.SetFloat("Master", -80);
+        else masterMixer.SetFloat("Master", masterSlider.value);
 
-        float bgm = bgmSlider.value;
-        if (bgm == 0) masterMixer.SetFloat("BGM", -80);
-        else masterMixer.SetFloat("BGM", bgm-95);
+        if (bgmSlider.value == -40) masterMixer.SetFloat("BGM", -80);
+        else masterMixer.SetFloat("BGM", bgmSlider.value);
 
-        float effect = effectSlider.value;
-        if (effect == 0) masterMixer.SetFloat("SFX", -80);
-        else masterMixer.SetFloat("SFX", effect-95);
+        if (effectSlider.value == -40) masterMixer.SetFloat("SFX", -80);
+        else masterMixer.SetFloat("SFX", effectSlider.value);
     }
 }
