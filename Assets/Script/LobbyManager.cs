@@ -179,4 +179,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         ChangePanel(ActivePanel.ROOMS);
     }
 
+    public void OnExitGame()
+    {
+        Debug.Log("ExitGame");
+        Application.Quit();
+    }
+
 }

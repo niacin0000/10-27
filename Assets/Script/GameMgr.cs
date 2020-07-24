@@ -16,6 +16,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public GameObject Ch2;
     public GameObject Ch3;
     public GameObject Ch4;
+    public GameObject menuSet;
     // Start is called before the first frame update
 
     public GameObject Robo;
@@ -38,8 +39,17 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Invoke("CheckPlayerCount", 0.5f);
     }
 
-
-
+    private void Update()
+    {
+        // sub menu
+        if (Input.GetButtonDown("Cancel"))
+        {
+            if (menuSet.activeSelf)
+                menuSet.SetActive(false);
+            else
+                menuSet.SetActive(true);
+        }
+    }
     public void CreateCube1()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
@@ -154,12 +164,9 @@ public class GameMgr : MonoBehaviourPunCallbacks
         msgList.text += "\n" + msg;
     }
 
-
-
-    private void Update()
+    public void OnExitGame()
     {
-
-        
+        Debug.Log("ExitGame");
+        Application.Quit();
     }
-
 }
