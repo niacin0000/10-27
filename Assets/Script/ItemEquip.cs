@@ -5,54 +5,67 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class ItemEquip : MonoBehaviourPunCallbacks
+public class ItemEquip : MonoBehaviourPunCallbacks, IPunObservable
 {
     GameObject player;
     public GameObject playerEquipPoint, playerTakeDownPoint;
     
     MoveCtrl playerFunction;
-
+    private Transform tr;
     bool isPlayerEnter = false;
 
-    private void Onestart()
-    {
-        player = GameObject.FindGameObjectWithTag("ROBO");
-        playerEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint");
-        playerTakeDownPoint = GameObject.Find("TakeDownPoint");
 
-        playerFunction = player.GetComponent<MoveCtrl>();
+    private void Start()
+    {
+        tr = GetComponent<Transform>();
     }
-    
+
+
     // Update is called once per frame
     void Update()
     {
-        //if (GameObject.FindGameObjectWithTag("ROBO"))
-        //{
-        //    Invoke("Onestart", 0);
-        //}
-
-        Debug.Log("isPicking = >" + playerFunction.isPicking);
-        if (Input.GetButtonDown("Fire1") && isPlayerEnter && playerFunction.isPicking == false)
+        if(photonView.IsMine)
         {
-            Debug.Log("들기");
-            transform.SetParent(playerEquipPoint.transform);
-            transform.localPosition = Vector3.zero;
-            transform.rotation = new Quaternion(0, 0, 0, 0);
+            if (Input.GetButtonDown("Fire1") && isPlayerEnter && playerFunction.isPicking == false)
+            {
+                Debug.Log("들기");
+                transform.SetParent(playerEquipPoint.transform);
+                transform.localPosition = Vector3.zero;
+                transform.rotation = new Quaternion(0, 0, 0, 0);
 
-            isPlayerEnter = false;
+                isPlayerEnter = false;
 
-            playerFunction.Pickup(this.gameObject);
+                photonView.RPC("RPCPick", RpcTarget.AllViaServer, null);
+
+            }
+
+            if (Input.GetButtonDown("Fire3") && playerFunction.isPicking)
+            {
+                Debug.Log("내려놓기");
+
+                photonView.RPC("RPCDrop", RpcTarget.AllViaServer, null);
+
+            }
+
+        }
+        else
+        {
+            if ((tr.position - currPos).sqrMagnitude >= 10.0f * 10.0f)
+            {
+                tr.position = currPos;
+                tr.rotation = currRot;
+            }
+            else
+            {
+                tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10);
+                tr.rotation = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 10);
+                //playerFunction.isPicking = pick;
+            }
+
         }
 
-        if (Input.GetButtonDown("Fire3") && playerFunction.isPicking)
-        {
-            Debug.Log("내려놓기");
 
-            playerFunction.Drop();
-            
-        }
-
-        if(!playerFunction.isPicking)
+        if (!playerFunction.isPicking)
         {
             this.GetComponent<Collider>().enabled = true;
             this.GetComponent<Rigidbody>().isKinematic = false;
@@ -60,13 +73,23 @@ public class ItemEquip : MonoBehaviourPunCallbacks
         }
     }
 
+    [PunRPC]
+    void RPCPick()
+    {
+        playerFunction.Pickup(this.gameObject);
+    }
+
+    [PunRPC]
+    void RPCDrop()
+    {
+        playerFunction.Drop();
+    }
+
+
     void OnTriggerEnter(Collider other)
     {
-        Debug.Log("무언가에 닿음");
         if (other.CompareTag("ROBO"))
         {
-            Debug.Log("로보에 닿음");
-
             player = other.gameObject;
             playerEquipPoint = player.transform.Find("ItemPoint").gameObject;
             playerTakeDownPoint = player.transform.Find("head").gameObject.gameObject.transform.Find("TakeDownPoint").gameObject;
@@ -80,10 +103,30 @@ public class ItemEquip : MonoBehaviourPunCallbacks
     {
         if (other.CompareTag("ROBO"))
         {
-            Debug.Log("로보랑 떨어짐");
             isPlayerEnter = false;
         }
     }
 
+
+
+    private Vector3 currPos;    // 실시간으로 전송하고 받는 변수
+    private Quaternion currRot; // 실시간으로 전송하고 받는 변수
+    //private bool pick;
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+    {
+        if (stream.IsWriting) //데이터를 계속 전송만
+        {
+            stream.SendNext(tr.position);   //내 위치값을 보낸다
+            stream.SendNext(tr.rotation);   //내 회전값을 보낸다
+            //stream.SendNext(playerFunction.isPicking);
+        }
+        else
+        {
+            //stream.ReceiveNext()는 오브젝트 타입이라  currPos에 맞게 vector3로 변경해준다.
+            currPos = (Vector3)stream.ReceiveNext();
+            currRot = (Quaternion)stream.ReceiveNext();
+            //pick = (bool)stream.ReceiveNext();
+        }
+    }
 
 }

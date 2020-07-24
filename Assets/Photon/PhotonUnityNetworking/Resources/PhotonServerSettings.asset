@@ -40,6 +40,10 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - setBuff
+  - Drop
+  - Pickup
+  - RPCDrop
+  - RPCPick
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

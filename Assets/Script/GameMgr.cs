@@ -41,7 +41,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     public void CreateCube1()
     {
-        if (currPlayer == 4)
+        if (currPlayer >= 1)
         {
             Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
@@ -55,7 +55,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     public void CreateCube2()
     {
-        if (currPlayer == 4)
+        if (currPlayer == 2)
         {
             Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
@@ -68,7 +68,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     public void CreateCube3()
     {
-        if (currPlayer == 4)
+        if (currPlayer == 2)
         {
             Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
@@ -82,7 +82,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     public void CreateCube4()
     {
-        if (currPlayer == 4)
+        if (currPlayer == 2)
         {
             Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
