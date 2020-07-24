@@ -230,14 +230,14 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (other.CompareTag("ITEMS") && !isDie && isPicking == false)
         {
-            Debug.Log(GameObject.FindGameObjectWithTag("ITEMS").name);
+            Debug.Log(other.gameObject.name);
             settarget_I = other.gameObject;
         }
 
     }
     public void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("BLOCK")&&!isDie)
+        if (other.CompareTag("BLOCK") && !isDie)
         {
             speed = 10.0f;
         }
@@ -251,7 +251,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         isPicking = true;
     }
 
-    public void Drop(GameObject item)
+    public void Drop()
     {
         SetEquip(settarget_I, false);
         settarget_I.transform.position = takedownP.transform.position;
@@ -259,6 +259,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         itemPoint.transform.DetachChildren();
 
         isPicking = false;
+
     }
 
     void SetEquip(GameObject item, bool isEquip)

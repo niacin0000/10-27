@@ -26,10 +26,10 @@ public class ItemEquip : MonoBehaviourPunCallbacks
     // Update is called once per frame
     void Update()
     {
-        if (GameObject.FindGameObjectWithTag("ROBO"))
-        {
-            Invoke("Onestart", 0);
-        }
+        //if (GameObject.FindGameObjectWithTag("ROBO"))
+        //{
+        //    Invoke("Onestart", 0);
+        //}
 
         Debug.Log("isPicking = >" + playerFunction.isPicking);
         if (Input.GetButtonDown("Fire1") && isPlayerEnter && playerFunction.isPicking == false)
@@ -48,8 +48,14 @@ public class ItemEquip : MonoBehaviourPunCallbacks
         {
             Debug.Log("내려놓기");
 
-            playerFunction.Drop(this.gameObject);
+            playerFunction.Drop();
+            
+        }
 
+        if(!playerFunction.isPicking)
+        {
+            this.GetComponent<Collider>().enabled = true;
+            this.GetComponent<Rigidbody>().isKinematic = false;
 
         }
     }
@@ -60,7 +66,12 @@ public class ItemEquip : MonoBehaviourPunCallbacks
         if (other.CompareTag("ROBO"))
         {
             Debug.Log("로보에 닿음");
-            playerEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint");
+
+            player = other.gameObject;
+            playerEquipPoint = player.transform.Find("ItemPoint").gameObject;
+            playerTakeDownPoint = player.transform.Find("head").gameObject.gameObject.transform.Find("TakeDownPoint").gameObject;
+
+            playerFunction = player.GetComponent<MoveCtrl>();
             isPlayerEnter = true;
         }
     }

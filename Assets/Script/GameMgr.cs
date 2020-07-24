@@ -7,21 +7,20 @@ using Photon.Realtime; // 포톤 서비스 관련 라이브러리
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Security.Cryptography;
 
 public class GameMgr : MonoBehaviourPunCallbacks
 {
     public Text msgList;
     public Text playerCount;
-    public GameObject Ch1;
-    public GameObject Ch2;
-    public GameObject Ch3;
-    public GameObject Ch4;
+    public GameObject Ch1, Ch2, Ch3, Ch4;
+
     // Start is called before the first frame update
 
     public GameObject Robo;
     public Collision collision;
 
-    private int a;
+    private int a, currPlayer, maxPlayer;
 
     void Awake()
     {
@@ -42,51 +41,57 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     public void CreateCube1()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer == 4)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Robo", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("Robo", points[idx].position, Quaternion.identity);
+            a = 1;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
 
-
-
-        a = 1;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
 
     }
     public void CreateCube2()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer == 4)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Robo_D", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("Robo_D", points[idx].position, Quaternion.identity);
+            a = 2;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
 
-        //Ch2.SetActive(false);
-        a = 2;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-
-        //DestroyButton();
     }
     public void CreateCube3()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer == 4)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Robo_J", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("Robo_J", points[idx].position, Quaternion.identity);
 
-        a = 3;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        //Ch3.SetActive(false);
+            a = 3;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
+
     }
     public void CreateCube4()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer == 4)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("Player", points[idx].position, Quaternion.identity);
+            a = 4;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
 
-        a = 4;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        //Ch4.SetActive(false);
     }
 
     [PunRPC]
@@ -145,8 +150,8 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     void CheckPlayerCount()
     {
-        int currPlayer = PhotonNetwork.PlayerList.Length;
-        int maxPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
+        currPlayer = PhotonNetwork.PlayerList.Length;
+        maxPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
         playerCount.text = string.Format("[{0}/{1}]", currPlayer, maxPlayer);
     }
     void ReceiveMsg(string msg)
@@ -159,7 +164,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     private void Update()
     {
 
-        
+
     }
 
 }
