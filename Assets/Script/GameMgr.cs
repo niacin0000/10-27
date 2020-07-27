@@ -24,6 +24,9 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public GameObject Robo;
     public Collision collision;
 
+    bool fullScreen_game;
+
+
     private int a;
 
     //판넬 바꾸기
@@ -39,6 +42,16 @@ public class GameMgr : MonoBehaviourPunCallbacks
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
         DontDestroyOnLoad(gameObject);
+        //if (GetComponent<ScreenSize>().Checking == 1)
+        //{
+        //    GetComponent<LobbyManager>().fullScreen = true;
+        //}
+        //else
+        //{
+        //    GetComponent<LobbyManager>().fullScreen = false;
+        //}
+        //Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        //Screen.SetResolution(GetComponent<LobbyManager>().screenSize_x, GetComponent<LobbyManager>().screenSize_y, GetComponent<LobbyManager>().fullScreen);
 
     }
     void Start()
@@ -48,6 +61,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = true;
         Invoke("CheckPlayerCount", 0.5f);
         GetComponent<Config>().Load();
+        GetComponent<ScreenSize>().Load();
     }
 
     private void Update()
@@ -68,7 +82,9 @@ public class GameMgr : MonoBehaviourPunCallbacks
                     menuSet.SetActive(false);
             }
             else
+            {
                 menuSet.SetActive(true);
+            }
         }
     }
     public void CreateCube1()
@@ -196,6 +212,16 @@ public class GameMgr : MonoBehaviourPunCallbacks
     {
         ChangePanel(ActivePanel.MENU);
         GetComponent<Config>().Save();
+        GetComponent<ScreenSize>().Save();
+        if (GetComponent<ScreenSize>().Checking == 1)
+        {
+            fullScreen_game = true;
+        }
+        else
+        {
+            fullScreen_game = false;
+        }
+        Screen.SetResolution(1920, 1080, fullScreen_game);
     }
 
     public void OnInitOption()
