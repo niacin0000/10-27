@@ -30,12 +30,25 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public GameObject room;
     public Transform gridTr;
 
-
+    public bool fullScreen = true;
+    public int screenSize_x = 1920;
+    public int screenSize_y = 1080;
 
     private void Awake()
     {
         // photon1과 photon2로 바뀌면서 달라진점 (같은방 동기화)
         PhotonNetwork.AutomaticallySyncScene = true;
+        GetComponent<ScreenSize>().Load();
+        if (GetComponent<ScreenSize>().Checking == 1)
+        {
+            fullScreen = true;
+        }
+        else
+        {
+            fullScreen = false;
+        }
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+        Screen.SetResolution(screenSize_x, screenSize_y, fullScreen);
     }
     // 게임 실행과 동시에 마스터 서버 접속 시도
     private void Start()
@@ -178,6 +191,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void OnReturnLobby()
     {
+        GetComponent<ScreenSize>().Save();
+        if (GetComponent<ScreenSize>().Checking == 1)
+        {
+            fullScreen = true;
+        }
+        else
+        {
+            fullScreen = false;
+        }
+        Screen.SetResolution(screenSize_x, screenSize_y, fullScreen);
         ChangePanel(ActivePanel.ROOMS);
     }
 
