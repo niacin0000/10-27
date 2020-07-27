@@ -12,7 +12,8 @@ public class ItemEquip : MonoBehaviourPunCallbacks, IPunObservable
     
     MoveCtrl playerFunction;
     private Transform tr;
-    bool isPlayerEnter = false;
+    bool isPlayerEnter = false, ispickup = false;
+    
 
 
     private void Start()
@@ -65,24 +66,38 @@ public class ItemEquip : MonoBehaviourPunCallbacks, IPunObservable
         }
 
 
-        if (!playerFunction.isPicking)
+        //if (!playerFunction.isPicking)
+        //{
+        //    this.GetComponent<Collider>().enabled = true;
+        //    this.GetComponent<Rigidbody>().isKinematic = false;
+        //}
+
+        if (!ispickup)
         {
             this.GetComponent<Collider>().enabled = true;
             this.GetComponent<Rigidbody>().isKinematic = false;
-
         }
+        else if (ispickup)
+        {
+            this.GetComponent<Collider>().enabled = false;
+            this.GetComponent<Rigidbody>().isKinematic = true;
+        }
+
+
     }
 
     [PunRPC]
     void RPCPick()
     {
         playerFunction.Pickup(this.gameObject);
+        ispickup = true;
     }
 
     [PunRPC]
     void RPCDrop()
     {
         playerFunction.Drop();
+        ispickup = false;
     }
 
 

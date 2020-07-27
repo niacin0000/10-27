@@ -225,7 +225,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (other.CompareTag("ITEMS") && !isDie && isPicking == false)
         {
-            Debug.Log(other.gameObject.name);
             settarget_I = other.gameObject;
         }
 
