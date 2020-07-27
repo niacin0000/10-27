@@ -21,8 +21,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     public Text nickName;
 
 
+    //체력 게이지
     public float currHP = 100.0f;
 
+    //대쉬 게이지
     public float currDP = 100.0f;
 
     bool dash_c = true;
@@ -36,10 +38,12 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     //물건을 들었는지 상태여부
     public bool isPicking = false;
 
-    ItemEquip itemEquip;
+    ItemEquip itemequip;
 
     private GameObject settarget_I;
-    public GameObject itemPoint, takedownP, body;
+    public GameObject body;
+
+    public GameObject playerEquipPoint, playerTakeDownPoint;
 
     private void Awake()
     {
@@ -50,7 +54,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-
         tr = GetComponent<Transform>();
 
         if (photonView.IsMine)
@@ -62,22 +65,17 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             GetComponent<Rigidbody>().isKinematic = true;  //물리충돌 일어나지 않게 isKinematic
         }
 
+        playerEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint");
+        playerTakeDownPoint = GameObject.Find("TakeDownPoint");
+
         nickName.text = photonView.Owner.NickName;
-
-
     }
 
     // Update is called once per frame
     void Update()
     {
-        //if(!photonView.IsMine)
-        //{
-        //    return;
-        //}
-
         if (photonView.IsMine && !isDie)
         {
-
             //이동
             if (dash_c == true)
             {
@@ -87,10 +85,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 tr.Translate(Vector3.right * h * speed * Time.deltaTime);
             }
 
-
             //대쉬
             if (Input.GetKeyDown(KeyCode.Space))
             {
+
                 if (currDP >= 33.3f && dash_c == true)
                 {
                     CancelInvoke("RecoveryDP");
@@ -103,7 +101,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                     InvokeRepeating("RecoveryDP", 2f, 0.1f);
 
                     currDP -= 33.3f;
-                    //dpBar.fillAmount = currDP / initDP;
                 }
             }
 
@@ -111,6 +108,18 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKeyDown(KeyCode.B))
             {
                 currHP -= 20;
+            }
+
+            //마우스 좌클릭
+            if (Input.GetButtonDown("Fire1") && isPicking == false)
+            {
+                Pickup(settarget_I);
+            }
+
+            //마우스 우클릭
+            if (Input.GetButtonDown("Fire3") && isPicking == true)
+            {
+                Drop(settarget_I);
             }
 
         }
@@ -127,7 +136,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 tr.rotation = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
             }
         }
-
     }
 
     void Dash()
@@ -244,19 +252,23 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     }
 
     public void Pickup(GameObject item)
-    {
+    { 
         SetEquip(item, true);
 
-        Debug.Log("드는 중");
+        item.transform.SetParent(playerEquipPoint.transform);
+        item.transform.localPosition = Vector3.zero;
+        item.transform.rotation = new Quaternion(0, 0, 0, 0);
+
         isPicking = true;
     }
 
     public void Drop(GameObject item)
     {
         SetEquip(settarget_I, false);
-        settarget_I.transform.position = takedownP.transform.position;
 
-        itemPoint.transform.DetachChildren();
+        item.transform.position = playerTakeDownPoint.transform.position;
+
+        playerEquipPoint.transform.DetachChildren();
 
         isPicking = false;
     }

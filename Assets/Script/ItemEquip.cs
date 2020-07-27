@@ -5,74 +5,29 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UIElements;
 
-public class ItemEquip : MonoBehaviourPunCallbacks
+public class ItemEquip : MonoBehaviourPunCallbacks , IPunObservable
 {
-    GameObject player;
-    public GameObject playerEquipPoint, playerTakeDownPoint;
-    
-    MoveCtrl playerFunction;
+    private Vector3 currPos;    // 실시간으로 전송하고 받는 변수
+    private Quaternion currRot; // 실시간으로 전송하고 받는 변수
+    private Transform tr;
 
-    bool isPlayerEnter = false;
-
-    private void Onestart()
+    void Start()
     {
-        player = GameObject.FindGameObjectWithTag("ROBO");
-        playerEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint");
-        playerTakeDownPoint = GameObject.Find("TakeDownPoint");
-
-        playerFunction = player.GetComponent<MoveCtrl>();
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (GameObject.FindGameObjectWithTag("ROBO"))
-        {
-            Invoke("Onestart", 0);
-        }
-
-        Debug.Log("isPicking = >" + playerFunction.isPicking);
-        if (Input.GetButtonDown("Fire1") && isPlayerEnter && playerFunction.isPicking == false)
-        {
-            Debug.Log("들기");
-            transform.SetParent(playerEquipPoint.transform);
-            transform.localPosition = Vector3.zero;
-            transform.rotation = new Quaternion(0, 0, 0, 0);
-
-            isPlayerEnter = false;
-
-            playerFunction.Pickup(this.gameObject);
-        }
-
-        if (Input.GetButtonDown("Fire3") && playerFunction.isPicking)
-        {
-            Debug.Log("내려놓기");
-
-            playerFunction.Drop(this.gameObject);
-
-
-        }
+        tr = GetComponent<Transform>();
     }
 
-    void OnTriggerEnter(Collider other)
+    public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {
-        Debug.Log("무언가에 닿음");
-        if (other.CompareTag("ROBO"))
+        if (stream.IsWriting) //데이터를 계속 전송만
         {
-            Debug.Log("로보에 닿음");
-            playerEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint");
-            isPlayerEnter = true;
+            stream.SendNext(tr.position);   //내 위치값을 보낸다
+            stream.SendNext(tr.rotation);   //내 회전값을 보낸다
+        }
+        else
+        {
+            //stream.ReceiveNext()는 오브젝트 타입이라  currPos에 맞게 vector3로 변경해준다.
+            currPos = (Vector3)stream.ReceiveNext();
+            currRot = (Quaternion)stream.ReceiveNext();
         }
     }
-
-    void OnTriggerExit(Collider other)
-    {
-        if (other.CompareTag("ROBO"))
-        {
-            Debug.Log("로보랑 떨어짐");
-            isPlayerEnter = false;
-        }
-    }
-
-
 }
