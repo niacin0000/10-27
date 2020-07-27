@@ -7,6 +7,7 @@ using Photon.Realtime; // 포톤 서비스 관련 라이브러리
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun.Demo.PunBasics;
 
 public class GameMgr : MonoBehaviourPunCallbacks
 {
@@ -17,12 +18,21 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public GameObject Ch3;
     public GameObject Ch4;
     public GameObject menuSet;
+    public GameObject oPtion;
     // Start is called before the first frame update
 
     public GameObject Robo;
     public Collision collision;
 
     private int a;
+
+    //판넬 바꾸기
+    public enum ActivePanel
+    {
+        MENU = 0,
+        OPTION = 1,
+    }
+    public GameObject[] panels;
 
     void Awake()
     {
@@ -43,10 +53,20 @@ public class GameMgr : MonoBehaviourPunCallbacks
     private void Update()
     {
         // sub menu
+        // 적용한 Cancel키로 메뉴호출
         if (Input.GetButtonDown("Cancel"))
         {
             if (menuSet.activeSelf)
-                menuSet.SetActive(false);
+            {
+                //메뉴 내에서뒤로가기 개념의 코드
+                if (oPtion.activeSelf)
+                {
+                    ChangePanel(ActivePanel.MENU);
+                }
+                else
+                    //메뉴 끄기
+                    menuSet.SetActive(false);
+            }
             else
                 menuSet.SetActive(true);
         }
@@ -170,4 +190,27 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Debug.Log("ExitGame");
         Application.Quit();
     }
+
+    //버튼을 통한 메뉴의 전환
+    public void OnReturnMenu()
+    {
+        ChangePanel(ActivePanel.MENU);
+        GetComponent<Config>().Save();
+    }
+
+    public void OnInitOption()
+    {
+        ChangePanel(ActivePanel.OPTION);
+    }
+
+    private void ChangePanel(ActivePanel panel)
+    {
+        foreach (GameObject _panel in panels)
+        {
+            Debug.Log(panels);
+            _panel.SetActive(false);
+        }
+        panels[(int)panel].SetActive(true);
+    }
+
 }
