@@ -92,6 +92,7 @@
     <Compile Include="Assets\Script\MouseFocus.cs" />
     <Compile Include="Assets\Script\MoveCtrl.cs" />
     <Compile Include="Assets\Script\RoomData.cs" />
+    <Compile Include="Assets\Script\RoomPanel.cs" />
     <Compile Include="Assets\Script\ScreenSize.cs" />
     <Compile Include="Assets\Script\SmoothFollow.cs" />
     <Compile Include="Assets\Script\UIMgr.cs" />

@@ -11,7 +11,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 {
     public enum ActivePanel
     {
-        LOGIN = 0,
+        TITLE = 0,
         ROOMS = 1,
         OPTION = 2,
     }
@@ -26,6 +26,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public InputField txtUserId;
     public InputField txtRoomName;
+
+    public Toggle isPassword;
+    public InputField txtRoomPassword;
 
     public GameObject room;
     public Transform gridTr;
@@ -66,6 +69,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         connectionInfoText.text = "마스터 서버에 접속중...";
 
         GetComponent<Config>().Load();
+    }
+
+    private void Update()
+    {
+        if (GetComponent<RoomPanel>().panels[0].activeSelf == true)
+        {
+            OnPasswordCheck();
+        }
     }
 
     private void ChangePanel(ActivePanel panel)
@@ -133,10 +144,24 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnected)
             return;
 
-        PhotonNetwork.CreateRoom(txtRoomName.text
+        PhotonNetwork.CreateRoom(txtRoomName.text + "_" + txtRoomPassword.text
                                 , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
-
     }
+
+    //패스워드관련
+    public void OnPasswordCheck()
+    {
+        if (isPassword.isOn)
+        {
+            txtRoomPassword.interactable = true;
+        }
+        else
+        {
+            txtRoomPassword.interactable = false;
+            txtRoomPassword.text = null;
+        }
+    }
+
     // (빈 방이 없어)랜덤 룸 참가에 실패한 경우 자동 실행
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
@@ -189,7 +214,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {    
         ChangePanel(ActivePanel.OPTION);
     }
-    public void OnReturnLobby()
+    public void OnReturnTitle()
     {
         GetComponent<ScreenSize>().Save();
         if (GetComponent<ScreenSize>().Checking == 1)
@@ -201,7 +226,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             fullScreen = false;
         }
         Screen.SetResolution(screenSize_x, screenSize_y, fullScreen);
-        ChangePanel(ActivePanel.ROOMS);
+        ChangePanel(ActivePanel.TITLE);
     }
 
     public void OnExitGame()
