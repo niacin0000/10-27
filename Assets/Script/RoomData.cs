@@ -12,19 +12,21 @@ public class RoomData : MonoBehaviourPunCallbacks
     public int maxPlayer = 0;
 
     [System.NonSerialized]
-    public Text roomDataTxt;
+    public Text roomDataNametxt;
+    public Text roomDataPCtxt;
+    public Text rommDataPlayerNick;
+    public string msg = "";
 
     void Awake()
     {
-        roomDataTxt = GetComponentInChildren<Text>();
+        roomDataNametxt = GetComponentInChildren<Text>();
+        roomDataPCtxt = GetComponentInChildren<Text>();
     }
 
     public void UpdateInfo()
     {
-        roomDataTxt.text = string.Format(" {0} [{1}/{2}]"
-                                        , roomName
-                                        , playerCount.ToString("00")
-                                        , maxPlayer);
-        Debug.Log(roomDataTxt.text);
+        roomDataNametxt.text = string.Format("방 이름 : {0}", roomName);
+        roomDataPCtxt.text = string.Format("[{0}/{1}]",playerCount.ToString("00"), maxPlayer);
+        rommDataPlayerNick.text = msg;
     }
 }

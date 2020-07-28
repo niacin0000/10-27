@@ -123,8 +123,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             // 룸 접속 실행
             //connectionInfoText.text = "룸에 접속...";
             //PhotonNetwork.JoinRandomRoom();
-            PhotonNetwork.GameVersion = this.gameVersion;
-            PhotonNetwork.NickName = txtUserId.text;
 
             PhotonNetwork.ConnectUsingSettings();
 
@@ -174,6 +172,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // 룸에 참가 완료된 경우 자동 실행
     public override void OnJoinedRoom()
     {
+        PhotonNetwork.GameVersion = this.gameVersion;
+        PhotonNetwork.NickName = txtUserId.text;
         // 접속 상태 표시
         connectionInfoText.text = "방 참가 성공";
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
@@ -194,6 +194,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             roomData.roomName = roomInfo.Name;
             roomData.maxPlayer = roomInfo.MaxPlayers;
             roomData.playerCount = roomInfo.PlayerCount;
+            roomData.msg += photonView.Owner.NickName;
             roomData.UpdateInfo();
             roomData.GetComponent<Button>().onClick.AddListener
             (
@@ -207,7 +208,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     void OnClickRoom(string roomName)
     {
         PhotonNetwork.NickName = txtUserId.text;
-        PhotonNetwork.JoinRoom(roomName, null);
+        //PhotonNetwork.JoinRoom(roomName, null);
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
     }
     public void OnEnterOption()

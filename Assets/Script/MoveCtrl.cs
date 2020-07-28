@@ -64,7 +64,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
         nickName.text = photonView.Owner.NickName;
 
-
     }
 
     // Update is called once per frame
