@@ -488,9 +488,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: e4320000
       m_LastClickedID: 0
-      m_ExpandedIDs: 68fbffff
+      m_ExpandedIDs: 6afbffffa23b0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -602,9 +602,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.04229719, y: 0.0000025729305, z: 0.00011892517, w: -0.99910516}
   m_Size:
-    m_Target: 353.79532
+    m_Target: 435.5635
     speed: 2
-    m_Value: 353.79532
+    m_Value: 435.5635
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -739,19 +739,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scenes
+    - Assets/Script
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scenes
+  - Assets/Script
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\Unity\0717_0310_FTestPhoton\10-27
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 157}
-    m_SelectedIDs: 5e3d0000
-    m_LastClickedID: 15710
+    scrollPos: {x: 0, y: 181}
+    m_SelectedIDs: 603d0000
+    m_LastClickedID: 15712
     m_ExpandedIDs: 00000000363d0000383d00003a3d00003c3d00003e3d000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -807,7 +807,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: 2638000000000000f2e7ffff143c0000703b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0

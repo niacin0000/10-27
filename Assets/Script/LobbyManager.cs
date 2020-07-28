@@ -208,7 +208,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     void OnClickRoom(string roomName)
     {
         PhotonNetwork.NickName = txtUserId.text;
-        //PhotonNetwork.JoinRoom(roomName, null);
+        PhotonNetwork.JoinRoom(roomName, null);
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
     }
     public void OnEnterOption()
