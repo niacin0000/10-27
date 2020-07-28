@@ -10,15 +10,9 @@ using UnityEngine.UI;
 
 public class GameMgr : MonoBehaviourPunCallbacks
 {
-    public Text msgList;
-    public Text playerCount;
-    public GameObject Ch1;
-    public GameObject Ch2;
-    public GameObject Ch3;
-    public GameObject Ch4;
-    // Start is called before the first frame update
+    public Text msgList, playerCount;
+    public GameObject Ch1, Ch2, Ch3, Ch4;
 
-    public GameObject Robo;
     public Collision collision;
 
     private int a;
@@ -46,8 +40,6 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
         int idx = Random.Range(1, points.Length);
         PhotonNetwork.Instantiate("Robo", points[idx].position, Quaternion.identity);
-
-
 
         a = 1;
         photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
@@ -114,7 +106,6 @@ public class GameMgr : MonoBehaviourPunCallbacks
     {
         Destroy(GameObject.Find("PCanvas"));
 
-        //Don'tDestroyOnLoad 에 있는 아이템 제거
         GameObject[] D_I = GameObject.FindGameObjectsWithTag("ITEMS");
         for (int i = 0; i < D_I.Length; i++)
             Destroy(D_I[i]);

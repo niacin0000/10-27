@@ -10,11 +10,42 @@ public class ItemEquip : MonoBehaviourPunCallbacks , IPunObservable
     private Vector3 currPos;    // 실시간으로 전송하고 받는 변수
     private Quaternion currRot; // 실시간으로 전송하고 받는 변수
     private Transform tr;
+    public bool I_picking = false;
 
     void Start()
     {
         tr = GetComponent<Transform>();
     }
+
+    void Update()
+    {
+        if (!photonView.IsMine)
+        {
+            if ((tr.position - currPos).sqrMagnitude >= 10.0f * 10.0f)
+            {
+                tr.position = currPos;
+                tr.rotation = currRot;
+            }
+            else
+            {
+                tr.position = Vector3.Lerp(tr.position, currPos, Time.deltaTime * 10.0f);
+                tr.rotation = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
+            }
+        }
+
+
+        if (I_picking)
+        {
+            this.GetComponent<Collider>().enabled = false;
+            this.GetComponent<Rigidbody>().isKinematic = true;
+        }
+        else if (!I_picking)
+        {
+            this.GetComponent<Collider>().enabled = true;
+            this.GetComponent<Rigidbody>().isKinematic = false;
+        }
+    }
+
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
     {

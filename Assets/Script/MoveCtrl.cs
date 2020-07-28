@@ -38,8 +38,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     //물건을 들었는지 상태여부
     public bool isPicking = false;
 
-    ItemEquip itemequip;
-
     private GameObject settarget_I;
     public GameObject body;
 
@@ -65,8 +63,8 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             GetComponent<Rigidbody>().isKinematic = true;  //물리충돌 일어나지 않게 isKinematic
         }
 
-        playerEquipPoint = GameObject.FindGameObjectWithTag("EquipPoint");
-        playerTakeDownPoint = GameObject.Find("TakeDownPoint");
+        playerEquipPoint = this.transform.Find("ItemPoint").gameObject;
+        playerTakeDownPoint = this.transform.Find("head").transform.Find("TakeDownPoint").gameObject;
 
         nickName.text = photonView.Owner.NickName;
     }
@@ -116,7 +114,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 Pickup(settarget_I);
             }
 
-            //마우스 우클릭
+            //마우스 가운데클릭
             if (Input.GetButtonDown("Fire3") && isPicking == true)
             {
                 Drop(settarget_I);
@@ -163,8 +161,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         if (currDP < 100 && dashR_c == true)
         {
             currDP += 3f;
-
-            Debug.Log(currDP);
         }
 
         if (currDP >= 100)
@@ -172,7 +168,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             CancelInvoke("RecoveryDP");
             currDP = 100;
             dashR_c = false;
-            Debug.Log(currDP);
         }
     }
 
@@ -233,22 +228,28 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             speed = 5.0f;
         }
     }
-
+    
     public void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("ITEMS") && !isDie && isPicking == false)
         {
-            Debug.Log(GameObject.FindGameObjectWithTag("ITEMS").name);
+            //Debug.Log(other.name);
             settarget_I = other.gameObject;
         }
-
     }
+
     public void OnTriggerExit(Collider other)
     {
         if(other.CompareTag("BLOCK")&&!isDie)
         {
             speed = 10.0f;
         }
+
+        if(other.CompareTag("ITEMS") && !isPicking)
+        {
+            settarget_I = null;
+        }
+       
     }
 
     public void Pickup(GameObject item)
@@ -260,6 +261,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         item.transform.rotation = new Quaternion(0, 0, 0, 0);
 
         isPicking = true;
+        photonView.RPC("setItemis", RpcTarget.AllViaServer, true);
     }
 
     public void Drop(GameObject item)
@@ -271,6 +273,8 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         playerEquipPoint.transform.DetachChildren();
 
         isPicking = false;
+        photonView.RPC("setItemis", RpcTarget.AllViaServer, false);
+
     }
 
     void SetEquip(GameObject item, bool isEquip)
@@ -283,6 +287,19 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             itemCollider.enabled = !isEquip;
         }
         itemRigidbody.isKinematic = isEquip;
+
+    }
+
+    [PunRPC]
+    void setItemis(bool ia)
+    {
+        if (ia)
+            settarget_I.GetComponent<ItemEquip>().I_picking = true;
+        else if (!ia)
+        {
+            settarget_I.GetComponent<ItemEquip>().I_picking = false;
+            settarget_I = null;
+        }
 
     }
 }
