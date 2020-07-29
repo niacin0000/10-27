@@ -322,9 +322,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13430}
     - Class: 114
-      Script: {instanceID: 19290}
+      Script: {instanceID: 14942}
     - Class: 114
-      Script: {instanceID: 19398}
+      Script: {instanceID: 15078}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -1050,7 +1050,7 @@ ScriptsOnlyBuild:
     className: CurrentRoomPropertiesListedInLobbyProperty
   - hash:
       serializedVersion: 2
-      Hash: d62976f364e18510048a92c74765338d
+      Hash: 7eb4e95b82e25b67f0dc555fb52ae946
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RoomData
@@ -1464,7 +1464,7 @@ ScriptsOnlyBuild:
     className: FootMove
   - hash:
       serializedVersion: 2
-      Hash: 079e37d2fd5c073dd4923ea207a0fb41
+      Hash: 752d8fc3cea4c005caab27a5295fd86b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LobbyManager

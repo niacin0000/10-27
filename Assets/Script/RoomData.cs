@@ -10,9 +10,6 @@ public class RoomData : MonoBehaviour
     public int playerCount = 0;
     public int maxPlayer = 0;
 
-    public Text txtplayerCount;
-    public Text txtroomName;
-    public Text[] txtplayerList;
 
     [System.NonSerialized]
     public Text roomDataTxt;
@@ -28,8 +25,5 @@ public class RoomData : MonoBehaviour
                                         , roomName
                                         , playerCount.ToString("00")
                                         , maxPlayer);
-
-        txtplayerCount.text = string.Format("{0}/{1}", playerCount, maxPlayer);
-        txtroomName.text = string.Format("방이름 : {0}", roomName);
     }
 }

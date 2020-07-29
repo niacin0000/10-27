@@ -1,5 +1,6 @@
 ﻿using Photon.Pun; // 유니티용 포톤 컴포넌트들
 using Photon.Realtime; // 포톤 서비스 관련 라이브러리
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +27,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public InputField txtUserId;
     public InputField txtRoomName;
+
+    public Text txtplayerCount;
+    public Text txtroomName;
+    public Text[] txtplayerList;
 
     public Toggle isPassword;
     public InputField txtRoomPassword;
@@ -61,11 +66,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 설정한 정보를 가지고 마스터 서버 접속 시도
         PhotonNetwork.ConnectUsingSettings();
 
-        txtUserId.text = PlayerPrefs.GetString("USER_ID", "USER_" + Random.Range(1, 999));
-        txtRoomName.text = PlayerPrefs.GetString("ROOM_NAME", "ROOM_" + Random.Range(1, 999));
+        txtUserId.text = PlayerPrefs.GetString("USER_ID", "USER_Chan");
+        txtRoomName.text = PlayerPrefs.GetString("ROOM_NAME", "ROOM_Chan");
         // 룸 접속 버튼을 잠시 비활성화
-        joinButton.interactable = false;
-        // 접속을 시도 중임을 텍스트로 표시
+        //joinButton.interactable = false;
+        //// 접속을 시도 중임을 텍스트로 표시
         connectionInfoText.text = "마스터 서버에 접속중...";
 
         GetComponent<Config>().Load();
@@ -77,6 +82,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             OnPasswordCheck();
         }
+
     }
 
     private void ChangePanel(ActivePanel panel)
@@ -93,7 +99,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         // 룸 접속 버튼을 활성화
-        joinButton.interactable = true;
+        //joinButton.interactable = true;
         // 접속 정보 표시
         connectionInfoText.text = "온라인 : 마스터 서버와 연결됨";
     }
@@ -102,7 +108,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         // 룸 접속 버튼을 비활성화
-        joinButton.interactable = false;
+        //joinButton.interactable = false;
         // 접속 정보 표시
         //connectionInfoText.text = "오프라인 : 마스터 서버와 연결되지 않음\n접속 재시도 중...";
 
@@ -115,7 +121,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinLobby();
         // 중복 접속 시도를 막기 위해, 접속 버튼 잠시 비활성화
-        joinButton.interactable = false;
+        //joinButton.interactable = false;
 
         // 마스터 서버에 접속중이라면
         if (PhotonNetwork.IsConnected)
@@ -196,15 +202,24 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             roomData.playerCount = roomInfo.PlayerCount;
             //roomData.msg += photonView.Owner.NickName;
             roomData.UpdateInfo();
+
             roomData.GetComponent<Button>().onClick.AddListener
             (
                 delegate
                 {
-                    OnClickRoom(roomData);
+                    //OnClickRoom(roomData);
+                    OnJoinUpdate(roomData);
                 }
             );
         }
     }
+    
+    private void OnJoinUpdate(RoomData roomdata)
+    {
+        txtplayerCount.text = string.Format("{0}/{1}", roomdata.playerCount, roomdata.maxPlayer);
+        txtroomName.text = string.Format("방이름 : {0}", roomdata.roomName);
+    }
+    
     void OnClickRoom(RoomData roomdata)
     {
         PhotonNetwork.NickName = txtUserId.text;
@@ -218,6 +233,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
     public void OnReturnTitle()
     {
+        GetComponent<RoomPanel>().OnToggleOff();
         GetComponent<ScreenSize>().Save();
         if (GetComponent<ScreenSize>().Checking == 1)
         {
