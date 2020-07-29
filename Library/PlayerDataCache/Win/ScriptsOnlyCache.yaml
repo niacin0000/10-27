@@ -103,9 +103,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11150}
     - Class: 114
-      Script: {instanceID: 11154}
+      Script: {instanceID: 11152}
     - Class: 114
-      Script: {instanceID: 11176}
+      Script: {instanceID: 11156}
     - Class: 114
       Script: {instanceID: 11250}
     - Class: 114
@@ -248,7 +248,7 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11154}
     - Class: 114
-      Script: {instanceID: 11176}
+      Script: {instanceID: 11156}
     - Class: 114
       Script: {instanceID: 11250}
     - Class: 114
@@ -322,9 +322,9 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 13430}
     - Class: 114
-      Script: {instanceID: 14942}
+      Script: {instanceID: 19308}
     - Class: 114
-      Script: {instanceID: 15078}
+      Script: {instanceID: 19416}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -366,6 +366,12 @@ ScriptsOnlyBuild:
   scriptHashData:
   - hash:
       serializedVersion: 2
+      Hash: 4bc4346a71a8df53a6b106f68ef3a190
+    assemblyName: UnityEngine.UI.dll
+    namespaceName: UnityEngine.UI
+    className: CanvasScaler
+  - hash:
+      serializedVersion: 2
       Hash: aeb62f729c52c814dec86c47dcac1471
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -400,12 +406,6 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: PunTeams
-  - hash:
-      serializedVersion: 2
-      Hash: 4bc4346a71a8df53a6b106f68ef3a190
-    assemblyName: UnityEngine.UI.dll
-    namespaceName: UnityEngine.UI
-    className: CanvasScaler
   - hash:
       serializedVersion: 2
       Hash: 74494c459d8da1b3c2f0349d1d8534aa
