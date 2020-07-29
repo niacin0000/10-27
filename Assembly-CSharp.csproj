@@ -76,7 +76,9 @@
     <Compile Include="Assets\Photon\PhotonChat\Demos\DemoChat\NamePickGui.cs" />
     <Compile Include="Assets\Photon\PhotonRealtime\Demos\DemoLoadBalancing\ConnectAndJoinRandomLb.cs" />
     <Compile Include="Assets\Script\AudioControl.cs" />
+    <Compile Include="Assets\Script\B_Wall.cs" />
     <Compile Include="Assets\Script\Bliiboard.cs" />
+    <Compile Include="Assets\Script\Boss.cs" />
     <Compile Include="Assets\Script\Buff.cs" />
     <Compile Include="Assets\Script\Cannon.cs" />
     <Compile Include="Assets\Script\Enemy.cs" />

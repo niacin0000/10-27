@@ -14,6 +14,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 {
     private float h, v; //이동에 쓰는코드 (위아래, 좌우)
     private Transform tr; //오브젝트의 트랜스폼
+    private Rigidbody rb;
 
     public float speed = 10.0f; //무브스피드
 
@@ -46,6 +47,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     void Start()
     {
         tr = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
 
         if (photonView.IsMine)
         {
@@ -211,6 +213,13 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             PhotonNetwork.LoadLevel("Level_1");
         }
+
+
+        ////혹시 바닥에 떨어지고나서부터 캐릭터의 y값을 변환시키고 싶지 않을때
+        //if (collision.collider.CompareTag("FLOOR"))
+        //{
+        //    rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        //}
     }
 
     public void OnTriggerEnter(Collider other)
@@ -219,6 +228,22 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         if (other.CompareTag("BLOCK") && !isDie)
         {
             speed = 5.0f;
+        }
+
+        //BOSSWALLHIT이라는 태그를 가진 오브젝트와 닿았을 때
+        if (other.CompareTag("BOSSWALLHIT") && !isDie && td_c)
+        {
+            currHP -= 20.0f;
+            td_c = false;
+            body.GetComponent<MeshRenderer>().material.color = Color.red;
+            tr.Translate(Vector3.back * 500 * Time.deltaTime);
+            Invoke("TakeDamage_c", 2f);
+
+            if (photonView.IsMine && currHP <= 0.0f)
+            {
+                isDie = true;
+                Debug.Log("Die");
+            }
         }
     }
 
@@ -243,7 +268,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             settarget_I = null;
         }
-
     }
 
     //아이템 픽업

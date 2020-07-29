@@ -55,7 +55,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     public void CreateCube2()
     {
-        if (currPlayer == 2)
+        if (currPlayer >= 1)
         {
             Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
