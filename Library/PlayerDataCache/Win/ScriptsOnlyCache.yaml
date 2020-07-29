@@ -17,6 +17,7 @@ ScriptsOnlyBuild:
     - MouseFocus
     - MoveCtrl
     - RoomData
+    - RoomPanel
     - ScreenSize
     - UIMgr
     - UnityStandardAssets.Utility.SmoothFollow
@@ -108,53 +109,53 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11250}
     - Class: 114
-      Script: {instanceID: 11336}
+      Script: {instanceID: 11338}
     - Class: 114
-      Script: {instanceID: 11424}
+      Script: {instanceID: 11426}
     - Class: 114
-      Script: {instanceID: 11556}
+      Script: {instanceID: 11558}
     - Class: 114
-      Script: {instanceID: 11684}
+      Script: {instanceID: 11686}
     - Class: 114
-      Script: {instanceID: 11890}
+      Script: {instanceID: 11892}
     - Class: 114
-      Script: {instanceID: 11908}
+      Script: {instanceID: 11910}
     - Class: 114
-      Script: {instanceID: 12042}
+      Script: {instanceID: 12044}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12180}
     - Class: 114
-      Script: {instanceID: 12218}
+      Script: {instanceID: 12220}
     - Class: 114
-      Script: {instanceID: 12240}
+      Script: {instanceID: 12242}
     - Class: 114
-      Script: {instanceID: 12294}
+      Script: {instanceID: 12296}
     - Class: 114
-      Script: {instanceID: 12408}
+      Script: {instanceID: 12410}
     - Class: 114
-      Script: {instanceID: 12432}
+      Script: {instanceID: 12434}
     - Class: 114
-      Script: {instanceID: 12690}
+      Script: {instanceID: 12692}
     - Class: 114
-      Script: {instanceID: 12732}
+      Script: {instanceID: 12734}
     - Class: 114
-      Script: {instanceID: 12960}
+      Script: {instanceID: 12962}
     - Class: 114
-      Script: {instanceID: 13008}
+      Script: {instanceID: 13010}
     - Class: 114
-      Script: {instanceID: 13018}
+      Script: {instanceID: 13020}
     - Class: 114
-      Script: {instanceID: 13060}
+      Script: {instanceID: 13062}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 13082}
     - Class: 114
-      Script: {instanceID: 13314}
+      Script: {instanceID: 13316}
     - Class: 114
-      Script: {instanceID: 13330}
+      Script: {instanceID: 13332}
     - Class: 114
-      Script: {instanceID: 13398}
+      Script: {instanceID: 13400}
     - Class: 114
-      Script: {instanceID: 13412}
+      Script: {instanceID: 13414}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -251,77 +252,79 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11250}
     - Class: 114
-      Script: {instanceID: 11322}
+      Script: {instanceID: 11268}
     - Class: 114
-      Script: {instanceID: 11344}
+      Script: {instanceID: 11324}
     - Class: 114
-      Script: {instanceID: 11424}
+      Script: {instanceID: 11346}
     - Class: 114
-      Script: {instanceID: 11484}
+      Script: {instanceID: 11426}
     - Class: 114
-      Script: {instanceID: 11556}
+      Script: {instanceID: 11486}
     - Class: 114
-      Script: {instanceID: 11684}
+      Script: {instanceID: 11558}
     - Class: 114
-      Script: {instanceID: 11890}
+      Script: {instanceID: 11686}
     - Class: 114
-      Script: {instanceID: 11966}
+      Script: {instanceID: 11892}
     - Class: 114
-      Script: {instanceID: 12042}
+      Script: {instanceID: 11968}
     - Class: 114
-      Script: {instanceID: 12116}
+      Script: {instanceID: 12044}
     - Class: 114
-      Script: {instanceID: 12172}
+      Script: {instanceID: 12118}
     - Class: 114
-      Script: {instanceID: 12218}
+      Script: {instanceID: 12174}
     - Class: 114
-      Script: {instanceID: 12240}
+      Script: {instanceID: 12220}
     - Class: 114
-      Script: {instanceID: 12266}
+      Script: {instanceID: 12242}
     - Class: 114
-      Script: {instanceID: 12294}
+      Script: {instanceID: 12268}
     - Class: 114
-      Script: {instanceID: 12434}
+      Script: {instanceID: 12296}
     - Class: 114
-      Script: {instanceID: 12506}
+      Script: {instanceID: 12436}
     - Class: 114
-      Script: {instanceID: 12586}
+      Script: {instanceID: 12508}
     - Class: 114
-      Script: {instanceID: 12594}
+      Script: {instanceID: 12588}
     - Class: 114
-      Script: {instanceID: 12606}
+      Script: {instanceID: 12596}
     - Class: 114
-      Script: {instanceID: 12732}
+      Script: {instanceID: 12608}
     - Class: 114
-      Script: {instanceID: 12808}
+      Script: {instanceID: 12734}
     - Class: 114
-      Script: {instanceID: 12826}
+      Script: {instanceID: 12810}
     - Class: 114
-      Script: {instanceID: 12834}
+      Script: {instanceID: 12828}
     - Class: 114
-      Script: {instanceID: 12960}
+      Script: {instanceID: 12836}
     - Class: 114
-      Script: {instanceID: 13008}
+      Script: {instanceID: 12962}
     - Class: 114
-      Script: {instanceID: 13018}
+      Script: {instanceID: 13010}
     - Class: 114
-      Script: {instanceID: 13026}
+      Script: {instanceID: 13020}
     - Class: 114
-      Script: {instanceID: 13080}
+      Script: {instanceID: 13028}
     - Class: 114
-      Script: {instanceID: 13314}
+      Script: {instanceID: 13082}
     - Class: 114
-      Script: {instanceID: 13330}
+      Script: {instanceID: 13316}
     - Class: 114
-      Script: {instanceID: 13398}
+      Script: {instanceID: 13332}
     - Class: 114
-      Script: {instanceID: 13412}
+      Script: {instanceID: 13400}
     - Class: 114
-      Script: {instanceID: 13428}
+      Script: {instanceID: 13414}
     - Class: 114
-      Script: {instanceID: 19882}
+      Script: {instanceID: 13430}
     - Class: 114
-      Script: {instanceID: 19990}
+      Script: {instanceID: 19290}
+    - Class: 114
+      Script: {instanceID: 19398}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -463,6 +466,12 @@ ScriptsOnlyBuild:
     assemblyName: PhotonUnityNetworking.Utilities.dll
     namespaceName: Photon.Pun.UtilityScripts
     className: GraphicToggleIsOnTransition
+  - hash:
+      serializedVersion: 2
+      Hash: 8dd7eeae5fbc27965d5726b12372a852
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomPanel
   - hash:
       serializedVersion: 2
       Hash: c656dcc13ae391b68d594cc8f9c590b0
@@ -1041,7 +1050,7 @@ ScriptsOnlyBuild:
     className: CurrentRoomPropertiesListedInLobbyProperty
   - hash:
       serializedVersion: 2
-      Hash: 7eb4e95b82e25b67f0dc555fb52ae946
+      Hash: d62976f364e18510048a92c74765338d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: RoomData
@@ -1455,7 +1464,7 @@ ScriptsOnlyBuild:
     className: FootMove
   - hash:
       serializedVersion: 2
-      Hash: 084c5e9e06a410cc79f13d7cc7a14bea
+      Hash: 079e37d2fd5c073dd4923ea207a0fb41
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LobbyManager
@@ -1781,4 +1790,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/Lobby.unity
   - Assets/Scenes/Level.unity
-  playerPath: "C:/Users/rase1/Desktop/\uC0C8 \uD3F4\uB354 (4)/FTestPhoton.exe"
+  playerPath: D:/Unity/0717_0310_FTestPhoton/10-27/Build/FTestPhoton.exe

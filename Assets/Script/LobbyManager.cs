@@ -194,21 +194,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             roomData.roomName = roomInfo.Name;
             roomData.maxPlayer = roomInfo.MaxPlayers;
             roomData.playerCount = roomInfo.PlayerCount;
-            roomData.msg += photonView.Owner.NickName;
+            //roomData.msg += photonView.Owner.NickName;
             roomData.UpdateInfo();
             roomData.GetComponent<Button>().onClick.AddListener
             (
                 delegate
                 {
-                    OnClickRoom(roomData.roomName);
+                    OnClickRoom(roomData);
                 }
             );
         }
     }
-    void OnClickRoom(string roomName)
+    void OnClickRoom(RoomData roomdata)
     {
         PhotonNetwork.NickName = txtUserId.text;
-        PhotonNetwork.JoinRoom(roomName, null);
+
+        //PhotonNetwork.JoinRoom(roomdata.name, null);
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
     }
     public void OnEnterOption()

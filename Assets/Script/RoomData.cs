@@ -1,32 +1,35 @@
-﻿using Photon.Pun;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RoomData : MonoBehaviourPunCallbacks
+public class RoomData : MonoBehaviour
 {
 
     public string roomName = "";
     public int playerCount = 0;
     public int maxPlayer = 0;
 
+    public Text txtplayerCount;
+    public Text txtroomName;
+    public Text[] txtplayerList;
+
     [System.NonSerialized]
-    public Text roomDataNametxt;
-    public Text roomDataPCtxt;
-    public Text rommDataPlayerNick;
-    public string msg = "";
+    public Text roomDataTxt;
 
     void Awake()
     {
-        roomDataNametxt = GetComponentInChildren<Text>();
-        roomDataPCtxt = GetComponentInChildren<Text>();
+        roomDataTxt = GetComponentInChildren<Text>();
     }
 
     public void UpdateInfo()
     {
-        roomDataNametxt.text = string.Format("방 이름 : {0}", roomName);
-        roomDataPCtxt.text = string.Format("[{0}/{1}]",playerCount.ToString("00"), maxPlayer);
-        rommDataPlayerNick.text = msg;
+        roomDataTxt.text = string.Format(" {0} [{1}/{2}]"
+                                        , roomName
+                                        , playerCount.ToString("00")
+                                        , maxPlayer);
+
+        txtplayerCount.text = string.Format("{0}/{1}", playerCount, maxPlayer);
+        txtroomName.text = string.Format("방이름 : {0}", roomName);
     }
 }
