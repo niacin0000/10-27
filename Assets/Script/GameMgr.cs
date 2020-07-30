@@ -68,12 +68,12 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     public void CreateCube3()
     {
-        if (currPlayer == 2)
+        if (currPlayer >= 1)
         {
             Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
             int idx = Random.Range(1, points.Length);
-            PhotonNetwork.Instantiate("Robo_J", points[idx].position, Quaternion.identity);
+            PhotonNetwork.Instantiate("plist", points[idx].position, Quaternion.identity);
 
             a = 3;
             photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);

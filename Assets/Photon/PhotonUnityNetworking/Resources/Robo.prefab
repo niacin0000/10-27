@@ -752,8 +752,11 @@ MonoBehaviour:
   respawnTime: 3
   isPicking: 0
   body: {fileID: 3712360158771973503}
+  foot: {fileID: 246672220567446069}
   playerEquipPoint: {fileID: 0}
   playerTakeDownPoint: {fileID: 0}
+  Robo1: {fileID: 3712360158771973503}
+  Robo2: {fileID: 7061554253846966871, guid: 306d7b0f0b959c3488730714c5d6cab2, type: 3}
 --- !u!65 &3712360158771973501
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -603,9 +603,12 @@ MonoBehaviour:
   currDP: 100
   respawnTime: 3
   isPicking: 0
-  itemPoint: {fileID: 873237527635867496}
-  takedownP: {fileID: 217940738751987126}
   body: {fileID: 1345306393906731609}
+  foot: {fileID: 0}
+  playerEquipPoint: {fileID: 0}
+  playerTakeDownPoint: {fileID: 0}
+  Robo1: {fileID: 0}
+  Robo2: {fileID: 0}
 --- !u!54 &-6893192978830250341
 Rigidbody:
   m_ObjectHideFlags: 0

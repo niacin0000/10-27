@@ -13,8 +13,9 @@ using UnityEngine.UI;
 public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 {
     private float h, v; //이동에 쓰는코드 (위아래, 좌우)
-    private Transform tr; //오브젝트의 트랜스폼
+    private Transform tr, tr_f; //오브젝트의 트랜스폼, foot의 트랜스폼
     private Rigidbody rb;
+    private Vector3 foot_v;
 
     public float speed = 10.0f; //무브스피드
 
@@ -35,9 +36,11 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     public bool isPicking = false; //물건을 들었는지 상태여부
 
     private GameObject settarget_I; //현재 부딪힌 아이템 타게팅
-    public GameObject body; //캐릭터 몸체
+    public GameObject body, foot; //캐릭터 몸체, 캐릭터의 다리
 
     public GameObject playerEquipPoint, playerTakeDownPoint; //아이템 들고 내려두는 포인트
+
+    public GameObject Robo1, Robo2;
 
     private void Awake()
     {
@@ -48,6 +51,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     {
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        tr_f = foot.GetComponent<Transform>();
 
         if (photonView.IsMine)
         {
@@ -128,6 +132,19 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 tr.rotation = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
             }
         }
+
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            Robo1.SetActive(false);
+            Robo2.SetActive(true);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Robo1.SetActive(true);
+            Robo2.SetActive(false);
+        }
+
+
     }
 
     void Dash() //대쉬
@@ -236,7 +253,8 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             currHP -= 20.0f;
             td_c = false;
             body.GetComponent<MeshRenderer>().material.color = Color.red;
-            tr.Translate(Vector3.back * 500 * Time.deltaTime);
+            foot_v = foot.transform.TransformDirection(Vector3.back);
+            tr.Translate(foot_v * 500 * Time.deltaTime);
             Invoke("TakeDamage_c", 2f);
 
             if (photonView.IsMine && currHP <= 0.0f)
