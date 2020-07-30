@@ -197,29 +197,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             GameObject _room = Instantiate(room, gridTr);
             RoomData roomData = _room.GetComponent<RoomData>();
-            RoomData joinData = joinButton.GetComponent<RoomData>();
             roomData.roomName = roomInfo.Name;
-            joinData.roomName = roomInfo.Name;
             roomData.maxPlayer = roomInfo.MaxPlayers;
-            joinData.maxPlayer = roomInfo.MaxPlayers;
-
             roomData.playerCount = roomInfo.PlayerCount;
-            //roomData.msg += photonView.Owner.NickName;
             roomData.UpdateInfo();
-
             roomData.GetComponent<Button>().onClick.AddListener
             (
                 delegate
                 {
                     //OnClickRoom(roomData);
                     OnJoinUpdate(roomData);
-                }
-            );
-            joinButton.GetComponent<Button>().onClick.AddListener
-            (
-                delegate
-                {
-                    OnClickRoom(roomData);
                 }
             );
         }
@@ -229,13 +216,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         txtplayerCount.text = string.Format("{0}/{1}", roomdata.playerCount, roomdata.maxPlayer);
         txtroomName.text = string.Format("방이름 : {0}", roomdata.roomName);
+        joinButton.onClick.AddListener
+            (
+            delegate
+            {
+                OnClickRoom(roomdata);
+            }
+            );
     }
     
     void OnClickRoom(RoomData roomdata)
     {
         PhotonNetwork.NickName = txtUserId.text;
 
-        PhotonNetwork.JoinRoom(roomdata.name, null);
+        PhotonNetwork.JoinRoom(roomdata.roomName, null);
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
     }
     public void OnEnterOption()
