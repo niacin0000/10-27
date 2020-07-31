@@ -21,7 +21,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public GameObject oPtion;
     // Start is called before the first frame update
 
-    public GameObject Robo;
+    public GameObject Player;
     public Collision collision;
 
     bool fullScreen_game;
@@ -39,20 +39,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-        //Cursor.lockState = CursorLockMode.Locked;
-        //Cursor.visible = false;
         DontDestroyOnLoad(gameObject);
-        //if (GetComponent<ScreenSize>().Checking == 1)
-        //{
-        //    GetComponent<LobbyManager>().fullScreen = true;
-        //}
-        //else
-        //{
-        //    GetComponent<LobbyManager>().fullScreen = false;
-        //}
-        //Screen.sleepTimeout = SleepTimeout.NeverSleep;
-        //Screen.SetResolution(GetComponent<LobbyManager>().screenSize_x, GetComponent<LobbyManager>().screenSize_y, GetComponent<LobbyManager>().fullScreen);
-
     }
     void Start()
     {
@@ -92,7 +79,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
         int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Robo", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player1", points[idx].position, Quaternion.identity);
 
 
 
@@ -105,7 +92,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
         int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Robo_D", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player2", points[idx].position, Quaternion.identity);
 
         //Ch2.SetActive(false);
         a = 2;
@@ -118,7 +105,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
         int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Robo_J", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player3", points[idx].position, Quaternion.identity);
 
         a = 3;
         photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
@@ -129,7 +116,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
         int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player4", points[idx].position, Quaternion.identity);
 
         a = 4;
         photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
