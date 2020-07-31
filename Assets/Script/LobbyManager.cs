@@ -83,6 +83,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             OnPasswordCheck();
         }
 
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            Debug.Log(PhotonNetwork.PlayerList[i]);
+        }
+
     }
 
     private void ChangePanel(ActivePanel panel)
@@ -148,8 +153,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnected)
             return;
 
+
         PhotonNetwork.CreateRoom(txtRoomName.text + "_" + txtRoomPassword.text
                                 , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
+
+        
     }
 
     //패스워드관련
@@ -184,7 +192,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         connectionInfoText.text = "방 참가 성공";
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel("Level");
+        PhotonNetwork.LoadLevel("Room");
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -228,6 +236,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     void OnClickRoom(RoomData roomdata)
     {
         PhotonNetwork.NickName = txtUserId.text;
+
+        
 
         PhotonNetwork.JoinRoom(roomdata.roomName, null);
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
