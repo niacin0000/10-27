@@ -39,8 +39,6 @@ MonoBehaviour:
   - DestroySpaceship
   - Fire
   - RespawnSpaceship
-  - RPCDrop
-  - RPCPick
   - setBuff
   - setItemis
   DisableAutoOpenWizard: 1
