@@ -172,12 +172,12 @@ public class Inventory : MonoBehaviourPunCallbacks
         }
     }
 
-    bool inventoryContains(int id)
-    {
-        for (int i = 0; i < inventory.Count; i++)
-        {
-            return (inventory[i].itemID == id);
-        }
-        return false;
-    }
+    //bool inventoryContains(int id)
+    //{
+    //    for (int i = 0; i < inventory.Count; i++)
+    //    {
+    //        return (inventory[i].itemID == id);
+    //    }
+    //    return false;
+    //}
 }

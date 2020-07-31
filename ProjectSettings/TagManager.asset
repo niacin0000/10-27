@@ -13,6 +13,9 @@ TagManager:
   - ITEM
   - EquipPoint
   - BLOCK
+  - BOSSWALL
+  - FLOOR
+  - BOSSWALLHIT
   layers:
   - Default
   - TransparentFX

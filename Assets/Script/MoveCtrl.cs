@@ -12,71 +12,66 @@ using UnityEngine.UI;
 
 public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 {
-    private float h, v;
+    private float h, v; //이동에 쓰는코드 (위아래, 좌우)
+    private Transform tr, tr_f; //오브젝트의 트랜스폼, foot의 트랜스폼
     private Rigidbody rb;
-    private Transform tr;
+    private Vector3 foot_v;
 
-    public float speed = 10.0f;
+    public float speed = 10.0f; //무브스피드
 
-    public Text nickName;
+    public Text nickName; //플레이어 닉네임
+
+    public float currHP = 100.0f; //체력 게이지
+
+    public float currDP = 100.0f; //대쉬 게이지
+
+    bool dash_c = true; //대쉬 상태여부
+    bool dashR_c = false; //대쉬회복 상태여부
 
 
-    public float currHP = 100.0f;
+    private bool isDie = false; //캐릭터사망
+    public float respawnTime = 3.0f; //리스폰시간
+    bool td_c = true; //데미지받음(TakeDamage) 상태여부
 
-    public float currDP = 100.0f;
+    public bool isPicking = false; //물건을 들었는지 상태여부
 
-    bool dash_c = true;
-    bool dashR_c = false;
+    private GameObject settarget_I; //현재 부딪힌 아이템 타게팅
+    public GameObject body, foot; //캐릭터 몸체, 캐릭터의 다리
 
+    public GameObject playerEquipPoint, playerTakeDownPoint; //아이템 들고 내려두는 포인트
 
-    private bool isDie = false;
-    public float respawnTime = 3.0f;
-    bool td_c = true;
-
-    //물건을 들었는지 상태여부
-    public bool isPicking = false;
-
-    ItemEquip itemEquip;
-
-    private GameObject settarget_I;
-    public GameObject itemPoint, takedownP, body;
+    public GameObject Robo1, Robo2;
 
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject); //씬변환시 부수지않음
     }
 
-    // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
-
         tr = GetComponent<Transform>();
+        rb = GetComponent<Rigidbody>();
+        tr_f = foot.GetComponent<Transform>();
 
         if (photonView.IsMine)
         {
-            Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform;
+            Camera.main.GetComponent<SmoothFollow>().target = tr.Find("CamPivot").transform; //카메라가 캠피봇을 따라감
         }
         else
         {
             GetComponent<Rigidbody>().isKinematic = true;  //물리충돌 일어나지 않게 isKinematic
         }
 
-        nickName.text = photonView.Owner.NickName;
+        playerEquipPoint = this.transform.Find("ItemPoint").gameObject; //아이템 픽업 포인터 지정
+        playerTakeDownPoint = this.transform.Find("head").transform.Find("TakeDownPoint").gameObject; //아이템 다운 포인터 지정
 
+        nickName.text = photonView.Owner.NickName; //닉네임가져오기
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //if(!photonView.IsMine)
-        //{
-        //    return;
-        //}
-
         if (photonView.IsMine && !isDie)
         {
-
             //이동
             if (dash_c == true)
             {
@@ -86,10 +81,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 tr.Translate(Vector3.right * h * speed * Time.deltaTime);
             }
 
-
             //대쉬
             if (Input.GetKeyDown(KeyCode.Space))
             {
+
                 if (currDP >= 33.3f && dash_c == true)
                 {
                     CancelInvoke("RecoveryDP");
@@ -102,7 +97,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                     InvokeRepeating("RecoveryDP", 2f, 0.1f);
 
                     currDP -= 33.3f;
-                    //dpBar.fillAmount = currDP / initDP;
                 }
             }
 
@@ -110,6 +104,18 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKeyDown(KeyCode.B))
             {
                 currHP -= 20;
+            }
+
+            //마우스 좌클릭
+            if (Input.GetButtonDown("Fire1") && isPicking == false)
+            {
+                Pickup(settarget_I);
+            }
+
+            //마우스 가운데클릭
+            if (Input.GetButtonDown("Fire3") && isPicking == true)
+            {
+                Drop(settarget_I);
             }
 
         }
@@ -127,9 +133,21 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             }
         }
 
+        if(Input.GetKeyDown(KeyCode.J))
+        {
+            Robo1.SetActive(false);
+            Robo2.SetActive(true);
+        }
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Robo1.SetActive(true);
+            Robo2.SetActive(false);
+        }
+
+
     }
 
-    void Dash()
+    void Dash() //대쉬
     {
         tr.Translate(Vector3.forward * v * speed * 7 * Time.deltaTime);
         tr.Translate(Vector3.right * h * speed * 7 * Time.deltaTime);
@@ -137,25 +155,23 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         Debug.Log("Dash");
     }
 
-    private void CancelDash()
+    private void CancelDash() //대쉬중단
     {
         CancelInvoke("Dash");
         dash_c = true;
     }
 
-    private void RecoveryDP_c()
+    private void RecoveryDP_c() //대쉬포인트 회복 여부
     {
         dashR_c = true;
     }
 
-    private void RecoveryDP()
+    private void RecoveryDP() //대쉬포인트 회복
     {
 
         if (currDP < 100 && dashR_c == true)
         {
             currDP += 3f;
-
-            Debug.Log(currDP);
         }
 
         if (currDP >= 100)
@@ -163,11 +179,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             CancelInvoke("RecoveryDP");
             currDP = 100;
             dashR_c = false;
-            Debug.Log(currDP);
         }
     }
 
-    private void TakeDamage_c()
+    private void TakeDamage_c() //데미지받음(색변환)
     {
         body.GetComponent<MeshRenderer>().material.color = Color.blue;
         td_c = true;
@@ -215,51 +230,91 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             PhotonNetwork.LoadLevel("Level_1");
         }
+
+
+        ////혹시 바닥에 떨어지고나서부터 캐릭터의 y값을 변환시키고 싶지 않을때
+        //if (collision.collider.CompareTag("FLOOR"))
+        //{
+        //    rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        //}
     }
 
     public void OnTriggerEnter(Collider other)
     {
+        //BLOCK이라는 태그를 가진 오브젝트와 닿았을 때
         if (other.CompareTag("BLOCK") && !isDie)
         {
             speed = 5.0f;
+        }
+
+        //BOSSWALLHIT이라는 태그를 가진 오브젝트와 닿았을 때
+        if (other.CompareTag("BOSSWALLHIT") && !isDie && td_c)
+        {
+            currHP -= 20.0f;
+            td_c = false;
+            body.GetComponent<MeshRenderer>().material.color = Color.red;
+            foot_v = foot.transform.TransformDirection(Vector3.back);
+            tr.Translate(foot_v * 500 * Time.deltaTime);
+            Invoke("TakeDamage_c", 2f);
+
+            if (photonView.IsMine && currHP <= 0.0f)
+            {
+                isDie = true;
+                Debug.Log("Die");
+            }
         }
     }
 
     public void OnTriggerStay(Collider other)
     {
+        //ITEMS이라는 태그를 가진 오브젝트와 닿고 있는중
         if (other.CompareTag("ITEMS") && !isDie && isPicking == false)
         {
-            Debug.Log(GameObject.FindGameObjectWithTag("ITEMS").name);
             settarget_I = other.gameObject;
         }
-
     }
+
     public void OnTriggerExit(Collider other)
     {
-        if(other.CompareTag("BLOCK")&&!isDie)
+        //BLOCK이라는 태그를 가진 오브젝트에 나갔을 때
+        if (other.CompareTag("BLOCK") && !isDie)
         {
             speed = 10.0f;
         }
+        //ITEMS이라는 태그를 가진 오브젝트에 나갔을 때
+        if (other.CompareTag("ITEMS") && !isPicking)
+        {
+            settarget_I = null;
+        }
     }
 
+    //아이템 픽업
     public void Pickup(GameObject item)
     {
         SetEquip(item, true);
 
-        Debug.Log("드는 중");
+        item.transform.SetParent(playerEquipPoint.transform);
+        item.transform.localPosition = Vector3.zero;
+        item.transform.rotation = new Quaternion(0, 0, 0, 0);
+
         isPicking = true;
+        photonView.RPC("setItemis", RpcTarget.AllViaServer, true);
     }
 
+    //아이템 드랍
     public void Drop(GameObject item)
     {
         SetEquip(settarget_I, false);
-        settarget_I.transform.position = takedownP.transform.position;
 
-        itemPoint.transform.DetachChildren();
+        item.transform.position = playerTakeDownPoint.transform.position;
 
-        isPicking = false;
+        playerEquipPoint.transform.DetachChildren();
+
+        photonView.RPC("setItemis", RpcTarget.AllViaServer, false);
+
     }
 
+    //아이템의 콜라이더와 키네마틱 상태 변환
     void SetEquip(GameObject item, bool isEquip)
     {
         Collider[] itemColliders = item.GetComponents<Collider>();
@@ -270,6 +325,23 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             itemCollider.enabled = !isEquip;
         }
         itemRigidbody.isKinematic = isEquip;
+
+    }
+
+    //아이템의 콜라이더와 키네마틱 상태 변환(아이템쪽 코드에서)
+    [PunRPC]
+    void setItemis(bool ia)
+    {
+        if (ia)
+        {
+            settarget_I.GetComponent<ItemEquip>().I_picking = true;
+        }
+        else if (!ia)
+        {
+            settarget_I.GetComponent<ItemEquip>().I_picking = false;
+            isPicking = false;
+            settarget_I = null;
+        }
 
     }
 }

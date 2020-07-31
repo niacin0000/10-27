@@ -7,39 +7,27 @@ using Photon.Realtime; // 포톤 서비스 관련 라이브러리
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
-using Photon.Pun.Demo.PunBasics;
+using System.Security.Cryptography;
 
 public class GameMgr : MonoBehaviourPunCallbacks
 {
     public Text msgList;
     public Text playerCount;
-    public GameObject Ch1;
-    public GameObject Ch2;
-    public GameObject Ch3;
-    public GameObject Ch4;
-    public GameObject menuSet;
-    public GameObject oPtion;
+    public GameObject Ch1, Ch2, Ch3, Ch4;
+
     // Start is called before the first frame update
 
-    public GameObject Player;
+    public GameObject Robo;
     public Collision collision;
 
-    bool fullScreen_game;
-
-
-    private int a;
-
-    //판넬 바꾸기
-    public enum ActivePanel
-    {
-        MENU = 0,
-        OPTION = 1,
-    }
-    public GameObject[] panels;
+    private int a, currPlayer, maxPlayer;
 
     void Awake()
     {
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
         DontDestroyOnLoad(gameObject);
+
     }
     void Start()
     {
@@ -47,80 +35,63 @@ public class GameMgr : MonoBehaviourPunCallbacks
         // photonNetwork의 데이터 통신을 다시 연결시켜준다. 
         PhotonNetwork.IsMessageQueueRunning = true;
         Invoke("CheckPlayerCount", 0.5f);
-        GetComponent<Config>().Load();
-        GetComponent<ScreenSize>().Load();
     }
 
-    private void Update()
-    {
-        // sub menu
-        // 적용한 Cancel키로 메뉴호출
-        if (Input.GetButtonDown("Cancel"))
-        {
-            if (menuSet.activeSelf)
-            {
-                //메뉴 내에서뒤로가기 개념의 코드
-                if (oPtion.activeSelf)
-                {
-                    ChangePanel(ActivePanel.MENU);
-                }
-                else
-                    //메뉴 끄기
-                    menuSet.SetActive(false);
-            }
-            else
-            {
-                menuSet.SetActive(true);
-            }
-        }
-    }
+
+
     public void CreateCube1()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer >= 1)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player1", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("Robo", points[idx].position, Quaternion.identity);
+            a = 1;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
 
-
-
-        a = 1;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
 
     }
     public void CreateCube2()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer >= 1)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player2", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("Robo_D", points[idx].position, Quaternion.identity);
+            a = 2;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
 
-        //Ch2.SetActive(false);
-        a = 2;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-
-        //DestroyButton();
     }
     public void CreateCube3()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer >= 1)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player3", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("plist", points[idx].position, Quaternion.identity);
 
-        a = 3;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        //Ch3.SetActive(false);
+            a = 3;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
+
     }
     public void CreateCube4()
     {
-        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        if (currPlayer == 2)
+        {
+            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
 
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player4", points[idx].position, Quaternion.identity);
+            int idx = Random.Range(1, points.Length);
+            PhotonNetwork.Instantiate("Player", points[idx].position, Quaternion.identity);
+            a = 4;
+            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
+        }
 
-        a = 4;
-        photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        //Ch4.SetActive(false);
     }
 
     [PunRPC]
@@ -179,8 +150,8 @@ public class GameMgr : MonoBehaviourPunCallbacks
     }
     void CheckPlayerCount()
     {
-        int currPlayer = PhotonNetwork.PlayerList.Length;
-        int maxPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
+        currPlayer = PhotonNetwork.PlayerList.Length;
+        maxPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
         playerCount.text = string.Format("[{0}/{1}]", currPlayer, maxPlayer);
     }
     void ReceiveMsg(string msg)
@@ -188,42 +159,12 @@ public class GameMgr : MonoBehaviourPunCallbacks
         msgList.text += "\n" + msg;
     }
 
-    public void OnExitGame()
-    {
-        Debug.Log("ExitGame");
-        Application.Quit();
-    }
 
-    //버튼을 통한 메뉴의 전환
-    public void OnReturnMenu()
-    {
-        ChangePanel(ActivePanel.MENU);
-        GetComponent<Config>().Save();
-        GetComponent<ScreenSize>().Save();
-        if (GetComponent<ScreenSize>().Checking == 1)
-        {
-            fullScreen_game = true;
-        }
-        else
-        {
-            fullScreen_game = false;
-        }
-        Screen.SetResolution(1920, 1080, fullScreen_game);
-    }
 
-    public void OnInitOption()
+    private void Update()
     {
-        ChangePanel(ActivePanel.OPTION);
-    }
 
-    private void ChangePanel(ActivePanel panel)
-    {
-        foreach (GameObject _panel in panels)
-        {
-            Debug.Log(panels);
-            _panel.SetActive(false);
-        }
-        panels[(int)panel].SetActive(true);
+
     }
 
 }
