@@ -13,14 +13,15 @@ public class GameMgr : MonoBehaviourPunCallbacks
 {
     public Text msgList;
     public Text playerCount;
-    public GameObject Ch1, Ch2, Ch3, Ch4;
 
     // Start is called before the first frame update
 
     public GameObject Robo;
     public Collision collision;
 
-    private int a, currPlayer, maxPlayer;
+    private int currPlayer, maxPlayer;
+
+    private bool createPlayer = true;
 
     void Awake()
     {
@@ -30,76 +31,51 @@ public class GameMgr : MonoBehaviourPunCallbacks
     {
         // photonNetwork의 데이터 통신을 다시 연결시켜준다. 
         PhotonNetwork.IsMessageQueueRunning = true;
-        Invoke("CheckPlayerCount", 0.5f);
-    }
-
-
-
-    public void CreateCube1()
-    {
-        if (currPlayer >= 1)
-        {
-            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-
-            int idx = Random.Range(1, points.Length);
-            PhotonNetwork.Instantiate("Player1", points[idx].position, Quaternion.identity);
-            a = 1;
-            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        }
+        Invoke("CheckPlayerCount", 0f);
+        Invoke("Create", 0.5f);
 
 
     }
-    public void CreateCube2()
+
+
+    void Create()
     {
-        if (currPlayer >= 1)
-        {
-            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        Debug.Log(currPlayer + "/.sadafdsaf");
 
-            int idx = Random.Range(1, points.Length);
-            PhotonNetwork.Instantiate("Player2", points[idx].position, Quaternion.identity);
-            a = 2;
-            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        }
-
-    }
-    public void CreateCube3()
-    {
-        if (currPlayer >= 1)
-        {
-            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-
-            int idx = Random.Range(1, points.Length);
-            PhotonNetwork.Instantiate("Player3", points[idx].position, Quaternion.identity);
-
-            a = 3;
-            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        }
-
-    }
-    public void CreateCube4()
-    {
-        if (currPlayer == 2)
-        {
-            Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-
-            int idx = Random.Range(1, points.Length);
-            PhotonNetwork.Instantiate("Player4", points[idx].position, Quaternion.identity);
-            a = 4;
-            photonView.RPC("DestroyButton", RpcTarget.AllViaServer, a);
-        }
-
+        if (currPlayer == 1)
+            CreatePlayer1();
+        else if (currPlayer == 2)
+            CreatePlayer2();
+        else if (currPlayer == 3)
+            CreatePlayer3();
+        else if (currPlayer == 4)
+            CreatePlayer4();
     }
 
-    [PunRPC]
-    void DestroyButton(int a)
+
+    public void CreatePlayer1()
     {
-        switch (a)
-        {
-            case 1: Destroy(Ch1); break;
-            case 2: Destroy(Ch2); break;
-            case 3: Destroy(Ch3); break;
-            case 4: Destroy(Ch4); break;
-        }
+        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        int idx = Random.Range(1, points.Length);
+        PhotonNetwork.Instantiate("Player1", points[idx].position, Quaternion.identity);
+    }
+    public void CreatePlayer2()
+    {
+        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        int idx = Random.Range(1, points.Length);
+        PhotonNetwork.Instantiate("Player2", points[idx].position, Quaternion.identity);
+    }
+    public void CreatePlayer3()
+    {
+        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        int idx = Random.Range(1, points.Length);
+        PhotonNetwork.Instantiate("Player3", points[idx].position, Quaternion.identity);
+    }
+    public void CreatePlayer4()
+    {
+        Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
+        int idx = Random.Range(1, points.Length);
+        PhotonNetwork.Instantiate("Player4", points[idx].position, Quaternion.identity);
     }
 
     public void OnExitClick()
