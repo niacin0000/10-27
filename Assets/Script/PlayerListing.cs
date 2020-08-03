@@ -12,10 +12,12 @@ public class PlayerListing : MonoBehaviour
 
     public Player Player { get; private set; }
 
-    public void SetPlayerInfo(Player player)
+    public bool TeamRedBlu;
+
+    public void SetPlayerInfo(Player player, bool RedBlu)
     {
         Player = player;
         _text.text = player.NickName;
-
+        TeamRedBlu = RedBlu;
     }
 }
