@@ -112,7 +112,10 @@
     <None Include="Assets\Photon\PhotonUnityNetworking\changelog.txt" />
     <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Grass Sway.shader" />
     <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Blur.shader" />
+    <None Include="Assets\Supercyan Free Forest Sample\Shaders\Legacy\CelShader.shader" />
+    <None Include="Assets\Supercyan Free Forest Sample\Shaders\SupercyanShaderLighting.cginc" />
     <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Plexus\Plexus.compute" />
+    <None Include="Assets\Supercyan Free Forest Sample\Shaders\SupercyanShader.shader" />
     <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Depth Mask Edge Detection.shader" />
     <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Ocean.shader" />
     <None Include="Assets\Ultimate 10 Plus Shaders\Shaders\Dissolve.shader" />
