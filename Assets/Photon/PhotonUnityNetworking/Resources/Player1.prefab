@@ -4873,10 +4873,6 @@ MonoBehaviour:
   currHP: 100
   currDP: 100
   respawnTime: 3
-  isPicking: 0
-  itemPoint: {fileID: 0}
-  takedownP: {fileID: 0}
-  body: {fileID: 0}
 --- !u!114 &-9140767729583168885
 MonoBehaviour:
   m_ObjectHideFlags: 0
