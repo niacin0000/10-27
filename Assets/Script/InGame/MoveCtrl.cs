@@ -52,7 +52,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             GetComponent<Rigidbody>().isKinematic = true;  //물리충돌 일어나지 않게 isKinematic
         }
 
-        nickName.text = photonView.Owner.NickName; //닉네임가져오기
+        //nickName.text = photonView.Owner.NickName; //닉네임가져오기
     }
 
     void Update()

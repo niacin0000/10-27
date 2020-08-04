@@ -19,6 +19,11 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public GameObject Robo;
     public Collision collision;
 
+    public GameObject sword;
+    public GameObject espadon;
+    public GameObject shield;
+    public GameObject staff;
+
     private int currPlayer, maxPlayer;
 
     private bool createPlayer = true;
@@ -52,30 +57,35 @@ public class GameMgr : MonoBehaviourPunCallbacks
             CreatePlayer4();
     }
 
+    public void DropWeapon()
+    {
+        Transform[] points = GameObject.Find("SpawnWeaponsGroup").GetComponentsInChildren<Transform>();
+        Instantiate(sword, points[0].position, Quaternion.identity);
+        Instantiate(espadon, points[1].position, Quaternion.identity);
+        Instantiate(shield, points[2].position, Quaternion.identity);
+        Instantiate(staff, points[3].position, Quaternion.identity);
+    }
 
     public void CreatePlayer1()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player1", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player1", points[0].position, Quaternion.identity);
     }
     public void CreatePlayer2()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player2", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player2", points[1].position, Quaternion.identity);
     }
     public void CreatePlayer3()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player3", points[idx].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player3", points[2].position, Quaternion.identity);
     }
     public void CreatePlayer4()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player4", points[idx].position, Quaternion.identity);
+        //int idx = Random.Range(1, points.Length);
+        PhotonNetwork.Instantiate("Player4", points[3].position, Quaternion.identity);
     }
 
     public void OnExitClick()
@@ -115,7 +125,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     {
         currPlayer = PhotonNetwork.PlayerList.Length;
         maxPlayer = PhotonNetwork.CurrentRoom.MaxPlayers;
-        playerCount.text = string.Format("[{0}/{1}]", currPlayer, maxPlayer);
+        //playerCount.text = string.Format("[{0}/{1}]", currPlayer, maxPlayer);
     }
     void ReceiveMsg(string msg)
     {
