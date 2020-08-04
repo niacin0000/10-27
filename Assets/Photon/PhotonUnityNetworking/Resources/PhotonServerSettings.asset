@@ -34,7 +34,6 @@ MonoBehaviour:
   StartInOfflineMode: 0
   RpcList:
   - ClickRpc
-  - DestroyButton
   - DestroyRpc
   - DestroySpaceship
   - Fire
