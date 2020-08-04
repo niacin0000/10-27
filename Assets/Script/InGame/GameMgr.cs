@@ -26,11 +26,12 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     private int currPlayer, maxPlayer;
 
-    private bool createPlayer = true;
+    //private bool createPlayer = true;
 
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
+        DropWeapon();
     }
     void Start()
     {
@@ -38,8 +39,6 @@ public class GameMgr : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = true;
         Invoke("CheckPlayerCount", 0f);
         Invoke("Create", 0.5f);
-
-
     }
 
 
@@ -60,32 +59,32 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public void DropWeapon()
     {
         Transform[] points = GameObject.Find("SpawnWeaponsGroup").GetComponentsInChildren<Transform>();
-        Instantiate(sword, points[0].position, Quaternion.identity);
-        Instantiate(espadon, points[1].position, Quaternion.identity);
-        Instantiate(shield, points[2].position, Quaternion.identity);
-        Instantiate(staff, points[3].position, Quaternion.identity);
+        Instantiate(sword, points[1].position, Quaternion.identity);
+        Instantiate(espadon, points[2].position, Quaternion.identity);
+        Instantiate(shield, points[3].position, Quaternion.identity);
+        Instantiate(staff, points[4].position, Quaternion.identity);
     }
 
     public void CreatePlayer1()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        PhotonNetwork.Instantiate("Player1", points[0].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player1", points[1].position, Quaternion.identity);
     }
     public void CreatePlayer2()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        PhotonNetwork.Instantiate("Player2", points[1].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player2", points[2].position, Quaternion.identity);
     }
     public void CreatePlayer3()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
-        PhotonNetwork.Instantiate("Player3", points[2].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player3", points[3].position, Quaternion.identity);
     }
     public void CreatePlayer4()
     {
         Transform[] points = GameObject.Find("SpawnPointGroup").GetComponentsInChildren<Transform>();
         //int idx = Random.Range(1, points.Length);
-        PhotonNetwork.Instantiate("Player4", points[3].position, Quaternion.identity);
+        PhotonNetwork.Instantiate("Player4", points[4].position, Quaternion.identity);
     }
 
     public void OnExitClick()
@@ -108,7 +107,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
         string msg = string.Format("[{0}]님이 입장", newPlayer.NickName);
 
-        ReceiveMsg(msg);
+        //ReceiveMsg(msg);
     }
 
     public override void OnPlayerLeftRoom(Player otherPlayer)
@@ -119,7 +118,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
                                     , otherPlayer.NickName);
 
         //photonView.RPC("ReceiveMsg", RpcTarget.Others, msg);
-        ReceiveMsg(msg);
+        //ReceiveMsg(msg);
     }
     void CheckPlayerCount()
     {
