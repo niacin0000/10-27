@@ -1,4 +1,5 @@
 ﻿using Photon.Pun;
+using Photon.Pun.Demo.Cockpit;
 using Photon.Realtime;
 using System.Collections;
 using System.Collections.Generic;
@@ -23,16 +24,31 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
     private List<PlayerListing> _listing_Blu = new List<PlayerListing>();
 
     private bool RedOrBlu;
+    private bool isLoading = true;
 
     private void Awake()
     {
-        GetCurrentRoomPlayers();
     }
 
     private void Start()
     {
     }
 
+    private void Update()
+    {
+        if (isLoading)
+        {
+            if (PhotonNetwork.CurrentRoom == null)
+            {
+                return;
+            }
+            else
+            {
+                GetCurrentRoomPlayers();
+                isLoading = false;
+            }
+        }
+    }
     private void GetCurrentRoomPlayers()
     {
         foreach (KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)
