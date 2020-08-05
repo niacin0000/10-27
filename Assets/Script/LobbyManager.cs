@@ -23,7 +23,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public Text connectionInfoText; // 네트워크 정보를 표시할 텍스트
     public Button joinButton; // 게임로비 접속 버튼
-    public Button joinRoomButton; // 룸 접속 버튼
+    public Button StartButton; // 룸 접속 버튼
 
     public GameObject[] panels;
 
@@ -88,6 +88,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
             Debug.Log(PhotonNetwork.PlayerList[i]);
+        }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartButton.interactable = true;
+        }
+        else
+        {
+            StartButton.interactable = false;
         }
 
     }
@@ -267,6 +276,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         ChangePanel(ActivePanel.TITLE);
     }
 
+    public void OnLeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        ChangePanel(ActivePanel.ROOMS);
+    }
+
     public void OnExitGame()
     {
         Debug.Log("ExitGame");
@@ -275,6 +290,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void GameStart()
     {
-        PhotonNetwork.LoadLevel(1);
+            PhotonNetwork.LoadLevel(2);
     }
 }
