@@ -154,8 +154,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsConnected)
             return;
-
-        //GetComponent<RoomPanel>().OnToggleOff();
         PhotonNetwork.CreateRoom(txtRoomName.text + "_" + txtRoomPassword.text
                                 , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
     }
@@ -174,14 +172,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    // (빈 방이 없어)랜덤 룸 참가에 실패한 경우 자동 실행
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        // 접속 상태 표시
-        connectionInfoText.text = "빈 방이 없음, 새로운 방 생성...";
-        // 최대 4명을 수용 가능한 빈방을 생성
-        PhotonNetwork.CreateRoom(null, new RoomOptions { MaxPlayers = 4 });
-    }
 
     // 룸에 참가 완료된 경우 자동 실행
     public override void OnJoinedRoom()
@@ -194,8 +184,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
 
-        PhotonNetwork.IsMessageQueueRunning = true;
-        ChangePanel(ActivePanel.LOBBY);
+        if(PhotonNetwork.IsMessageQueueRunning == false)
+        {
+            ChangePanel(ActivePanel.LOBBY);
+            PhotonNetwork.IsMessageQueueRunning = true;
+        }
+        else
+        {
+            PhotonNetwork.LoadLevel("Level");
+        }
+
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -231,29 +229,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             (
             delegate
             {
-                OnJoinRoom(roomdata);
+                OnClickRoom(roomdata);
             }
             );
     }
 
-    
     void OnClickRoom(RoomData roomdata)
     {
-        PhotonNetwork.JoinRoom(roomdata.roomName, null);
         PhotonNetwork.IsMessageQueueRunning = false;
-    }
 
-    private void OnJoinRoom(RoomData roomdata)
-    {
         PhotonNetwork.NickName = txtUserId.text;
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
-        joinRoomButton.onClick.AddListener
-    (
-    delegate
-    {
-        OnClickRoom(roomdata);
-    }
-    );
+
+        PhotonNetwork.IsMessageQueueRunning = true;
+        PhotonNetwork.JoinRoom(roomdata.roomName, null);
+        GetComponent<RoomPanel>().OnToggleOff();
+        ChangePanel(ActivePanel.LOBBY);
     }
 
     public void OnEnterOption()
@@ -282,4 +273,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Application.Quit();
     }
 
+    public void GameStart()
+    {
+        PhotonNetwork.LoadLevel(1);
+    }
 }
