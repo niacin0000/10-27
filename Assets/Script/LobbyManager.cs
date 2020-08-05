@@ -15,13 +15,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         TITLE = 0,
         ROOMS = 1,
         OPTION = 2,
+        LOBBY = 3,
     }
     private string gameVersion = "1"; // 게임 버전
     public string userId = "YouRang";
     public byte maxPlayer = 20;
 
     public Text connectionInfoText; // 네트워크 정보를 표시할 텍스트
-    public Button joinButton; // 룸 접속 버튼
+    public Button joinButton; // 게임로비 접속 버튼
+    public Button joinRoomButton; // 룸 접속 버튼
 
     public GameObject[] panels;
 
@@ -153,11 +155,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnected)
             return;
 
-
+        //GetComponent<RoomPanel>().OnToggleOff();
         PhotonNetwork.CreateRoom(txtRoomName.text + "_" + txtRoomPassword.text
                                 , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
-
-        
     }
 
     //패스워드관련
@@ -190,9 +190,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = txtUserId.text;
         // 접속 상태 표시
         connectionInfoText.text = "방 참가 성공";
+        GetComponent<RoomPanel>().OnToggleOff();
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel("Room");
+
+        PhotonNetwork.IsMessageQueueRunning = true;
+        ChangePanel(ActivePanel.LOBBY);
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -228,20 +231,31 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             (
             delegate
             {
-                OnClickRoom(roomdata);
+                OnJoinRoom(roomdata);
             }
             );
     }
+
     
     void OnClickRoom(RoomData roomdata)
     {
-        PhotonNetwork.NickName = txtUserId.text;
-
-        
-
         PhotonNetwork.JoinRoom(roomdata.roomName, null);
-        PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
+        PhotonNetwork.IsMessageQueueRunning = false;
     }
+
+    private void OnJoinRoom(RoomData roomdata)
+    {
+        PhotonNetwork.NickName = txtUserId.text;
+        PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
+        joinRoomButton.onClick.AddListener
+    (
+    delegate
+    {
+        OnClickRoom(roomdata);
+    }
+    );
+    }
+
     public void OnEnterOption()
     {    
         ChangePanel(ActivePanel.OPTION);
