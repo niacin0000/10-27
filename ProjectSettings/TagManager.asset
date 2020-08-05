@@ -7,15 +7,11 @@ TagManager:
   - ROOM
   - ROBO
   - ENEMY
-  - POTAL
   - Item Database
-  - ITEMS
-  - ITEM
-  - EquipPoint
-  - BLOCK
-  - BOSSWALL
-  - FLOOR
-  - BOSSWALLHIT
+  - ESPA
+  - SHIELD
+  - STAFF
+  - SWORD
   layers:
   - Default
   - TransparentFX

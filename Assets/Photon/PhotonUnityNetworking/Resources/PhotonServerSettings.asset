@@ -39,6 +39,12 @@ MonoBehaviour:
   - Fire
   - RespawnSpaceship
   - setBuff
+  - OnCollisionEnter
+  - Change
+  - Change_E
+  - Change_Shi
+  - Change_Sta
+  - Change_Swo
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
