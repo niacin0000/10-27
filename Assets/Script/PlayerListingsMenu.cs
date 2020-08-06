@@ -23,7 +23,6 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
     private List<PlayerListing> _listing_Red = new List<PlayerListing>();
     private List<PlayerListing> _listing_Blu = new List<PlayerListing>();
 
-    private bool RedOrBlu;
     private bool isLoading = true;
 
     private void Awake()
@@ -49,6 +48,7 @@ public class PlayerListingsMenu : MonoBehaviourPunCallbacks
             }
         }
     }
+
     private void GetCurrentRoomPlayers()
     {
         foreach (KeyValuePair<int, Player> playerInfo in PhotonNetwork.CurrentRoom.Players)

@@ -87,10 +87,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             OnPasswordCheck();
         }
 
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            Debug.Log(PhotonNetwork.PlayerList[i]);
-        }
+        //for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        //{
+        //    Debug.Log(PhotonNetwork.PlayerList[i]);
+        //}
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -275,7 +275,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     }
 
     public void OnEnterOption()
-    {    
+    {
         ChangePanel(ActivePanel.OPTION);
     }
     public void OnReturnTitle()
