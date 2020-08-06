@@ -45,6 +45,12 @@ MonoBehaviour:
   - Change_Shi
   - Change_Sta
   - Change_Swo
+  - selfDamge
+  - Dashbar
+  - DPbarUpdate
+  - HPbarUpdate
+  - selfDamage
+  - Dash_Pun
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1

@@ -21,9 +21,16 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     public Text nickName; //플레이어 닉네임
 
+    public Image hpbar; //플레이어 hpbar
+    public Image dpbar; //플레이어 dpbar
+
+
     public float currHP = 100.0f; //체력 게이지
+    private float initHP = 100.0f;
 
     public float currDP = 100.0f; //대쉬 게이지
+    private float initDP = 100.0f;
+
 
     bool dash_c = true; //대쉬 상태여부
     bool dashR_c = false; //대쉬회복 상태여부
@@ -52,7 +59,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             GetComponent<Rigidbody>().isKinematic = true;  //물리충돌 일어나지 않게 isKinematic
         }
 
-        //nickName.text = photonView.Owner.NickName; //닉네임가져오기
+        nickName.text = photonView.Owner.NickName; //닉네임가져오기
     }
 
     void Update()
@@ -74,24 +81,16 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
                 if (currDP >= 33.3f && dash_c == true)
                 {
-                    CancelInvoke("RecoveryDP");
-                    dashR_c = false;
-                    dash_c = false;
-                    InvokeRepeating("Dash", 0.0f, 0.02f);
-                    Invoke("CancelDash", 0.2f);
-
-                    Invoke("RecoveryDP_c", 2f);
-                    InvokeRepeating("RecoveryDP", 2f, 0.1f);
-
-                    currDP -= 33.3f;
+                    photonView.RPC("Dash_Pun", RpcTarget.AllViaServer, null);
                 }
             }
 
             //자가데미지체크
             if (Input.GetKeyDown(KeyCode.B))
             {
-                currHP -= 20;
+                photonView.RPC("selfDamage", RpcTarget.AllViaServer, null);
             }
+
         }
         else
         {
@@ -106,12 +105,58 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 tr.rotation = Quaternion.Slerp(tr.rotation, currRot, Time.deltaTime * 10.0f);
             }
         }
+
+
+        //체력포인트바 업데이트
+        photonView.RPC("HPbarUpdate", RpcTarget.AllViaServer, null);
+
+        //대쉬포인트바 업데이트
+        photonView.RPC("DPbarUpdate", RpcTarget.AllViaServer, null);
+
     }
+
+
+    [PunRPC]
+    void HPbarUpdate()
+    {
+        this.hpbar.fillAmount = currHP / initHP;
+    }
+
+    [PunRPC]
+    void DPbarUpdate()
+    {
+        this.dpbar.fillAmount = currDP / initDP;
+    }
+
+
+
+    [PunRPC]
+    void selfDamage()
+    {
+        this.currHP -= 20;
+
+    }
+
+    [PunRPC]
+    void Dash_Pun()
+    {
+        CancelInvoke("RecoveryDP");
+        dashR_c = false;
+        dash_c = false;
+        InvokeRepeating("Dash", 0.0f, 0.02f);
+        Invoke("CancelDash", 0.2f);
+
+        Invoke("RecoveryDP_c", 2f);
+        InvokeRepeating("RecoveryDP", 2f, 0.1f);
+
+        currDP -= 33.3f;
+    }
+
 
     void Dash() //대쉬
     {
-        tr.Translate(Vector3.forward * v * speed * 7 * Time.deltaTime);
-        tr.Translate(Vector3.right * h * speed * 7 * Time.deltaTime);
+        tr.Translate(Vector3.forward * v * speed * 3 * Time.deltaTime);
+        tr.Translate(Vector3.right * h * speed * 3 * Time.deltaTime);
 
         //Debug.Log("Dash");
     }
