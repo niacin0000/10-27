@@ -174,7 +174,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         connectionInfoText.text = "방 참가 성공";
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel("Level_RPG");
+        PhotonNetwork.LoadLevel("Map_01");      //맵 바꾸는 곳
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)

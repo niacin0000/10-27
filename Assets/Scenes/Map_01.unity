@@ -5432,6 +5432,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aa56db0d69ad07b4cbb9d8255a12f78b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  msgList: {fileID: 0}
+  playerCount: {fileID: 0}
+  Robo: {fileID: 0}
+  sword: {fileID: 100000, guid: 09600f57fc86f4f4783f05ae49266fdb, type: 3}
+  espadon: {fileID: 100000, guid: cd1cfb297d32e124ba813220e8203a90, type: 3}
+  shield: {fileID: 100000, guid: ebdcbb93f25154a40a75599dfef39caa, type: 3}
+  staff: {fileID: 100000, guid: d8796c30149de704bb9c5d4e869fd94d, type: 3}
 --- !u!4 &498888695
 Transform:
   m_ObjectHideFlags: 0
@@ -5722,6 +5729,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f76806479d916a64aa03f8e3eba7912f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  target: {fileID: 0}
+  distance: 10
+  height: 5
+  rotationDamping: 0
+  heightDamping: 0
 --- !u!20 &522811754
 Camera:
   m_ObjectHideFlags: 0
