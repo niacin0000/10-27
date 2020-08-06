@@ -15,7 +15,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         TITLE = 0,
         ROOMS = 1,
         OPTION = 2,
-        LOBBY = 3,
+        SOLO = 3,
+        TEAM = 4,
     }
     private string gameVersion = "1"; // 게임 버전
     public string userId = "YouRang";
@@ -26,6 +27,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Button StartButton; // 룸 접속 버튼
 
     public GameObject[] panels;
+    public Dropdown teamSelect;
 
     public InputField txtUserId;
     public InputField txtRoomName;
@@ -163,8 +165,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsConnected)
             return;
-        PhotonNetwork.CreateRoom(txtRoomName.text + "_" + txtRoomPassword.text
-                                , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
+
+            PhotonNetwork.CreateRoom(teamSelect.options[teamSelect.value].text + "/" + txtRoomName.text + "_" + txtRoomPassword.text
+                        , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
     }
 
     //패스워드관련
@@ -193,16 +196,18 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
 
-        if(PhotonNetwork.IsMessageQueueRunning == false)
+        if (teamSelect.value == 1)
         {
-            ChangePanel(ActivePanel.LOBBY);
+            ChangePanel(ActivePanel.SOLO);
             PhotonNetwork.IsMessageQueueRunning = true;
         }
-        else
+        else if(teamSelect.value == 0)
         {
-            PhotonNetwork.LoadLevel("Level");
+            ChangePanel(ActivePanel.TEAM);
+            PhotonNetwork.IsMessageQueueRunning = true;
         }
-
+        else //방 참가시
+            PhotonNetwork.IsMessageQueueRunning = true;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -252,8 +257,21 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         PhotonNetwork.IsMessageQueueRunning = true;
         PhotonNetwork.JoinRoom(roomdata.roomName, null);
+
         GetComponent<RoomPanel>().OnToggleOff();
-        ChangePanel(ActivePanel.LOBBY);
+        string[] check = roomdata.roomName.Split(new char[] { '/' });
+        if (check[0] == "팀전")
+        {
+            ChangePanel(ActivePanel.TEAM);
+        }
+
+        else if (check[0] == "개인전")
+        {
+            ChangePanel(ActivePanel.SOLO);
+        }
+        else
+            return;
+
     }
 
     public void OnEnterOption()
@@ -290,6 +308,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void GameStart()
     {
-            PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel(2);
     }
 }
