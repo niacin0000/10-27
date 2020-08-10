@@ -26,6 +26,8 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     private int currPlayer, maxPlayer;
 
+  
+
     //private bool createPlayer = true;
 
     public void Update()
@@ -69,6 +71,8 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Instantiate(espadon, points[2].position, Quaternion.identity);
         Instantiate(shield, points[3].position, Quaternion.identity);
         Instantiate(staff, points[4].position, Quaternion.identity);
+
+        GameObject.FindGameObjectWithTag("SHIELD").transform.rotation = Quaternion.Euler(-90, -90, -90);
     }
 
     public void CreatePlayer1()

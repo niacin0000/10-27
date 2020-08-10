@@ -189,7 +189,21 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnJoinedRoom()
     {
         PhotonNetwork.GameVersion = this.gameVersion;
-        PhotonNetwork.NickName = txtUserId.text;
+        //PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
+
+
+        if(PhotonNetwork.PlayerList.Length == 1)
+        {
+            PhotonNetwork.NickName = txtUserId.text;
+        }
+        for (int i = 1; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if (PhotonNetwork.PlayerList[i].NickName == txtUserId.text)
+            {
+                PhotonNetwork.NickName = txtUserId.text + "(Clone)";
+            }
+        }
+
         // 접속 상태 표시
         connectionInfoText.text = "방 참가 성공";
         GetComponent<RoomPanel>().OnToggleOff();
@@ -212,6 +226,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         //}
         else //방 참가시
             PhotonNetwork.IsMessageQueueRunning = true;
+
+
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -257,6 +273,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.IsMessageQueueRunning = false;
 
         PhotonNetwork.NickName = txtUserId.text;
+
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
 
         PhotonNetwork.IsMessageQueueRunning = true;
