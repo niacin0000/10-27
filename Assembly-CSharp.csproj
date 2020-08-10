@@ -89,6 +89,7 @@
     <Compile Include="Assets\Script\InGame\Cannon.cs" />
     <Compile Include="Assets\Script\InGame\FireCannon.cs" />
     <Compile Include="Assets\Script\InGame\GameMgr.cs" />
+    <Compile Include="Assets\Script\InGame\MouseFocus.cs" />
     <Compile Include="Assets\Script\InGame\MoveCtrl.cs" />
     <Compile Include="Assets\Script\InGame\SmoothFollow.cs" />
     <Compile Include="Assets\Script\InGame\UIMgr.cs" />

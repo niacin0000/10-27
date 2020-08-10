@@ -28,6 +28,14 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     //private bool createPlayer = true;
 
+    public void Update()
+    {
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
+        }
+    }
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -44,15 +52,13 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     void Create()
     {
-        Debug.Log(currPlayer + "/.sadafdsaf");
-
-        if (currPlayer == 1)
+        if (PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
             CreatePlayer1();
-        else if (currPlayer == 2)
+        else if (PhotonNetwork.PlayerList[1].NickName == PhotonNetwork.NickName)
             CreatePlayer2();
-        else if (currPlayer == 3)
+        else if (PhotonNetwork.PlayerList[2].NickName == PhotonNetwork.NickName)
             CreatePlayer3();
-        else if (currPlayer == 4)
+        else if (PhotonNetwork.PlayerList[3].NickName == PhotonNetwork.NickName)
             CreatePlayer4();
     }
 
@@ -113,6 +119,9 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         CheckPlayerCount();
+
+
+        
 
         string msg = string.Format("[{0}]님이 퇴장"
                                     , otherPlayer.NickName);
