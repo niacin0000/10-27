@@ -196,16 +196,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
 
-        if (teamSelect.value == 1)
+        if (teamSelect.value == 0)
         {
             ChangePanel(ActivePanel.SOLO);
             PhotonNetwork.IsMessageQueueRunning = true;
         }
-        else if(teamSelect.value == 0)
-        {
-            ChangePanel(ActivePanel.TEAM);
-            PhotonNetwork.IsMessageQueueRunning = true;
-        }
+        //else if(teamSelect.value == 0)
+        //{
+        //    ChangePanel(ActivePanel.TEAM);
+        //    PhotonNetwork.IsMessageQueueRunning = true;
+        //}
         else //방 참가시
             PhotonNetwork.IsMessageQueueRunning = true;
     }
