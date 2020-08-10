@@ -30,7 +30,6 @@ public class PlayerListing : MonoBehaviourPunCallbacks
     {
         Player = player;
         _text.text = player.NickName;
-        _image.color = new Color(0, 0, 255);
         TeamRedBlu = RedBlu;
     }
 
@@ -40,13 +39,11 @@ public class PlayerListing : MonoBehaviourPunCallbacks
             {
                 this.TeamRedBlu = false;
                 Debug.Log("false");
-                this._image.color = new Color(0, 0, 255);
             }
             else if (TeamRedBlu == false)
             {
                 this.TeamRedBlu = true;
                 Debug.Log("true");
-                this._image.color = new Color(255, 0, 0);
             }
             else
                 return;
