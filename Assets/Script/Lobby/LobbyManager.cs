@@ -15,21 +15,26 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         TITLE = 0,
         ROOMS = 1,
         OPTION = 2,
+        SOLO = 3,
+        TEAM = 4,
     }
     private string gameVersion = "1"; // 게임 버전
     public string userId = "YouRang";
     public byte maxPlayer = 20;
 
     public Text connectionInfoText; // 네트워크 정보를 표시할 텍스트
-    public Button joinButton; // 룸 접속 버튼
+    public Button joinButton; // 게임로비 접속 버튼
+    public Button StartButton; // 룸 접속 버튼
 
     public GameObject[] panels;
+    public Dropdown teamSelect;
 
     public InputField txtUserId;
     public InputField txtRoomName;
 
     public Text txtplayerCount;
     public Text txtroomName;
+    public Text[] txtplayerList;
 
     public Toggle isPassword;
     public InputField txtRoomPassword;
@@ -80,6 +85,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (GetComponent<RoomPanel>().panels[0].activeSelf == true)
         {
             OnPasswordCheck();
+        }
+
+        //for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        //{
+        //    Debug.Log(PhotonNetwork.PlayerList[i]);
+        //}
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            StartButton.interactable = true;
+        }
+        else
+        {
+            StartButton.interactable = false;
         }
 
     }
@@ -147,8 +166,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         if (!PhotonNetwork.IsConnected)
             return;
 
-        PhotonNetwork.CreateRoom(txtRoomName.text + "_" + txtRoomPassword.text
-                                , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
+            PhotonNetwork.CreateRoom(teamSelect.options[teamSelect.value].text + "/" + txtRoomName.text + "_" + txtRoomPassword.text
+                        , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
     }
 
     //패스워드관련
@@ -165,6 +184,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
+
     // 룸에 참가 완료된 경우 자동 실행
     public override void OnJoinedRoom()
     {
@@ -172,9 +192,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         PhotonNetwork.NickName = txtUserId.text;
         // 접속 상태 표시
         connectionInfoText.text = "방 참가 성공";
+        GetComponent<RoomPanel>().OnToggleOff();
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
-        PhotonNetwork.LoadLevel("Map_01");      //맵 바꾸는 곳
+
+        if (teamSelect.value == 1)
+        {
+            ChangePanel(ActivePanel.SOLO);
+            PhotonNetwork.IsMessageQueueRunning = true;
+        }
+        else if(teamSelect.value == 0)
+        {
+            ChangePanel(ActivePanel.TEAM);
+            PhotonNetwork.IsMessageQueueRunning = true;
+        }
+        else //방 참가시
+            PhotonNetwork.IsMessageQueueRunning = true;
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -214,16 +247,35 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             }
             );
     }
-    
+
     void OnClickRoom(RoomData roomdata)
     {
-        PhotonNetwork.NickName = txtUserId.text;
+        PhotonNetwork.IsMessageQueueRunning = false;
 
-        PhotonNetwork.JoinRoom(roomdata.roomName, null);
+        PhotonNetwork.NickName = txtUserId.text;
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
+
+        PhotonNetwork.IsMessageQueueRunning = true;
+        PhotonNetwork.JoinRoom(roomdata.roomName, null);
+
+        GetComponent<RoomPanel>().OnToggleOff();
+        string[] check = roomdata.roomName.Split(new char[] { '/' });
+        if (check[0] == "팀전")
+        {
+            ChangePanel(ActivePanel.TEAM);
+        }
+
+        else if (check[0] == "개인전")
+        {
+            ChangePanel(ActivePanel.SOLO);
+        }
+        else
+            return;
+
     }
+
     public void OnEnterOption()
-    {    
+    {
         ChangePanel(ActivePanel.OPTION);
     }
     public void OnReturnTitle()
@@ -242,9 +294,20 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         ChangePanel(ActivePanel.TITLE);
     }
 
+    public void OnLeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+        ChangePanel(ActivePanel.ROOMS);
+    }
+
     public void OnExitGame()
     {
         Debug.Log("ExitGame");
         Application.Quit();
+    }
+
+    public void GameStart()
+    {
+        PhotonNetwork.LoadLevel(2);
     }
 }
