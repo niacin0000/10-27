@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &6637658632360418661
+--- !u!114 &499505656266582678
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,10 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 999091859277981228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnspeed: 2
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!114 &3153975871634739174
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,7 +37,7 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &499505656266582678
+--- !u!114 &6637658632360418661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -44,12 +46,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 999091859277981228}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  turnspeed: 2
 --- !u!1 &1591258725155652689
 GameObject:
   m_ObjectHideFlags: 0
@@ -14054,19 +14054,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &4322003164426180905
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2536596400121253653}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnspeed: 2
 --- !u!114 &64042661971207339
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14104,6 +14091,19 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &4322003164426180905
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2536596400121253653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnspeed: 2
 --- !u!1 &2747620284699101271
 GameObject:
   m_ObjectHideFlags: 0
@@ -42294,7 +42294,7 @@ MonoBehaviour:
     m_VerticalOverflow: 0
     m_LineSpacing: 1
   m_Text: New Text
---- !u!114 &5990289727426691969
+--- !u!114 &70697352569043393
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42303,10 +42303,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 4966783542644013984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turnspeed: 2
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
 --- !u!114 &400116463924373540
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42329,7 +42331,7 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
---- !u!114 &70697352569043393
+--- !u!114 &5990289727426691969
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42338,12 +42340,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4966783542644013984}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
+  turnspeed: 2
 --- !u!1 &5053045468787766780
 GameObject:
   m_ObjectHideFlags: 0
@@ -56430,19 +56430,6 @@ ParticleSystemRenderer:
   m_Mesh2: {fileID: 0}
   m_Mesh3: {fileID: 0}
   m_MaskInteraction: 0
---- !u!114 &7081405756206531121
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7677178573155817995}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnspeed: 2
 --- !u!114 &1010864908496457009
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56465,6 +56452,19 @@ MonoBehaviour:
   viewIdField: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &7081405756206531121
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7677178573155817995}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  turnspeed: 2
 --- !u!114 &8375963310307926801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61234,7 +61234,7 @@ SpriteRenderer:
   m_Size: {x: 1.49, y: 0.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!222 &8953622068598767791
@@ -61264,7 +61264,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9c8ad86f973778a4e9b7014eb57da49b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 66e9a15c6ccc91e4299fdb4329bbaa68, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -61359,7 +61359,7 @@ SpriteRenderer:
   m_Size: {x: 1.49, y: 0.22}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!222 &5400714251868190036
@@ -61389,7 +61389,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e31634e7cdbecc542a8a119b34844031, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f081f570f650a3c4ea90011d195efbcd, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
