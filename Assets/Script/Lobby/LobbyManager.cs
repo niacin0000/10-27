@@ -196,10 +196,14 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 모든 룸 참가자들이 Main 씬을 로드하게 함
         PhotonNetwork.IsMessageQueueRunning = false;
 
+
         if (teamSelect.value == 0)
         {
             ChangePanel(ActivePanel.SOLO);
             PhotonNetwork.IsMessageQueueRunning = true;
+
+            var value = PhotonNetwork.PlayerList.GetValue(0);
+            Debug.Log("벨류"+value);
         }
         //else if(teamSelect.value == 0)
         //{
@@ -308,6 +312,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public void GameStart()
     {
-        PhotonNetwork.LoadLevel(2);
+        PhotonNetwork.LoadLevel("Map_01");
     }
 }
