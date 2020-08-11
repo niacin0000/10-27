@@ -29,8 +29,12 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public GameObject Menu;
     public GameObject Option;
     public GameObject MenuImage;
+    public GameObject GameResult;
+
+    public GameObject Win_text, Lose_text;
 
     private bool menuOn = false;
+
 
 
     public bool fullScreen = true;
@@ -198,4 +202,29 @@ public class GameMgr : MonoBehaviourPunCallbacks
         Menu.SetActive(false);
         menuOn = false;
     }
+
+
+
+
+    public void Win_panel()
+    {
+
+        GameResult.SetActive(true);
+        Win_text.SetActive(true);
+        Lose_text.SetActive(false);
+
+    }
+
+    public void Lose_panel()
+    {
+
+        GameResult.SetActive(true);
+        Win_text.SetActive(false);
+        Lose_text.SetActive(true);
+
+    }
+
+
+
+
 }

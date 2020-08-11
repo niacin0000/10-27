@@ -9,6 +9,7 @@ using Photon.Realtime;
 using UnityStandardAssets.Utility;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -40,9 +41,12 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     public float respawnTime = 3.0f; //리스폰시간
     bool td_c = true; //데미지받음(TakeDamage) 상태여부
 
+    public GameObject Me;
+    int start_time = 0;
+
     private void Awake()
     {
-        DontDestroyOnLoad(gameObject); //씬변환시 부수지않음
+        //DontDestroyOnLoad(gameObject); //씬변환시 부수지않음
     }
 
     void Start()
@@ -91,6 +95,29 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 photonView.RPC("selfDamage", RpcTarget.AllViaServer, null);
             }
 
+            //쥬금
+            if (currHP <= 0)
+            {
+                Dead();
+                photonView.RPC("Destroy_Me", RpcTarget.AllViaServer, null);
+                photonView.RPC("DeadCountUp", RpcTarget.AllViaServer, null);
+            }
+
+            if(start_time < 20)
+                start_time++;
+            //이김
+            //if(PhotonNetwork.PlayerList.Length == 1)
+            //{
+            //    Invoke("Win", 3f);
+            //}
+            if (GameObject.FindGameObjectsWithTag("Player").Length == 1 && start_time > 15)
+            {
+                Invoke("Win", 3f);
+                
+            }
+
+            Debug.Log(GameObject.FindGameObjectsWithTag("Player").Length + "pla");
+            Debug.Log(start_time + "time");
         }
         else
         {
@@ -113,6 +140,8 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         //대쉬포인트바 업데이트
         photonView.RPC("DPbarUpdate", RpcTarget.AllViaServer, null);
 
+
+
     }
 
 
@@ -134,7 +163,6 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     void selfDamage()
     {
         this.currHP -= 20;
-
     }
 
     [PunRPC]
@@ -243,4 +271,23 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             speed = 10.0f;
         }
     }
+
+    public void Dead()
+    {
+        GameObject.Find("GameManager").GetComponent<GameMgr>().Lose_panel();
+    }
+
+    public void Win()
+    {
+        GameObject.Find("GameManager").GetComponent<GameMgr>().Win_panel();
+    }
+
+    [PunRPC]
+    public void Destroy_Me()
+    {
+        Destroy(Me);
+
+    }
+
+
 }

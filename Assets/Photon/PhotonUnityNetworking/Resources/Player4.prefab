@@ -37349,7 +37349,7 @@ GameObject:
   - component: {fileID: 4282499372055607439}
   m_Layer: 0
   m_Name: Player4
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -37416,6 +37416,7 @@ MonoBehaviour:
   currHP: 100
   currDP: 100
   respawnTime: 3
+  Me: {fileID: 3903107855261561362}
 --- !u!54 &3151622768602976015
 Rigidbody:
   m_ObjectHideFlags: 0
