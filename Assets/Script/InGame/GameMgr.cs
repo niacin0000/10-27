@@ -32,10 +32,6 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     public void Update()
     {
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
-        }
     }
 
     void Awake()

@@ -17,6 +17,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         OPTION = 2,
         SOLO = 3,
         TEAM = 4,
+        INTRO = 5,
     }
     private string gameVersion = "1"; // 게임 버전
     public string userId = "YouRang";
@@ -31,6 +32,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     public InputField txtUserId;
     public InputField txtRoomName;
+    public InputField txtJoinRoomPassword;
 
     public Text txtplayerCount;
     public Text txtroomName;
@@ -165,9 +167,22 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsConnected)
             return;
-
+        if(txtUserId.text==""||txtUserId.text==null)
+        {
+            GetComponent<RoomPanel>().ErrorNickName();
+            return;
+        }
+        else if(txtRoomName.text ==""||txtRoomName.text==null)
+        {
+            GetComponent<RoomPanel>().ErrorRoomName();
+            return;
+        }
+        else
+        {
             PhotonNetwork.CreateRoom(teamSelect.options[teamSelect.value].text + "/" + txtRoomName.text + "_" + txtRoomPassword.text
-                        , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
+            , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
+        }
+
     }
 
     //패스워드관련
@@ -196,8 +211,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.NickName = txtUserId.text;
         }
-
-
 
         // 접속 상태 표시
         connectionInfoText.text = "방 참가 성공";
@@ -262,7 +275,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     private void OnJoinUpdate(RoomData roomdata)
     {
         txtplayerCount.text = string.Format("{0}/{1}", roomdata.playerCount, roomdata.maxPlayer);
-        txtroomName.text = string.Format("방이름 : {0}", roomdata.roomName);
+        txtroomName.text = string.Format("방이름 : {0}", roomdata.roomName+txtJoinRoomPassword);
         joinButton.onClick.AddListener
             (
             delegate
@@ -275,34 +288,41 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     void OnClickRoom(RoomData roomdata)
     {
         PhotonNetwork.IsMessageQueueRunning = false;
-
         PhotonNetwork.NickName = txtUserId.text;
 
-        PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
-
-        PhotonNetwork.IsMessageQueueRunning = true;
-        PhotonNetwork.JoinRoom(roomdata.roomName, null);
-
-        GetComponent<RoomPanel>().OnToggleOff();
-        string[] check = roomdata.roomName.Split(new char[] { '/' });
-        if (check[0] == "팀전")
+        if(PhotonNetwork.NickName==null || PhotonNetwork.NickName== "")
         {
-            ChangePanel(ActivePanel.TEAM);
-        }
-
-        else if (check[0] == "개인전")
-        {
-            ChangePanel(ActivePanel.SOLO);
+            GetComponent<RoomPanel>().ErrorNickName();
+            return;
         }
         else
-            return;
+        {
+            PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
 
+            PhotonNetwork.IsMessageQueueRunning = true;
+            PhotonNetwork.JoinRoom(roomdata.roomName, null);
+
+            GetComponent<RoomPanel>().OnToggleOff();
+            string[] check = roomdata.roomName.Split(new char[] { '/' });
+            if (check[0] == "팀전")
+            {
+                ChangePanel(ActivePanel.TEAM);
+            }
+
+            else if (check[0] == "개인전")
+            {
+                ChangePanel(ActivePanel.SOLO);
+            }
+            else
+                return;
+        }
     }
 
     public void OnEnterOption()
     {
         ChangePanel(ActivePanel.OPTION);
     }
+
     public void OnReturnTitle()
     {
         GetComponent<RoomPanel>().OnToggleOff();
@@ -334,6 +354,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void GameStart()
     {
         PhotonNetwork.LoadLevel("Map_01");
+    }
+    public void OnEnterTitle()
+    {
+        ChangePanel(ActivePanel.TITLE);
     }
 
     public void Overlap()
