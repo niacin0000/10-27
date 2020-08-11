@@ -17,14 +17,14 @@ public class PlayerListing : MonoBehaviourPunCallbacks
     public bool TeamRedBlu;
 
 
-    private void Start()
-    {
-        GameObject.Find("Button - Switch").GetComponent<Button>().onClick.AddListener(
-    delegate
-    {
-        SwitchTeam();
-    });
-    }
+    //private void Start()
+    //{
+    //    GameObject.Find("Button - Switch").GetComponent<Button>().onClick.AddListener(
+    //delegate
+    //{
+    //    SwitchTeam();
+    //});
+    //}
 
     public void SetPlayerInfo(Player player, bool RedBlu)
     {
@@ -33,19 +33,19 @@ public class PlayerListing : MonoBehaviourPunCallbacks
         TeamRedBlu = RedBlu;
     }
 
-    public void SwitchTeam()
-    {
-            if (TeamRedBlu == true)
-            {
-                this.TeamRedBlu = false;
-                Debug.Log("false");
-            }
-            else if (TeamRedBlu == false)
-            {
-                this.TeamRedBlu = true;
-                Debug.Log("true");
-            }
-            else
-                return;
-    }
+    //public void SwitchTeam()
+    //{
+    //        if (TeamRedBlu == true)
+    //        {
+    //            this.TeamRedBlu = false;
+    //            Debug.Log("false");
+    //        }
+    //        else if (TeamRedBlu == false)
+    //        {
+    //            this.TeamRedBlu = true;
+    //            Debug.Log("true");
+    //        }
+    //        else
+    //            return;
+    //}
 }
