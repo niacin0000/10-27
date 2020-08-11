@@ -38,8 +38,8 @@ public class MouseFocus : MonoBehaviourPunCallbacks
         RaycastHit hit;
         if(Physics.Raycast(ray, out hit))
         {
-            Vector3 mouseDir = new Vector3(hit.point.x, transform.position.y, hit.point.z) - transform.position;
-            this.transform.forward = mouseDir;
+            //Vector3 mouseDir = new Vector3(hit.point.x, transform.position.y+65, hit.point.z) - transform.position;
+            //this.transform.forward = mouseDir;
         }
     }
 
