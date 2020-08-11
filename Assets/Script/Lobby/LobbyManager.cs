@@ -196,13 +196,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             PhotonNetwork.NickName = txtUserId.text;
         }
-        for (int i = 1; i < PhotonNetwork.PlayerList.Length; i++)
-        {
-            if (PhotonNetwork.PlayerList[i].NickName == txtUserId.text)
-            {
-                PhotonNetwork.NickName = txtUserId.text + "(Clone)";
-            }
-        }
+
+
 
         // 접속 상태 표시
         connectionInfoText.text = "방 참가 성공";
@@ -227,7 +222,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         else //방 참가시
             PhotonNetwork.IsMessageQueueRunning = true;
 
-
+        for (int i = 1; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            if (PhotonNetwork.PlayerList[i].NickName == txtUserId.text)
+            {
+                //PhotonNetwork.NickName = txtUserId.text + "("+i+")";
+                OnLeaveRoom();
+                Overlap();
+            }
+        }
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -331,4 +334,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LoadLevel("Map_01");
     }
+
+    public void Overlap()
+    {
+        //PhotonNetwork.LeaveRoom();
+        //ChangePanel(ActivePanel.ROOMS);
+        GetComponent<RoomPanel>().OnWarning();
+    }
+
 }

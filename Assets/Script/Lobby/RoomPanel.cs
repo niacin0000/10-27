@@ -32,4 +32,17 @@ public class RoomPanel : MonoBehaviour
         panels[0].SetActive(false);
         panels[1].SetActive(false);
     }
+
+    public void OnWarning()
+    {
+        panels[2].SetActive(true);
+    }
+
+
+
+    public void Click_OK()
+    {
+        panels[2].SetActive(false);
+    }
+
 }
