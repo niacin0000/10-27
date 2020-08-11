@@ -26,8 +26,16 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     private int currPlayer, maxPlayer;
 
-  
+    public GameObject Menu;
+    public GameObject Option;
+    public GameObject MenuImage;
 
+    private bool menuOn = false;
+
+
+    public bool fullScreen = true;
+    public int screenSize_x = 1920;
+    public int screenSize_y = 1080;
     //private bool createPlayer = true;
 
     public void Update()
@@ -35,6 +43,24 @@ public class GameMgr : MonoBehaviourPunCallbacks
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
             Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(menuOn == false)
+            {
+                Menu.SetActive(true);
+                menuOn = true;
+            }
+            else
+            {
+                Menu.SetActive(false);
+                Option.SetActive(false);
+                MenuImage.SetActive(true);
+                GetComponent<Config>().Save();
+                GetComponent<ScreenSize>().Save();
+                menuOn = false;
+            }
         }
     }
 
@@ -142,5 +168,34 @@ public class GameMgr : MonoBehaviourPunCallbacks
     void ReceiveMsg(string msg)
     {
         msgList.text += "\n" + msg;
+    }
+
+    public void OpenOption()
+    {
+        MenuImage.SetActive(false);
+        Option.SetActive(true);
+        GetComponent<ScreenSize>().Load();
+    }
+
+    public void ReturnMenu()
+    {
+        GetComponent<ScreenSize>().Save();
+        if (GetComponent<ScreenSize>().Checking == 1)
+        {
+            fullScreen = true;
+        }
+        else
+        {
+            fullScreen = false;
+        }
+        Screen.SetResolution(screenSize_x, screenSize_y, fullScreen);
+        Option.SetActive(false);
+        MenuImage.SetActive(true);
+    }
+
+    public void ReturnGame()
+    {
+        Menu.SetActive(false);
+        menuOn = false;
     }
 }
