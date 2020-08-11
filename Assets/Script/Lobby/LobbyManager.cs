@@ -222,9 +222,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         else //방 참가시
             PhotonNetwork.IsMessageQueueRunning = true;
 
-        for (int i = 1; i < PhotonNetwork.PlayerList.Length; i++)
+        //중복닉네임 확인
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length - 1; i++)
         {
-            if (PhotonNetwork.PlayerList[i].NickName == txtUserId.text)
+            if (PhotonNetwork.PlayerList[i].NickName == txtUserId.text && PhotonNetwork.PlayerList.Length > 1)
             {
                 //PhotonNetwork.NickName = txtUserId.text + "("+i+")";
                 OnLeaveRoom();
