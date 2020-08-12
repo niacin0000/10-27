@@ -26,12 +26,46 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     private int currPlayer, maxPlayer;
 
-  
+    public GameObject Menu;
+    public GameObject Option;
+    public GameObject MenuImage;
+    public GameObject GameResult;
 
+    public GameObject Win_text, Lose_text;
+
+    private bool menuOn = false;
+
+
+
+    public bool fullScreen = true;
+    public int screenSize_x = 1920;
+    public int screenSize_y = 1080;
     //private bool createPlayer = true;
 
     public void Update()
     {
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        {
+            //Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            if(menuOn == false)
+            {
+                Menu.SetActive(true);
+                menuOn = true;
+            }
+            else
+            {
+                Menu.SetActive(false);
+                Option.SetActive(false);
+                MenuImage.SetActive(true);
+                GetComponent<Config>().Save();
+                GetComponent<ScreenSize>().Save();
+                menuOn = false;
+            }
+        }
     }
 
     void Awake()
@@ -139,4 +173,58 @@ public class GameMgr : MonoBehaviourPunCallbacks
     {
         msgList.text += "\n" + msg;
     }
+
+    public void OpenOption()
+    {
+        MenuImage.SetActive(false);
+        Option.SetActive(true);
+        GetComponent<ScreenSize>().Load();
+    }
+
+    public void ReturnMenu()
+    {
+        GetComponent<ScreenSize>().Save();
+        if (GetComponent<ScreenSize>().Checking == 1)
+        {
+            fullScreen = true;
+        }
+        else
+        {
+            fullScreen = false;
+        }
+        Screen.SetResolution(screenSize_x, screenSize_y, fullScreen);
+        Option.SetActive(false);
+        MenuImage.SetActive(true);
+    }
+
+    public void ReturnGame()
+    {
+        Menu.SetActive(false);
+        menuOn = false;
+    }
+
+
+
+
+    public void Win_panel()
+    {
+
+        GameResult.SetActive(true);
+        Win_text.SetActive(true);
+        Lose_text.SetActive(false);
+
+    }
+
+    public void Lose_panel()
+    {
+
+        GameResult.SetActive(true);
+        Win_text.SetActive(false);
+        Lose_text.SetActive(true);
+
+    }
+
+
+
+
 }
