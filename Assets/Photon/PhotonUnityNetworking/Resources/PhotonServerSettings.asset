@@ -39,17 +39,19 @@ MonoBehaviour:
   - Change_Swo
   - ClickRpc
   - Dash_Pun
+  - Destroy_Me
   - DestroyRpc
   - DestroySpaceship
   - DPbarUpdate
+  - EndFire
+  - EndFocus
   - Fire
+  - HitColor
   - HPbarUpdate
+  - OriginalColor
   - RespawnSpaceship
   - selfDamage
   - setBuff
-  - EndFocus
-  - HitColor
-  - OriginalColor
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
