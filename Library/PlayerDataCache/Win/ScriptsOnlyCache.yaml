@@ -14,6 +14,7 @@ ScriptsOnlyBuild:
     - PlayerListing
     - PlayerListingsMenu
     - RoomData
+    - RoomManager
     - RoomPanel
     - ScreenSize
     - UnityStandardAssets.Utility.SmoothFollow
@@ -120,97 +121,97 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 11188}
     - Class: 114
-      Script: {instanceID: 11210}
+      Script: {instanceID: 11236}
     - Class: 114
-      Script: {instanceID: 11284}
+      Script: {instanceID: 11308}
     - Class: 114
-      Script: {instanceID: 11302}
+      Script: {instanceID: 11326}
     - Class: 114
-      Script: {instanceID: 11358}
+      Script: {instanceID: 11382}
     - Class: 114
-      Script: {instanceID: 11378}
+      Script: {instanceID: 11402}
     - Class: 114
-      Script: {instanceID: 11416}
+      Script: {instanceID: 11440}
     - Class: 114
-      Script: {instanceID: 11458}
+      Script: {instanceID: 11482}
     - Class: 114
-      Script: {instanceID: 11464}
+      Script: {instanceID: 11488}
     - Class: 114
-      Script: {instanceID: 11520}
+      Script: {instanceID: 11544}
     - Class: 114
-      Script: {instanceID: 11570}
+      Script: {instanceID: 11594}
     - Class: 114
-      Script: {instanceID: 11592}
+      Script: {instanceID: 11614}
     - Class: 114
-      Script: {instanceID: 11598}
+      Script: {instanceID: 11620}
     - Class: 114
-      Script: {instanceID: 11724}
+      Script: {instanceID: 11746}
     - Class: 114
-      Script: {instanceID: 11822}
+      Script: {instanceID: 11844}
     - Class: 114
-      Script: {instanceID: 11830}
+      Script: {instanceID: 11852}
     - Class: 114
-      Script: {instanceID: 11932}
+      Script: {instanceID: 11954}
     - Class: 114
-      Script: {instanceID: 12004}
+      Script: {instanceID: 12026}
     - Class: 114
-      Script: {instanceID: 12012}
+      Script: {instanceID: 12034}
     - Class: 114
-      Script: {instanceID: 12088}
+      Script: {instanceID: 12110}
     - Class: 114
-      Script: {instanceID: 12164}
+      Script: {instanceID: 12186}
     - Class: 114
-      Script: {instanceID: 12202}
+      Script: {instanceID: 12224}
     - Class: 114
-      Script: {instanceID: 12222}
+      Script: {instanceID: 12244}
     - Class: 114
-      Script: {instanceID: 12268}
+      Script: {instanceID: 12290}
     - Class: 114
-      Script: {instanceID: 12292}
+      Script: {instanceID: 12314}
     - Class: 114
-      Script: {instanceID: 12318}
+      Script: {instanceID: 12338}
     - Class: 114
-      Script: {instanceID: 12450}
+      Script: {instanceID: 12470}
     - Class: 114
-      Script: {instanceID: 12488}
+      Script: {instanceID: 12508}
     - Class: 114
-      Script: {instanceID: 12548}
+      Script: {instanceID: 12568}
     - Class: 114
-      Script: {instanceID: 12560}
-    - Class: 114
-      Script: {instanceID: 12642}
-    - Class: 114
-      Script: {instanceID: 12650}
+      Script: {instanceID: 12580}
     - Class: 114
       Script: {instanceID: 12662}
     - Class: 114
-      Script: {instanceID: 12790}
+      Script: {instanceID: 12670}
     - Class: 114
-      Script: {instanceID: 12868}
+      Script: {instanceID: 12682}
+    - Class: 114
+      Script: {instanceID: 12810}
     - Class: 114
       Script: {instanceID: 12886}
     - Class: 114
-      Script: {instanceID: 12894}
+      Script: {instanceID: 12904}
     - Class: 114
-      Script: {instanceID: 13020}
+      Script: {instanceID: 12912}
     - Class: 114
-      Script: {instanceID: 13068}
+      Script: {instanceID: 13036}
     - Class: 114
       Script: {instanceID: 13084}
     - Class: 114
-      Script: {instanceID: 13318}
+      Script: {instanceID: 13100}
     - Class: 114
-      Script: {instanceID: 13372}
+      Script: {instanceID: 13332}
     - Class: 114
-      Script: {instanceID: 13388}
+      Script: {instanceID: 13386}
     - Class: 114
-      Script: {instanceID: 13440}
+      Script: {instanceID: 13402}
     - Class: 114
-      Script: {instanceID: 13460}
+      Script: {instanceID: 13454}
     - Class: 114
       Script: {instanceID: 13474}
     - Class: 114
-      Script: {instanceID: 13490}
+      Script: {instanceID: 13488}
+    - Class: 114
+      Script: {instanceID: 13504}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -285,9 +286,9 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 12228}
+      Script: {instanceID: 12250}
     - Class: 114
-      Script: {instanceID: 13118}
+      Script: {instanceID: 13134}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -338,9 +339,9 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 12228}
+      Script: {instanceID: 12250}
     - Class: 114
-      Script: {instanceID: 13118}
+      Script: {instanceID: 13134}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -387,17 +388,17 @@ ScriptsOnlyBuild:
     - Class: 108
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11662}
+      Script: {instanceID: 11684}
     - Class: 114
-      Script: {instanceID: 12228}
+      Script: {instanceID: 12250}
     - Class: 114
-      Script: {instanceID: 12794}
+      Script: {instanceID: 12814}
     - Class: 114
-      Script: {instanceID: 13118}
+      Script: {instanceID: 13134}
     - Class: 114
-      Script: {instanceID: 35872}
+      Script: {instanceID: 29950}
     - Class: 114
-      Script: {instanceID: 35874}
+      Script: {instanceID: 29952}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 124
@@ -407,6 +408,79 @@ ScriptsOnlyBuild:
     - Class: 196
       Script: {instanceID: 0}
     - Class: 320
+      Script: {instanceID: 0}
+    Assets/Scenes/Room.unity:
+    - Class: 1
+      Script: {instanceID: 0}
+    - Class: 4
+      Script: {instanceID: 0}
+    - Class: 20
+      Script: {instanceID: 0}
+    - Class: 21
+      Script: {instanceID: 0}
+    - Class: 28
+      Script: {instanceID: 0}
+    - Class: 48
+      Script: {instanceID: 0}
+    - Class: 81
+      Script: {instanceID: 0}
+    - Class: 104
+      Script: {instanceID: 0}
+    - Class: 108
+      Script: {instanceID: 0}
+    - Class: 114
+      Script: {instanceID: 11182}
+    - Class: 114
+      Script: {instanceID: 11184}
+    - Class: 114
+      Script: {instanceID: 11236}
+    - Class: 114
+      Script: {instanceID: 11440}
+    - Class: 114
+      Script: {instanceID: 11482}
+    - Class: 114
+      Script: {instanceID: 11594}
+    - Class: 114
+      Script: {instanceID: 11620}
+    - Class: 114
+      Script: {instanceID: 11844}
+    - Class: 114
+      Script: {instanceID: 11954}
+    - Class: 114
+      Script: {instanceID: 12186}
+    - Class: 114
+      Script: {instanceID: 12224}
+    - Class: 114
+      Script: {instanceID: 12314}
+    - Class: 114
+      Script: {instanceID: 12470}
+    - Class: 114
+      Script: {instanceID: 12568}
+    - Class: 114
+      Script: {instanceID: 13036}
+    - Class: 114
+      Script: {instanceID: 13332}
+    - Class: 114
+      Script: {instanceID: 13386}
+    - Class: 114
+      Script: {instanceID: 13474}
+    - Class: 114
+      Script: {instanceID: 33208}
+    - Class: 115
+      Script: {instanceID: 0}
+    - Class: 128
+      Script: {instanceID: 0}
+    - Class: 157
+      Script: {instanceID: 0}
+    - Class: 196
+      Script: {instanceID: 0}
+    - Class: 213
+      Script: {instanceID: 0}
+    - Class: 222
+      Script: {instanceID: 0}
+    - Class: 223
+      Script: {instanceID: 0}
+    - Class: 224
       Script: {instanceID: 0}
   scriptHashData:
   - hash:
@@ -1909,10 +1983,17 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: RoomManager
   platform: 5
   scenePathNames:
   - Assets/Scenes/Lobby.unity
   - Assets/Scenes/Map_01.unity
   - Assets/Scenes/Map_02.unity
   - Assets/Scenes/Map_03.unity
-  playerPath: D:/Unity/0717_0310_FTestPhoton/10-27/Build/FTestPhoton.exe
+  - Assets/Scenes/Room.unity
+  playerPath: "D:/\uC544 \uC874\uB0B4\uD558\uAE30\uC2EB\uB2E4 \uC528\uBD80\uC5C9\uBD80\uC5C9/Bit/\uD504\uB85C\uC81D\uD2B8/TestPhoton/Project/10-27/Build/FTestPhoton.exe"

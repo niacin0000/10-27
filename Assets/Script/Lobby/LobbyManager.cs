@@ -210,7 +210,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         if (teamSelect.value == 0)
         {
-            ChangePanel(ActivePanel.SOLO);
+            //ChangePanel(ActivePanel.SOLO);
+            PhotonNetwork.LoadLevel("Room");
             PhotonNetwork.IsMessageQueueRunning = true;
 
             var value = PhotonNetwork.PlayerList.GetValue(0);
@@ -289,7 +290,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         else if (check[0] == "개인전")
         {
-            ChangePanel(ActivePanel.SOLO);
+            //ChangePanel(ActivePanel.SOLO);
+            PhotonNetwork.LoadLevel("Room");
         }
         else
             return;
@@ -320,6 +322,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LeaveRoom();
         ChangePanel(ActivePanel.TITLE);
+        Start();
+    }
+
+    public void DoStart()
+    {
         Start();
     }
 
