@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomManager : MonoBehaviour
+public class RoomManager : MonoBehaviourPunCallbacks
 {
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-        GetComponent<LobbyManager>().DoStart();
         PhotonNetwork.LoadLevel("Lobby");
+    }
+
+    public void GameStart()
+    {
+        PhotonNetwork.LoadLevel("Map_01");
     }
 }

@@ -21,7 +21,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 875, y: 300}
+  m_MinSize: {x: 875, y: 542}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
 --- !u!114 &2
@@ -112,10 +112,10 @@ MonoBehaviour:
     y: 30
     width: 2560
     height: 1307
-  m_MinSize: {x: 679, y: 492}
-  m_MaxSize: {x: 14002, y: 14042}
+  m_MinSize: {x: 678, y: 492}
+  m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 77
+  controlID: 87
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -140,7 +140,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 78
+  controlID: 88
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -165,7 +165,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 79
+  controlID: 36
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -211,8 +211,8 @@ MonoBehaviour:
     y: 0
     width: 1537
     height: 822
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -266,8 +266,8 @@ MonoBehaviour:
     y: 0
     width: 518
     height: 1307
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -345,7 +345,7 @@ MonoBehaviour:
       y: 21
       width: 1535
       height: 780
-    m_Scale: {x: 0.7222222, y: 0.7222222}
+    m_Scale: {x: 0.72222215, y: 0.7222222}
     m_Translation: {x: 767.5, y: 390}
     m_MarginLeft: 0
     m_MarginRight: 0
@@ -394,9 +394,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: fa0f0100
-      m_LastClickedID: 69626
-      m_ExpandedIDs: c0b6fffffab6ffff92bdffffaebdffff88bfffff08c4ffff34c5ffffe2c9ffffe6c9ffffeccbffff08ccffff0accffff8ad0ffffb6d1ffff60d6ffff64d6ffffbed6ffffdad6ffffb8d8ffff3cddffff6cdeffff1ee3ffff26e3ffff6ee3ffffb4e6ffff28e8ffff44e8ffff20eaffffa4eeffffd4efffff86f4ffff8ef4ffff62f9ffff708100008aeb0000f40f01002c100100
+      m_SelectedIDs: 949f0100
+      m_LastClickedID: 106388
+      m_ExpandedIDs: 2aa3ffffe8b0ffffe6b1ffffb4bbffffd0bbffff9ebdffff1ec2ffff4ac3fffff8c7fffffcc7ffff04caffff52d1ffffacd1ffff68d2ffff90d5ffff1ed7ffff94d7ffff2ae5ffffd2e6fffff2e8ffff0ee9ffffeceaffff70efffffa0f0ffff52f5ffff5af5ffffcef7ffffd6faffff6afbffff203d0000e03d0000383e000098820000e4820000da860000bcee000008ef0000eaf0000024f1000056f20000a6f20000b0f20000e0f2000002fa00004efa000040fe00008e00010006300100167401006274010070740100607501002e760100407601007a7601009e760100ac770100fc770100067801003678010060780100
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -456,9 +456,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 829.95355, y: 643.2336, z: -160.48242}
+    m_Target: {x: 860.4212, y: 533.9157, z: -159.79736}
     speed: 2
-    m_Value: {x: 829.95355, y: 643.2336, z: -160.48242}
+    m_Value: {x: 860.4212, y: 533.9157, z: -159.79736}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -508,9 +508,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0.004189572, y: -0.0038920883, z: -0.00007189129, w: -0.99998367}
   m_Size:
-    m_Target: 569.4921
+    m_Target: 645.8186
     speed: 2
-    m_Value: 569.4921
+    m_Value: 645.8186
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -600,34 +600,34 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Script
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Script
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: "D:\\\uC544 \uC874\uB0B4\uD558\uAE30\uC2EB\uB2E4 \uC528\uBD80\uC5C9\uBD80\uC5C9\\Bit\\\uD504\uB85C\uC81D\uD2B8\\TestPhoton\\Project\\10-27"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 4}
-    m_SelectedIDs: c23e0000
-    m_LastClickedID: 16066
-    m_ExpandedIDs: 00000000aa3e0000ac3e0000ae3e0000b03e0000b23e0000b43e0000b63e0000b83e0000ba3e0000bc3e0000be3e0000c03e0000c23e0000d03e000000ca9a3b
+    scrollPos: {x: 0, y: 0}
+    m_SelectedIDs: fe3c0000
+    m_LastClickedID: 15614
+    m_ExpandedIDs: 00000000d63c0000d83c0000da3c0000dc3c0000de3c0000e03c0000e23c0000e43c0000e63c0000e83c0000ea3c0000ec3c0000ee3c000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: 
-      m_OriginalName: 
+      m_Name: Script
+      m_OriginalName: Script
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 0
+      m_UserData: 15598
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_SearchString: 
@@ -641,7 +641,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000aa3e0000ac3e0000ae3e0000b03e0000b23e0000b43e0000b63e0000b83e0000ba3e0000bc3e0000be3e0000c03e0000c23e0000
+    m_ExpandedIDs: 00000000d63c0000d83c0000da3c0000dc3c0000de3c0000e03c0000e23c0000e43c0000e63c0000e83c0000ea3c0000ec3c0000ee3c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -669,7 +669,7 @@ MonoBehaviour:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
     m_HadKeyboardFocusLastEvent: 1
-    m_ExpandedInstanceIDs: c623000070630000405e00004a5e0000505e0000ac5e0000585e00005c5e0000d89700005a5e00003c5e00004e5e0000465e00003a5e0000e8510000525e0000acc40000b4c40000bac40000c0c40000565e000000510000cc4c0100e44c0100fa560000fe56000000000000
+    m_ExpandedInstanceIDs: c623000070630000405e00004a5e0000505e0000ac5e0000585e00005c5e0000d89700005a5e00003c5e00004e5e0000465e00003a5e0000e8510000525e0000acc40000b4c40000bac40000c0c40000565e000000510000cc4c0100e44c0100fa560000fe56000000000000603c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

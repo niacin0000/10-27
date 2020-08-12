@@ -68,6 +68,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // 게임 실행과 동시에 마스터 서버 접속 시도
     private void Start()
     {
+        if(PhotonNetwork.LocalPlayer.NickName == null || PhotonNetwork.LocalPlayer.NickName == "")
+        {
+            ChangePanel(ActivePanel.INTRO);
+            print(PhotonNetwork.LocalPlayer.NickName);
+        }
+        print(PhotonNetwork.LocalPlayer.NickName);
         // 접속에 필요한 정보(게임 버전) 설정
         PhotonNetwork.GameVersion = gameVersion;
         // 설정한 정보를 가지고 마스터 서버 접속 시도
@@ -200,7 +206,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         if(PhotonNetwork.PlayerList.Length == 1)
         {
-            PhotonNetwork.NickName = txtUserId.text;
+            if (PhotonNetwork.LocalPlayer.NickName == null || PhotonNetwork.LocalPlayer.NickName == "")
+                PhotonNetwork.NickName = txtUserId.text;
+            else
+                PhotonNetwork.NickName = PhotonNetwork.LocalPlayer.NickName;
         }
 
         // 접속 상태 표시
@@ -336,10 +345,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Application.Quit();
     }
 
-    public void GameStart()
-    {
-        PhotonNetwork.LoadLevel("Map_01");
-    }
+    //public void GameStart()
+    //{
+    //    PhotonNetwork.LoadLevel("Map_01");
+    //}
     public void OnEnterTitle()
     {
         if (txtUserId.text == "" || txtUserId.text == null)
