@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ChangeWeapon.cs" />
+    <Compile Include="Assets\MouseVector.cs" />
     <Compile Include="Assets\Particle\48 Particle Effect Pack\Script\csDestroyEffect.cs" />
     <Compile Include="Assets\Particle\48 Particle Effect Pack\Script\csMouseOrbit.cs" />
     <Compile Include="Assets\Particle\48 Particle Effect Pack\Script\csParticleEffectPackLightControl.cs" />

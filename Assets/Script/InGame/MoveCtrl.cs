@@ -41,8 +41,11 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     public float respawnTime = 3.0f; //리스폰시간
     bool td_c = true; //데미지받음(TakeDamage) 상태여부
 
-    public GameObject Me;
+    public GameObject Me, Mouse_Vector;
     int start_time = 0;
+
+    public GameObject Espadon;
+    private Color Original_Color_Es;
 
     private void Awake()
     {
@@ -64,6 +67,9 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         }
 
         nickName.text = photonView.Owner.NickName; //닉네임가져오기
+
+        Original_Color_Es = Espadon.GetComponent<MeshRenderer>().material.color;
+
     }
 
     void Update()
@@ -93,6 +99,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             if (Input.GetKeyDown(KeyCode.B))
             {
                 photonView.RPC("selfDamage", RpcTarget.AllViaServer, null);
+                Knockback();
             }
 
             //쥬금
@@ -106,18 +113,14 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             if(start_time < 20)
                 start_time++;
             //이김
-            //if(PhotonNetwork.PlayerList.Length == 1)
-            //{
-            //    Invoke("Win", 3f);
-            //}
             if (GameObject.FindGameObjectsWithTag("Player").Length == 1 && start_time > 15)
             {
-                Invoke("Win", 3f);
+                //Invoke("Win", 3f);
                 
             }
 
-            Debug.Log(GameObject.FindGameObjectsWithTag("Player").Length + "pla");
-            Debug.Log(start_time + "time");
+            //Debug.Log(GameObject.FindGameObjectsWithTag("Player").Length + "pla");
+            //Debug.Log(start_time + "time");
         }
         else
         {
@@ -289,5 +292,29 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+    public void Knockback()
+    {
+        this.transform.position += -Mouse_Vector.transform.forward * 200 * Time.deltaTime;
+        photonView.RPC("HitColor", RpcTarget.AllViaServer, null);
+        Invoke("HitTimer_Original", 3);
+    }
+
+    public void HitTimer_Original()
+    {
+        photonView.RPC("OriginalColor", RpcTarget.AllViaServer, null);
+    }
+
+
+    [PunRPC]
+    public void HitColor()
+    {
+        Espadon.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+    }
+
+    [PunRPC]
+    public void OriginalColor()
+    {
+        Espadon.GetComponent<MeshRenderer>().material.color = Original_Color_Es;
+    }
 
 }

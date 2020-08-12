@@ -46,7 +46,7 @@ public class GameMgr : MonoBehaviourPunCallbacks
     {
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
         {
-            Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
+            //Debug.Log(PhotonNetwork.PlayerList[i].ActorNumber);
         }
 
         if(Input.GetKeyDown(KeyCode.Escape))
