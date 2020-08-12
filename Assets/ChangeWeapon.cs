@@ -5,31 +5,27 @@ using UnityEngine;
 
 public class ChangeWeapon : MonoBehaviourPunCallbacks
 {
-    //public GameObject Soul, Espadon, Shield, Staff, Sword;
-    private bool change = true;
+    public GameObject Soul, Espadon, Shield, Staff, Sword;
+
 
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("ESPA") && change)
+        if(collision.collider.CompareTag("ESPA"))
         {
             photonView.RPC("Change_E", RpcTarget.AllViaServer, null);
-            change = false;
         }
-        else if (collision.collider.CompareTag("SHIELD") && change)
+        else if (collision.collider.CompareTag("SHIELD"))
         {
             photonView.RPC("Change_Shi", RpcTarget.AllViaServer, null);
-            change = false;
         }
-        else if (collision.collider.CompareTag("STAFF") && change)
+        else if (collision.collider.CompareTag("STAFF"))
         {
             photonView.RPC("Change_Sta", RpcTarget.AllViaServer, null);
-            change = false;
         }
-        else if (collision.collider.CompareTag("SWORD") && change)
+        else if (collision.collider.CompareTag("SWORD"))
         {
             photonView.RPC("Change_Swo", RpcTarget.AllViaServer, null);
-            change = false;
         }
 
     }

@@ -17,7 +17,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         OPTION = 2,
         SOLO = 3,
         TEAM = 4,
-        INTRO = 5,
     }
     private string gameVersion = "1"; // 게임 버전
     public string userId = "YouRang";
@@ -26,14 +25,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public Text connectionInfoText; // 네트워크 정보를 표시할 텍스트
     public Button joinButton; // 게임로비 접속 버튼
     public Button StartButton; // 룸 접속 버튼
-    public Button titleButton;
 
     public GameObject[] panels;
     public Dropdown teamSelect;
 
     public InputField txtUserId;
     public InputField txtRoomName;
-    public InputField txtJoinRoomPassword;
 
     public Text txtplayerCount;
     public Text txtroomName;
@@ -68,12 +65,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // 게임 실행과 동시에 마스터 서버 접속 시도
     private void Start()
     {
-        if(PhotonNetwork.LocalPlayer.NickName == null || PhotonNetwork.LocalPlayer.NickName == "")
-        {
-            ChangePanel(ActivePanel.INTRO);
-            print(PhotonNetwork.LocalPlayer.NickName);
-        }
-        print(PhotonNetwork.LocalPlayer.NickName);
         // 접속에 필요한 정보(게임 버전) 설정
         PhotonNetwork.GameVersion = gameVersion;
         // 설정한 정보를 가지고 마스터 서버 접속 시도
@@ -82,7 +73,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         txtUserId.text = PlayerPrefs.GetString("USER_ID", "USER_Chan");
         txtRoomName.text = PlayerPrefs.GetString("ROOM_NAME", "ROOM_Chan");
         // 룸 접속 버튼을 잠시 비활성화
-        titleButton.interactable = false;
+        //joinButton.interactable = false;
         //// 접속을 시도 중임을 텍스트로 표시
         connectionInfoText.text = "마스터 서버에 접속중...";
 
@@ -95,6 +86,11 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             OnPasswordCheck();
         }
+
+        //for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
+        //{
+        //    Debug.Log(PhotonNetwork.PlayerList[i]);
+        //}
 
         if (PhotonNetwork.IsMasterClient)
         {
@@ -121,7 +117,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnConnectedToMaster()
     {
         // 룸 접속 버튼을 활성화
-        titleButton.interactable = true;
+        //joinButton.interactable = true;
         // 접속 정보 표시
         connectionInfoText.text = "온라인 : 마스터 서버와 연결됨";
     }
@@ -130,9 +126,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public override void OnDisconnected(DisconnectCause cause)
     {
         // 룸 접속 버튼을 비활성화
-        titleButton.interactable = false;
+        //joinButton.interactable = false;
         // 접속 정보 표시
-        connectionInfoText.text = "오프라인 : 마스터 서버와 연결되지 않음\n접속 재시도 중...";
+        //connectionInfoText.text = "오프라인 : 마스터 서버와 연결되지 않음\n접속 재시도 중...";
 
         // 마스터 서버로의 재접속 시도
         PhotonNetwork.ConnectUsingSettings();
@@ -143,7 +139,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.JoinLobby();
         // 중복 접속 시도를 막기 위해, 접속 버튼 잠시 비활성화
-        //titleButton.interactable = false;
+        //joinButton.interactable = false;
 
         // 마스터 서버에 접속중이라면
         if (PhotonNetwork.IsConnected)
@@ -169,17 +165,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         if (!PhotonNetwork.IsConnected)
             return;
-        if(txtRoomName.text ==""||txtRoomName.text==null)
-        {
-            GetComponent<RoomPanel>().ErrorRoomName();
-            return;
-        }
-        else
-        {
-            PhotonNetwork.CreateRoom(teamSelect.options[teamSelect.value].text + "/" + txtRoomName.text + "_" + txtRoomPassword.text
-            , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
-        }
 
+            PhotonNetwork.CreateRoom(teamSelect.options[teamSelect.value].text + "/" + txtRoomName.text + "_" + txtRoomPassword.text
+                        , new RoomOptions { MaxPlayers = this.maxPlayer }, TypedLobby.Default);
     }
 
     //패스워드관련
@@ -206,24 +194,25 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         if(PhotonNetwork.PlayerList.Length == 1)
         {
-            if (PhotonNetwork.LocalPlayer.NickName == null || PhotonNetwork.LocalPlayer.NickName == "")
-                PhotonNetwork.NickName = txtUserId.text;
-            else
-                PhotonNetwork.NickName = PhotonNetwork.LocalPlayer.NickName;
+            PhotonNetwork.NickName = txtUserId.text;
         }
+
+
 
         // 접속 상태 표시
         connectionInfoText.text = "방 참가 성공";
         GetComponent<RoomPanel>().OnToggleOff();
+        // 모든 룸 참가자들이 Main 씬을 로드하게 함
+        PhotonNetwork.IsMessageQueueRunning = false;
 
 
         if (teamSelect.value == 0)
         {
-            //ChangePanel(ActivePanel.SOLO);
-            PhotonNetwork.LoadLevel("Room");
+            ChangePanel(ActivePanel.SOLO);
             PhotonNetwork.IsMessageQueueRunning = true;
 
             var value = PhotonNetwork.PlayerList.GetValue(0);
+            Debug.Log("벨류"+value);
         }
         //else if(teamSelect.value == 0)
         //{
@@ -285,9 +274,13 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void OnClickRoom(RoomData roomdata)
     {
+        PhotonNetwork.IsMessageQueueRunning = false;
+
         PhotonNetwork.NickName = txtUserId.text;
 
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
+
+        PhotonNetwork.IsMessageQueueRunning = true;
         PhotonNetwork.JoinRoom(roomdata.roomName, null);
 
         GetComponent<RoomPanel>().OnToggleOff();
@@ -299,18 +292,17 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         else if (check[0] == "개인전")
         {
-            //ChangePanel(ActivePanel.SOLO);
-            PhotonNetwork.LoadLevel("Room");
+            ChangePanel(ActivePanel.SOLO);
         }
         else
             return;
+
     }
 
     public void OnEnterOption()
     {
         ChangePanel(ActivePanel.OPTION);
     }
-
     public void OnReturnTitle()
     {
         GetComponent<RoomPanel>().OnToggleOff();
@@ -330,13 +322,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public void OnLeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
-        ChangePanel(ActivePanel.TITLE);
-        Start();
-    }
-
-    public void DoStart()
-    {
-        Start();
+        ChangePanel(ActivePanel.ROOMS);
     }
 
     public void OnExitGame()
@@ -345,23 +331,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Application.Quit();
     }
 
-    //public void GameStart()
-    //{
-    //    PhotonNetwork.LoadLevel("Map_01");
-    //}
-    public void OnEnterTitle()
+    public void GameStart()
     {
-        if (txtUserId.text == "" || txtUserId.text == null)
-        {
-            GetComponent<RoomPanel>().ErrorNickName();
-            return;
-        }
-        else
-        ChangePanel(ActivePanel.TITLE);
+        PhotonNetwork.LoadLevel("Map_01");
     }
 
     public void Overlap()
     {
+        //PhotonNetwork.LeaveRoom();
+        //ChangePanel(ActivePanel.ROOMS);
         GetComponent<RoomPanel>().OnWarning();
     }
 
