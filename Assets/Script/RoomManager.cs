@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class RoomManager : MonoBehaviourPunCallbacks
-{
+{ 
     public void LeaveRoom()
     {
         PhotonNetwork.LeaveRoom();
