@@ -259,20 +259,20 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnTriggerEnter(Collider other)
     {
-        //BLOCK이라는 태그를 가진 오브젝트와 닿았을 때
-        if (other.CompareTag("BLOCK") && !isDie)
-        {
-            speed = 5.0f;
-        }
+    //    //BLOCK이라는 태그를 가진 오브젝트와 닿았을 때
+    //    if (other.CompareTag("BLOCK") && !isDie)
+    //    {
+    //        speed = 5.0f;
+    //    }
     }
 
     public void OnTriggerExit(Collider other)
     {
-        //BLOCK이라는 태그를 가진 오브젝트에 나갔을 때
-        if (other.CompareTag("BLOCK") && !isDie)
-        {
-            speed = 10.0f;
-        }
+        ////BLOCK이라는 태그를 가진 오브젝트에 나갔을 때
+        //if (other.CompareTag("BLOCK") && !isDie)
+        //{
+        //    speed = 10.0f;
+        //}
     }
 
     public void Dead()

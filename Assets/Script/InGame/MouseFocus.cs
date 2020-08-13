@@ -27,6 +27,7 @@ public class MouseFocus : MonoBehaviourPunCallbacks
             {
                 //NorayMouse();
                 LookMouse();
+                Debug.Log("Look");
             }
         }
 

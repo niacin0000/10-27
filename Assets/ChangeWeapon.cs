@@ -5,27 +5,32 @@ using UnityEngine;
 
 public class ChangeWeapon : MonoBehaviourPunCallbacks
 {
-    public GameObject Soul, Espadon, Shield, Staff, Sword;
-
+    //public GameObject Soul, Espadon, Shield, Staff, Sword;
+    private bool bungsin = false;
 
 
     public void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("ESPA"))
+        if(collision.collider.CompareTag("ESPA") && !bungsin)
         {
             photonView.RPC("Change_E", RpcTarget.AllViaServer, null);
+            bungsin = true;
+
         }
-        else if (collision.collider.CompareTag("SHIELD"))
+        else if (collision.collider.CompareTag("SHIELD") && !bungsin)
         {
             photonView.RPC("Change_Shi", RpcTarget.AllViaServer, null);
+            bungsin = true;
         }
-        else if (collision.collider.CompareTag("STAFF"))
+        else if (collision.collider.CompareTag("STAFF") && !bungsin)
         {
             photonView.RPC("Change_Sta", RpcTarget.AllViaServer, null);
+            bungsin = true;
         }
-        else if (collision.collider.CompareTag("SWORD"))
+        else if (collision.collider.CompareTag("SWORD") && !bungsin)
         {
             photonView.RPC("Change_Swo", RpcTarget.AllViaServer, null);
+            bungsin = true;
         }
 
     }
@@ -40,7 +45,7 @@ public class ChangeWeapon : MonoBehaviourPunCallbacks
         transform.Find("Staff").gameObject.SetActive(false);
         transform.Find("Sword").gameObject.SetActive(false);
 
-        transform.Find("Espadon").gameObject.tag = "ROBO";
+        //transform.Find("Espadon").gameObject.tag = "ROBO";
 
         Destroy(GameObject.FindGameObjectWithTag("ESPA"));
     }
@@ -54,7 +59,7 @@ public class ChangeWeapon : MonoBehaviourPunCallbacks
         transform.Find("Staff").gameObject.SetActive(false);
         transform.Find("Sword").gameObject.SetActive(false);
 
-        transform.Find("Shield").gameObject.tag = "ROBO";
+        //transform.Find("Shield").gameObject.tag = "ROBO";
 
         Destroy(GameObject.FindGameObjectWithTag("SHIELD"));
     }
@@ -68,7 +73,7 @@ public class ChangeWeapon : MonoBehaviourPunCallbacks
         transform.Find("Staff").gameObject.SetActive(true);
         transform.Find("Sword").gameObject.SetActive(false);
 
-        transform.Find("Staff").gameObject.tag = "ROBO";
+        //transform.Find("Staff").gameObject.tag = "ROBO";
 
         Destroy(GameObject.FindGameObjectWithTag("STAFF"));
     }
@@ -82,7 +87,7 @@ public class ChangeWeapon : MonoBehaviourPunCallbacks
         transform.Find("Staff").gameObject.SetActive(false);
         transform.Find("Sword").gameObject.SetActive(true);
 
-        transform.Find("Sword").gameObject.tag = "ROBO";
+        //transform.Find("Sword").gameObject.tag = "ROBO";
 
         Destroy(GameObject.FindGameObjectWithTag("SWORD"));
     }
