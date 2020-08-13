@@ -9,6 +9,11 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Button StartButton;
 
+    private void Start()
+    {
+        print(1);
+        CheckNick();
+    }
     private void Update()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -31,4 +36,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.LoadLevel("Map_01");
     }
+
+    void CheckNick()
+    {
+        for (int i = 0; i < PhotonNetwork.PlayerList.Length - 1; i++)
+        {
+            if (PhotonNetwork.PlayerList[i].NickName == PhotonNetwork.NickName)
+            {
+                //PhotonNetwork.NickName = txtUserId.text + "("+i+")";
+                LeaveRoom();
+            }
+            else
+                print(PhotonNetwork.PlayerList[i].NickName);
+        }
+    }
+
 }

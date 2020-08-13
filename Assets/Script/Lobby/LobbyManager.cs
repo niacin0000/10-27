@@ -220,15 +220,15 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             PhotonNetwork.IsMessageQueueRunning = true;
 
         //중복닉네임 확인
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length - 1; i++)
-        {
-            if (PhotonNetwork.PlayerList[i].NickName == txtUserId.text && PhotonNetwork.PlayerList.Length > 1)
-            {
-                //PhotonNetwork.NickName = txtUserId.text + "("+i+")";
-                OnLeaveRoom();
-                Overlap();
-            }
-        }
+        //for (int i = 0; i < PhotonNetwork.PlayerList.Length - 1; i++)
+        //{
+        //    if (PhotonNetwork.PlayerList[i].NickName == txtUserId.text && PhotonNetwork.PlayerList.Length > 1)
+        //    {
+        //        //PhotonNetwork.NickName = txtUserId.text + "("+i+")";
+        //        OnLeaveRoom();
+        //        Overlap();
+        //    }
+        //}
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
@@ -332,7 +332,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             return;
         }
         else
-        ChangePanel(ActivePanel.TITLE);
+        {
+            PhotonNetwork.NickName = txtUserId.text;
+            ChangePanel(ActivePanel.TITLE);
+        }
     }
 
     public void Overlap()
@@ -340,4 +343,8 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         GetComponent<RoomPanel>().OnWarning();
     }
 
+    public void ChangeNick()
+    {
+        ChangePanel(ActivePanel.INTRO);
+    }
 }
