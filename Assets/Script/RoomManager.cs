@@ -8,13 +8,11 @@ using UnityEngine.UI;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Button StartButton;
+    private bool isLoading = true;
 
-    private void Start()
-    {
-        print(1);
-        CheckNick();
-    }
-    private void Update()
+
+
+    public void Update()
     {
         if (PhotonNetwork.IsMasterClient)
         {
@@ -23,6 +21,19 @@ public class RoomManager : MonoBehaviourPunCallbacks
         else
         {
             StartButton.interactable = false;
+        }
+
+        if (isLoading)
+        {
+            if (PhotonNetwork.CurrentRoom == null)
+            {
+                return;
+            }
+            else
+            {
+                CheckNick();
+                isLoading = false;
+            }
         }
     }
     public void LeaveRoom()
@@ -39,11 +50,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
 
     void CheckNick()
     {
-        for (int i = 0; i < PhotonNetwork.PlayerList.Length - 1; i++)
+        for (int i = 0; i < PhotonNetwork.CurrentRoom.PlayerCount-1; i++)
         {
             if (PhotonNetwork.PlayerList[i].NickName == PhotonNetwork.NickName)
             {
-                //PhotonNetwork.NickName = txtUserId.text + "("+i+")";
                 LeaveRoom();
             }
             else
