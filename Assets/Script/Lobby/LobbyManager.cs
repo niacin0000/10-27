@@ -68,18 +68,16 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     // 게임 실행과 동시에 마스터 서버 접속 시도
     private void Start()
     {
-        if(PhotonNetwork.LocalPlayer.NickName == null || PhotonNetwork.LocalPlayer.NickName == "")
+        if(PhotonNetwork.NickName == null || PhotonNetwork.NickName == "")
         {
             ChangePanel(ActivePanel.INTRO);
-            print(PhotonNetwork.LocalPlayer.NickName);
         }
-        print(PhotonNetwork.LocalPlayer.NickName);
         // 접속에 필요한 정보(게임 버전) 설정
         PhotonNetwork.GameVersion = gameVersion;
         // 설정한 정보를 가지고 마스터 서버 접속 시도
         PhotonNetwork.ConnectUsingSettings();
 
-        txtUserId.text = PlayerPrefs.GetString("USER_ID", "USER_Chan");
+        //txtUserId.text = PlayerPrefs.GetString("USER_ID", null);
         txtRoomName.text = PlayerPrefs.GetString("ROOM_NAME", "ROOM_Chan");
         // 룸 접속 버튼을 잠시 비활성화
         titleButton.interactable = false;
@@ -195,9 +193,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.GameVersion = this.gameVersion;
         //PhotonNetwork.PlayerList[0].NickName == PhotonNetwork.NickName)
+        PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
 
 
-        if(PhotonNetwork.PlayerList.Length == 1)
+        if (PhotonNetwork.PlayerList.Length == 1)
         {
             if (PhotonNetwork.LocalPlayer.NickName == null || PhotonNetwork.LocalPlayer.NickName == "")
                 PhotonNetwork.NickName = txtUserId.text;
@@ -278,8 +277,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
     void OnClickRoom(RoomData roomdata)
     {
-        PhotonNetwork.NickName = txtUserId.text;
-
         PlayerPrefs.SetString("USER_ID", PhotonNetwork.NickName);
         PhotonNetwork.JoinRoom(roomdata.roomName, null);
 
