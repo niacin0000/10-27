@@ -27,7 +27,7 @@ MonoBehaviour:
     AuthMode: 0
     EnableLobbyStatistics: 0
     NetworkLogging: 1
-  DevRegion: kr
+  DevRegion: 
   PunLogging: 0
   EnableSupportLogger: 0
   RunInBackground: 1
@@ -38,6 +38,7 @@ MonoBehaviour:
   - Change_Sta
   - Change_Swo
   - ClickRpc
+  - CreateExplosion
   - Dash_Pun
   - Destroy_Me
   - DestroyRpc
@@ -52,7 +53,6 @@ MonoBehaviour:
   - RespawnSpaceship
   - selfDamage
   - setBuff
-  - CreateExplosion
   DisableAutoOpenWizard: 1
   ShowSettings: 0
-  DevRegionSetOnce: 1
+  DevRegionSetOnce: 0
