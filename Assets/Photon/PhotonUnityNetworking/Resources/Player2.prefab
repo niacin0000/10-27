@@ -28307,6 +28307,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f67401241d5ebe346a567e8da9fff6f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Soul: {fileID: 0}
+  Espadon: {fileID: 0}
+  Shield: {fileID: 0}
+  Staff: {fileID: 0}
+  Sword: {fileID: 0}
 --- !u!1 &5201393313083201349
 GameObject:
   m_ObjectHideFlags: 0

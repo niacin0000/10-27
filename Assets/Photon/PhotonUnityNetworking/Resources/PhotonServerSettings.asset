@@ -46,12 +46,12 @@ MonoBehaviour:
   - EndFire
   - EndFocus
   - Fire
+  - HitColor
   - HPbarUpdate
+  - OriginalColor
   - RespawnSpaceship
   - selfDamage
   - setBuff
-  - HitColor
-  - OriginalColor
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 1
