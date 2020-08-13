@@ -13,9 +13,6 @@ GameObject:
   - component: {fileID: 2647436393779974796}
   - component: {fileID: 2647436393768402828}
   - component: {fileID: 6809944913743563716}
-  - component: {fileID: 6270569872557610944}
-  - component: {fileID: 3643320622746676957}
-  - component: {fileID: 1050233171291531416}
   m_Layer: 0
   m_Name: Staff_1
   m_TagString: STAFF
@@ -117,53 +114,3 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4300000, guid: 4f2db797af4e6c7428de6463b59ba904, type: 3}
---- !u!114 &6270569872557610944
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647436393777777740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 410fd883a4f182143a42a738768fecfd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  turnspeed: 2
---- !u!114 &3643320622746676957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647436393777777740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SynchronizePosition: 1
-  m_SynchronizeRotation: 1
-  m_SynchronizeScale: 0
---- !u!114 &1050233171291531416
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2647436393777777740}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ObservedComponentsFoldoutOpen: 1
-  Group: 0
-  prefixField: -1
-  Synchronization: 3
-  OwnershipTransfer: 0
-  ObservedComponents:
-  - {fileID: 3643320622746676957}
-  viewIdField: 0
-  InstantiationId: 0
-  isRuntimeInstantiated: 0

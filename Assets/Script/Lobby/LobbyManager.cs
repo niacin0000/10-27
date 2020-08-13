@@ -96,14 +96,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
             OnPasswordCheck();
         }
 
-        if (PhotonNetwork.IsMasterClient)
-        {
-            StartButton.interactable = true;
-        }
-        else
-        {
-            StartButton.interactable = false;
-        }
+        
 
     }
 

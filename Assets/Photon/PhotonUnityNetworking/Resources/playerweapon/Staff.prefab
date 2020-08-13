@@ -58,15 +58,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1395941903452853660}
     m_Modifications:
-    - target: {fileID: 1050233171291531416, guid: 749bb60bf683bfa4bbf69d9da6f82232,
-        type: 3}
-      propertyPath: viewIdField
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2647436393777777740, guid: 749bb60bf683bfa4bbf69d9da6f82232,
         type: 3}
       propertyPath: m_Name
-      value: Staff
+      value: Staff_1
       objectReference: {fileID: 0}
     - target: {fileID: 2647436393777777740, guid: 749bb60bf683bfa4bbf69d9da6f82232,
         type: 3}
