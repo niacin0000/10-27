@@ -6716,7 +6716,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d43ecdc8e0b514459687574871598c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  userId: YouRang
   maxPlayer: 4
   connectionInfoText: {fileID: 908939779}
   joinButton: {fileID: 88197242}
@@ -6726,8 +6725,6 @@ MonoBehaviour:
   - {fileID: 1559033127}
   - {fileID: 825091045}
   - {fileID: 261710982}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 2128847987}
   teamSelect: {fileID: 1414138866}
   txtUserId: {fileID: 1273770442}

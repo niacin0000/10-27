@@ -15,13 +15,10 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         TITLE = 0,
         ROOMS = 1,
         OPTION = 2,
-        SOLO = 3,
-        TEAM = 4,
-        INTRO = 5,
+        INTRO = 3,
     }
     private string gameVersion = "1"; // 게임 버전
-    public string userId = "YouRang";
-    public byte maxPlayer = 20;
+    public byte maxPlayer = 4;
 
     public Text connectionInfoText; // 네트워크 정보를 표시할 텍스트
     public Button joinButton; // 게임로비 접속 버튼
@@ -93,9 +90,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         {
             OnPasswordCheck();
         }
-
-        
-
     }
 
     private void ChangePanel(ActivePanel panel)
@@ -282,12 +276,12 @@ public class LobbyManager : MonoBehaviourPunCallbacks
 
         GetComponent<RoomPanel>().OnToggleOff();
         string[] check = roomdata.roomName.Split(new char[] { '/' });
-        if (check[0] == "팀전")
-        {
-            ChangePanel(ActivePanel.TEAM);
-        }
+        //if (check[0] == "팀전")
+        //{
+        //    ChangePanel(ActivePanel.TEAM);
+        //}
 
-        else if (check[0] == "개인전")
+        if (check[0] == "개인전")
         {
             //ChangePanel(ActivePanel.SOLO);
             PhotonNetwork.LoadLevel("Room");
@@ -330,10 +324,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         Application.Quit();
     }
 
-    //public void GameStart()
-    //{
-    //    PhotonNetwork.LoadLevel("Map_01");
-    //}
     public void OnEnterTitle()
     {
         if (txtUserId.text == "" || txtUserId.text == null)
