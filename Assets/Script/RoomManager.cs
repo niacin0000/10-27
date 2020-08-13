@@ -2,11 +2,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Button StartButton;
+
     private void Update()
     {
         if (PhotonNetwork.IsMasterClient)
@@ -20,9 +22,10 @@ public class RoomManager : MonoBehaviourPunCallbacks
     }
     public void LeaveRoom()
     {
-        PhotonNetwork.LeaveRoom();
-        PhotonNetwork.LoadLevel("Lobby");
+        PhotonNetwork.Disconnect();
+        SceneManager.LoadSceneAsync("Lobby");
     }
+
 
     public void GameStart()
     {

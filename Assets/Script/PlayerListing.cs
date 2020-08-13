@@ -16,36 +16,10 @@ public class PlayerListing : MonoBehaviourPunCallbacks
 
     public bool TeamRedBlu;
 
-
-    private void Start()
-    {
-        GameObject.Find("Button - Switch").GetComponent<Button>().onClick.AddListener(
-    delegate
-    {
-        SwitchTeam();
-    });
-    }
-
     public void SetPlayerInfo(Player player, bool RedBlu)
     {
         Player = player;
         _text.text = player.NickName;
         TeamRedBlu = RedBlu;
-    }
-
-    public void SwitchTeam()
-    {
-            if (TeamRedBlu == true)
-            {
-                this.TeamRedBlu = false;
-                Debug.Log("false");
-            }
-            else if (TeamRedBlu == false)
-            {
-                this.TeamRedBlu = true;
-                Debug.Log("true");
-            }
-            else
-                return;
     }
 }
