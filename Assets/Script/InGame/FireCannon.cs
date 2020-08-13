@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.UIElements;
 
 public class FireCannon : MonoBehaviourPunCallbacks
 {
 
     public Animator animator;
-    public GameObject parent;
     public bool attacking = false;
+    public GameObject firevector, fireball, explosion;
+    private GameObject fired_fireball;
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
-        animator = parent.GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -29,6 +30,7 @@ public class FireCannon : MonoBehaviourPunCallbacks
                 photonView.RPC("Fire", RpcTarget.AllViaServer, null);
                 attacking = true;
                 Invoke("EndFireRPC", 3f);
+                Invoke("Explosion", 0.95f);
                 Debug.Log("fire");
             }
 
@@ -41,8 +43,9 @@ public class FireCannon : MonoBehaviourPunCallbacks
     [PunRPC]
     void Fire()
     {
-        //Instantiate(cannon, firePos.position, firePos.rotation);
         animator.SetBool("IsAttack", true);
+        Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+
         //Debug.Log(animator.GetBool("IsAttack"));
         //Debug.Log("총쏨");
 
@@ -61,4 +64,21 @@ public class FireCannon : MonoBehaviourPunCallbacks
 
         attacking = false;
     }
+
+
+
+    public void Explosion()
+    {
+
+        photonView.RPC("CreateExplosion", RpcTarget.AllViaServer, null);
+    }
+
+    [PunRPC]
+    public void CreateExplosion()
+    {
+        fired_fireball = GameObject.Find("Magic fire pro orange(Clone)").gameObject;
+
+        Instantiate(explosion, fired_fireball.transform.position, fired_fireball.transform.rotation);
+    }
+
 }

@@ -63,6 +63,11 @@ PrefabInstance:
       propertyPath: viewIdField
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 919750774439680946, guid: 5c565b93aefd9584795bf7f847c1f508,
+        type: 3}
+      propertyPath: ObservedComponents.Array.data[0]
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 4270499841059617567, guid: 5c565b93aefd9584795bf7f847c1f508,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -138,7 +143,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6269108224509714307, guid: 5c565b93aefd9584795bf7f847c1f508, type: 3}
+    - {fileID: 336042480425835114, guid: 5c565b93aefd9584795bf7f847c1f508, type: 3}
+    - {fileID: 919750774439680946, guid: 5c565b93aefd9584795bf7f847c1f508, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5c565b93aefd9584795bf7f847c1f508, type: 3}
 --- !u!4 &618541113431398493 stripped
 Transform:
