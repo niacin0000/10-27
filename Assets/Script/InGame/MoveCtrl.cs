@@ -44,8 +44,11 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     public GameObject Me, Mouse_Vector;
     int start_time = 0;
 
-    public GameObject Espadon;
-    private Color Original_Color_Es;
+    public GameObject Espadon, Shield, Staff, Sword;    //무기
+    public bool Es_active = false, Sh_active = false, St_active = false, Sw_active = false;    //집은무기 확인
+    private Color Original_Color_St, Original_Color_Es, Original_Color_Sw, Original_Color_Sh;   //무기 색
+
+    private bool hittime = true;    //무적
 
     private void Awake()
     {
@@ -68,7 +71,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
         nickName.text = photonView.Owner.NickName; //닉네임가져오기
 
+        Original_Color_St = Staff.GetComponent<MeshRenderer>().material.color;
         Original_Color_Es = Espadon.GetComponent<MeshRenderer>().material.color;
+        Original_Color_Sw = Sword.GetComponent<MeshRenderer>().material.color;
+        Original_Color_Sh = Shield.GetComponent<MeshRenderer>().material.color;
 
     }
 
@@ -143,8 +149,25 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         //대쉬포인트바 업데이트
         photonView.RPC("DPbarUpdate", RpcTarget.AllViaServer, null);
 
+        if (transform.Find("Staff").gameObject.activeSelf == true)
+        {
+            St_active = true;
+        }
+        if (transform.Find("Espadon").gameObject.activeSelf == true)
+        {
+            Es_active = true;
+        }
+        if (transform.Find("Sword").gameObject.activeSelf == true)
+        {
+            Sw_active = true;
+        }
+        if (transform.Find("Shield").gameObject.activeSelf == true)
+        {
+            Sh_active = true;
+        }
 
 
+        //Debug.Log(transform.Find("Espadon").GetComponent<Animator>().GetBool("IsAttack"));
     }
 
 
@@ -259,11 +282,45 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     public void OnTriggerEnter(Collider other)
     {
-    //    //BLOCK이라는 태그를 가진 오브젝트와 닿았을 때
-    //    if (other.CompareTag("BLOCK") && !isDie)
-    //    {
-    //        speed = 5.0f;
-    //    }
+        //FIREBALL 이라는 태그를 가진 오브젝트와 닿았을 때
+        if (other.CompareTag("FIREBALL") && !isDie && hittime && St_active == false)
+        {
+            hittime = false;
+            Invoke("hittimer", 3f);
+            Knockback();
+            photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
+        }
+
+        //ESPA 이라는 태그를 가진 오브젝트와 닿았을 때
+        if (other.CompareTag("ESPA") && !isDie && hittime && Es_active == false
+            && other.transform.parent.GetComponent<Animator>().GetBool("IsAttack"))
+        {
+            hittime = false;
+            Invoke("hittimer", 3f);
+            Knockback();
+            photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
+        }
+
+        //SWORD 이라는 태그를 가진 오브젝트와 닿았을 때
+        if (other.CompareTag("SWORD") && !isDie && hittime && Sw_active == false
+            && other.transform.parent.GetComponent<Animator>().GetBool("IsAttack"))
+        {
+            hittime = false;
+            Invoke("hittimer", 3f);
+            Knockback();
+            photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
+        }
+
+        //SHIELD 이라는 태그를 가진 오브젝트와 닿았을 때
+        if (other.CompareTag("SHIELD") && !isDie && hittime && Sh_active == false
+            && other.transform.parent.GetComponent<Animator>().GetBool("IsAttack"))
+        {
+            hittime = false;
+            Invoke("hittimer", 3f);
+            Knockback();
+            photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
+        }
+
     }
 
     public void OnTriggerExit(Collider other)
@@ -292,14 +349,20 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     }
 
+
+    public void hittimer()
+    {
+        hittime = true;
+    }
+
     public void Knockback()
     {
         this.transform.position += -Mouse_Vector.transform.forward * 200 * Time.deltaTime;
         photonView.RPC("HitColor", RpcTarget.AllViaServer, null);
-        Invoke("HitTimer_Original", 3);
+        Invoke("HitTimer_Originalcolor", 3f);
     }
 
-    public void HitTimer_Original()
+    public void HitTimer_Originalcolor()
     {
         photonView.RPC("OriginalColor", RpcTarget.AllViaServer, null);
     }
@@ -308,13 +371,52 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     public void HitColor()
     {
-        Espadon.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+        if(St_active)
+        {
+            Staff.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+        }
+        if (Es_active)
+        {
+            Espadon.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+        }
+        if (Sw_active)
+        {
+            Sword.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+        }
+        if (Sh_active)
+        {
+            Shield.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+        }
     }
 
     [PunRPC]
     public void OriginalColor()
     {
-        Espadon.GetComponent<MeshRenderer>().material.color = Original_Color_Es;
+        if (St_active)
+        {
+            Staff.GetComponent<MeshRenderer>().material.color = Original_Color_St;
+        }
+        if (Es_active)
+        {
+            Espadon.GetComponent<MeshRenderer>().material.color = Original_Color_Es;
+        }
+        if (Sw_active)
+        {
+            Sword.GetComponent<MeshRenderer>().material.color = Original_Color_Sw;
+        }
+        if (Sh_active)
+        {
+            Shield.GetComponent<MeshRenderer>().material.color = Original_Color_Sh;
+        }
     }
+
+
+    [PunRPC]
+    public void Hit_Fireball()
+    {
+        this.currHP -= 5;
+    }
+
+
 
 }
