@@ -9,8 +9,9 @@ public class FireCannon : MonoBehaviourPunCallbacks
 
     public Animator animator;
     public bool attacking = false;
-    public GameObject firevector, fireball, explosion;
+    public GameObject firevector, fireball, explosion, player;
     private GameObject fired_fireball;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -30,8 +31,11 @@ public class FireCannon : MonoBehaviourPunCallbacks
                 photonView.RPC("Fire", RpcTarget.AllViaServer, null);
                 attacking = true;
                 Invoke("EndFireRPC", 3f);
-                Invoke("Explosion", 0.95f);
-                Debug.Log("fire");
+                if (player.GetComponent<MoveCtrl>().St_active)
+                {
+                    Invoke("Explosion", 0.95f);
+                }
+
             }
 
 
@@ -44,7 +48,10 @@ public class FireCannon : MonoBehaviourPunCallbacks
     void Fire()
     {
         animator.SetBool("IsAttack", true);
-        Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+        if(player.GetComponent<MoveCtrl>().St_active)
+        {
+            Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+        }
 
         //Debug.Log(animator.GetBool("IsAttack"));
         //Debug.Log("총쏨");
@@ -55,6 +62,8 @@ public class FireCannon : MonoBehaviourPunCallbacks
     void EndFireRPC()
     {
         photonView.RPC("EndFire", RpcTarget.AllViaServer, null);
+        attacking = false;
+
     }
 
     [PunRPC]
@@ -62,14 +71,12 @@ public class FireCannon : MonoBehaviourPunCallbacks
     {
         animator.SetBool("IsAttack", false);
 
-        attacking = false;
     }
 
 
 
     public void Explosion()
     {
-
         photonView.RPC("CreateExplosion", RpcTarget.AllViaServer, null);
     }
 
