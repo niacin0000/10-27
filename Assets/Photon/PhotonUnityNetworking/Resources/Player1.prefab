@@ -23729,6 +23729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7ca7f8036074464abc066095fe0a486, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  t_Damage: 0
   speed: 10
   nickName: {fileID: 7367761870395035518}
   hpbar: {fileID: 325893535385833147}

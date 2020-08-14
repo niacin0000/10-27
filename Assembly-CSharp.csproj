@@ -93,6 +93,7 @@
     <Compile Include="Assets\Script\Audio\AudioControl.cs" />
     <Compile Include="Assets\Script\InGame\Bliiboard.cs" />
     <Compile Include="Assets\Script\InGame\Buff.cs" />
+    <Compile Include="Assets\Script\InGame\CameraShake.cs" />
     <Compile Include="Assets\Script\InGame\Cannon.cs" />
     <Compile Include="Assets\Script\InGame\FireCannon.cs" />
     <Compile Include="Assets\Script\InGame\GameMgr.cs" />
@@ -112,6 +113,7 @@
     <Compile Include="Assets\Script\PlayerListing.cs" />
     <Compile Include="Assets\Script\PlayerListingsMenu.cs" />
     <Compile Include="Assets\Script\RoomManager.cs" />
+    <Compile Include="Assets\Script\animation.cs" />
     <Compile Include="Assets\destroyme.cs" />
     <None Include="Assets\Sound\sound effect\효과음.txt" />
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

@@ -15,6 +15,8 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 {
     private float h, v; //이동에 쓰는코드 (위아래, 좌우)
     private Transform tr, tr_f; //오브젝트의 트랜스폼, foot의 트랜스폼
+    public bool t_Damage = false;
+
     private Rigidbody rb;
     private Vector3 foot_v;
 
@@ -165,7 +167,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void selfDamage()
     {
-        this.currHP -= 20;
+        this.currHP -= 1;
     }
 
     [PunRPC]
@@ -294,6 +296,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Knockback()
     {
+        t_Damage = true;
         this.transform.position += -Mouse_Vector.transform.forward * 200 * Time.deltaTime;
         photonView.RPC("HitColor", RpcTarget.AllViaServer, null);
         Invoke("HitTimer_Original", 3);
