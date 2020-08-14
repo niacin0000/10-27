@@ -47,6 +47,7 @@ MonoBehaviour:
   - EndFire
   - EndFocus
   - Fire
+  - Hit_Fireball
   - HitColor
   - HPbarUpdate
   - OriginalColor

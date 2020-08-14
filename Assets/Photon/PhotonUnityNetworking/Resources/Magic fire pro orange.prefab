@@ -19030,9 +19030,10 @@ GameObject:
   - component: {fileID: 2149602420576943236}
   - component: {fileID: 6939172795649354054}
   - component: {fileID: 6415895940115416181}
+  - component: {fileID: 4029681980139381547}
   m_Layer: 0
   m_Name: Magic fire pro orange
-  m_TagString: Untagged
+  m_TagString: FIREBALL
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -23792,6 +23793,7 @@ MonoBehaviour:
   speed: 20
   timeText: {fileID: 0}
   explosion: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
+  staff: {fileID: 0}
 --- !u!114 &6939172795649354054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23829,3 +23831,16 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!65 &4029681980139381547
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1725317912486240}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1206621, y: 1.9635837, z: 1.1392207}
+  m_Center: {x: 0.058078587, y: 0.3252082, z: -0.08021617}

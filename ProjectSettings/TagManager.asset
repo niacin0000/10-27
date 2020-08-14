@@ -12,6 +12,7 @@ TagManager:
   - SHIELD
   - STAFF
   - SWORD
+  - FIREBALL
   layers:
   - Default
   - TransparentFX

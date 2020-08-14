@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using UnityEngine.UIElements;
+using UnityEngine.Audio;
 
 public class FireCannon : MonoBehaviourPunCallbacks
 {
 
     public Animator animator;
+    public AudioClip[] audioClips;
+    AudioSource audiosource;
+    public AudioMixerGroup audioMixerGroup;
     public bool attacking = false;
-    public GameObject firevector, fireball, explosion;
+    public GameObject firevector, fireball, explosion, player;
     private GameObject fired_fireball;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         animator = GetComponent<Animator>();
+        audiosource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -25,13 +31,15 @@ public class FireCannon : MonoBehaviourPunCallbacks
 
         if (photonView.IsMine)
         {
-            if (Input.GetMouseButtonDown(1))
+            if (attacking == false && Input.GetMouseButtonDown(1))
             {
                 photonView.RPC("Fire", RpcTarget.AllViaServer, null);
                 attacking = true;
-                Invoke("EndFireRPC", 3f);
-                Invoke("Explosion", 0.95f);
-                Debug.Log("fire");
+                if (player.GetComponent<MoveCtrl>().St_active)
+                {
+                    Invoke("Explosion", 0.95f);
+                }
+
             }
 
 
@@ -44,17 +52,39 @@ public class FireCannon : MonoBehaviourPunCallbacks
     void Fire()
     {
         animator.SetBool("IsAttack", true);
-        Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+        if(player.GetComponent<MoveCtrl>().St_active)
+        {
+            Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+        }
 
         //Debug.Log(animator.GetBool("IsAttack"));
         //Debug.Log("총쏨");
 
     }
 
+    void OnAttack()
+    {
+        audiosource.clip = audioClips[0];
+        audiosource.outputAudioMixerGroup = audioMixerGroup;
+        audiosource.Play();
+        audiosource.loop = false;
 
-    void EndFireRPC()
+    }
+
+    void OnAttack1()
+    {
+        audiosource.clip = audioClips[1];
+        audiosource.outputAudioMixerGroup = audioMixerGroup;
+        audiosource.Play();
+        audiosource.loop = false;
+    }
+
+
+    void OnIdle()
     {
         photonView.RPC("EndFire", RpcTarget.AllViaServer, null);
+        attacking = false;
+
     }
 
     [PunRPC]
@@ -62,14 +92,12 @@ public class FireCannon : MonoBehaviourPunCallbacks
     {
         animator.SetBool("IsAttack", false);
 
-        attacking = false;
     }
 
 
 
     public void Explosion()
     {
-
         photonView.RPC("CreateExplosion", RpcTarget.AllViaServer, null);
     }
 
