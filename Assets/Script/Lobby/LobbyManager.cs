@@ -338,11 +338,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         }
     }
 
-    public void Overlap()
-    {
-        GetComponent<RoomPanel>().OnWarning();
-    }
-
     public void ChangeNick()
     {
         ChangePanel(ActivePanel.INTRO);

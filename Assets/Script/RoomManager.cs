@@ -9,11 +9,16 @@ public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Button StartButton;
     public GameObject nameWarrning;
+    public GameObject oPtion;
+
     public Button okButton;
     public bool u_name = false;
     private bool isLoading = true;
 
-
+    public void Start()
+    {
+        GetComponent<Config>().Load();
+    }
 
     public void Update()
     {
@@ -76,6 +81,14 @@ public class RoomManager : MonoBehaviourPunCallbacks
             else
                 print(PhotonNetwork.PlayerList[i].NickName);
         }
+    }
+    public void Option()
+    {
+        oPtion.SetActive(true);
+    }
+    public void OptionClose()
+    {
+        oPtion.SetActive(false);
     }
 
 }

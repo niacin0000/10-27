@@ -42,6 +42,15 @@ public class GameMgr : MonoBehaviourPunCallbacks
     public int screenSize_y = 1080;
     //private bool createPlayer = true;
 
+    void Start()
+    {
+        GetComponent<Config>().Load();
+        // photonNetwork의 데이터 통신을 다시 연결시켜준다. 
+        PhotonNetwork.IsMessageQueueRunning = true;
+        Invoke("CheckPlayerCount", 0f);
+        Invoke("Create", 0.5f);
+    }
+
     public void Update()
     {
         for (int i = 0; i < PhotonNetwork.PlayerList.Length; i++)
@@ -70,16 +79,9 @@ public class GameMgr : MonoBehaviourPunCallbacks
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
         DropWeapon();
     }
-    void Start()
-    {
-        // photonNetwork의 데이터 통신을 다시 연결시켜준다. 
-        PhotonNetwork.IsMessageQueueRunning = true;
-        Invoke("CheckPlayerCount", 0f);
-        Invoke("Create", 0.5f);
-    }
+
 
 
     void Create()

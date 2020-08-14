@@ -6564,7 +6564,7 @@ MonoBehaviour:
   maxPlayer: 4
   connectionInfoText: {fileID: 908939779}
   joinButton: {fileID: 88197242}
-  StartButton: {fileID: 0}
+  StartButton: {fileID: 802237715}
   titleButton: {fileID: 794420047}
   panels:
   - {fileID: 1559033127}
@@ -6643,7 +6643,6 @@ MonoBehaviour:
   panels:
   - {fileID: 1691999074}
   - {fileID: 1447523096}
-  - {fileID: 0}
   - {fileID: 1553232286}
   - {fileID: 440454137}
 --- !u!1 &1354718969

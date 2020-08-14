@@ -35,25 +35,16 @@ public class RoomPanel : MonoBehaviour
 
     public void ErrorRoomName()
     {
-        panels[3].SetActive(true);
+        panels[2].SetActive(true);
     }
     public void ErrorNickName()
     {
-        panels[4].SetActive(true);
+        panels[3].SetActive(true);
     }
-
-    public void OnWarning()
-    {
-        panels[2].SetActive(true);
-    }
-
-
 
     public void Click_OK()
     {
         panels[2].SetActive(false);
         panels[3].SetActive(false);
-        panels[4].SetActive(false);
     }
-
 }
