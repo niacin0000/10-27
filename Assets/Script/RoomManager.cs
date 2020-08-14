@@ -8,6 +8,9 @@ using UnityEngine.UI;
 public class RoomManager : MonoBehaviourPunCallbacks
 {
     public Button StartButton;
+    public GameObject nameWarrning;
+    public Button okButton;
+    public bool u_name = false;
     private bool isLoading = true;
 
 
@@ -40,6 +43,20 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.Disconnect();
         SceneManager.LoadSceneAsync("Lobby");
+
+    }
+
+    private void NameWarnning()
+    {
+        PhotonNetwork.Disconnect();
+        nameWarrning.SetActive(true);
+        okButton.onClick.AddListener
+        (
+            delegate
+            {
+                SceneManager.LoadSceneAsync("Lobby");
+            }
+        );
     }
 
 
@@ -54,7 +71,7 @@ public class RoomManager : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.PlayerList[i].NickName == PhotonNetwork.NickName)
             {
-                LeaveRoom();
+                NameWarnning();
             }
             else
                 print(PhotonNetwork.PlayerList[i].NickName);
