@@ -12,6 +12,7 @@ public class MouseFocus : MonoBehaviourPunCallbacks
 
     Camera cameraFocuse;
 
+
     private void Start()
     {
         tr = GetComponent<Transform>();
@@ -41,8 +42,18 @@ public class MouseFocus : MonoBehaviourPunCallbacks
         if (Physics.Raycast(ray, out hit))
         {
             //Vector3 mouseDir = new Vector3(hit.point.x, transform.position.y+65, hit.point.z) - transform.position;
-            Vector3 mouseDir = new Vector3(hit.point.x, transform.position.y + 50, hit.point.z) - transform.position;
-            this.transform.forward = mouseDir;
+            if(this.name == "Shield")
+            {
+                Vector3 mouseDir = new Vector3(hit.point.x, transform.position.y + 100, hit.point.z) - transform.position;
+                this.transform.forward = mouseDir;
+
+            }
+            else
+            {
+                Vector3 mouseDir = new Vector3(hit.point.x, transform.position.y + 20, hit.point.z) - transform.position;
+                this.transform.forward = mouseDir;
+
+            }
         }
     }
 
