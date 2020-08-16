@@ -9953,7 +9953,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\uB2C9\uB124\uC784\uBCC0\uACBD\uACBD"
+  m_Text: "\uB2C9\uB124\uC784\uBCC0\uACBD\n"
 --- !u!222 &1989812413
 CanvasRenderer:
   m_ObjectHideFlags: 0

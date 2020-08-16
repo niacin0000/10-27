@@ -38,6 +38,7 @@ MonoBehaviour:
   - Change_Sta
   - Change_Swo
   - ClickRpc
+  - CreateAfterImage
   - CreateExplosion
   - Dash_Pun
   - Destroy_Me
@@ -54,7 +55,6 @@ MonoBehaviour:
   - RespawnSpaceship
   - selfDamage
   - setBuff
-  - CreateAfterImage
   - unitGhost
   - WhatTime
   DisableAutoOpenWizard: 1
