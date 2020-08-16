@@ -132,7 +132,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             //이김
             if (GameObject.FindGameObjectsWithTag("Player").Length == 1 && start_time > 15)
             {
-                //Invoke("Win", 3f);
+                Invoke("Win", 3f);
 
             }
 
