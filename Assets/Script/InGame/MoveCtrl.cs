@@ -10,6 +10,7 @@ using UnityStandardAssets.Utility;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.Audio;
 
 public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 {
@@ -51,6 +52,11 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     private Color Original_Color_St, Original_Color_Es, Original_Color_Sw, Original_Color_Sh;   //무기 색
 
     private bool hittime = true;    //무적
+
+    // 오디오 관련 변수
+    public AudioClip[] audioClips;
+    AudioSource audiosource;
+    public AudioMixerGroup audioMixerGroup;
 
     private void Awake()
     {
@@ -289,6 +295,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
+            HitSound();
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
@@ -299,6 +306,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
+            HitSound();
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
@@ -309,6 +317,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
+            HitSound();
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
@@ -319,6 +328,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
+            HitSound();
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
@@ -363,6 +373,38 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         this.transform.position += -Mouse_Vector.transform.forward * 200 * Time.deltaTime;
         photonView.RPC("HitColor", RpcTarget.AllViaServer, null);
         Invoke("HitTimer_Originalcolor", 3f);
+    }
+
+    public void HitSound()
+    {
+        if(Es_active == true)
+        {
+            audiosource.clip = audioClips[0];
+            audiosource.outputAudioMixerGroup = audioMixerGroup;
+            audiosource.Play();
+            audiosource.loop = false;
+        }
+        else if(Sh_active == true)
+        {
+            audiosource.clip = audioClips[1];
+            audiosource.outputAudioMixerGroup = audioMixerGroup;
+            audiosource.Play();
+            audiosource.loop = false;
+        }
+        else if(St_active == true)
+        {
+            audiosource.clip = audioClips[2];
+            audiosource.outputAudioMixerGroup = audioMixerGroup;
+            audiosource.Play();
+            audiosource.loop = false;
+        }
+        else if(Sw_active == true)
+        {
+            audiosource.clip = audioClips[3];
+            audiosource.outputAudioMixerGroup = audioMixerGroup;
+            audiosource.Play();
+            audiosource.loop = false;
+        }
     }
 
     public void HitTimer_Originalcolor()
