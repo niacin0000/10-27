@@ -23748,8 +23748,12 @@ MonoBehaviour:
   Sh_active: 0
   St_active: 0
   Sw_active: 0
-  audioClips: []
-  audioMixerGroup: {fileID: 0}
+  audioClips:
+  - {fileID: 8300000, guid: 5d7384c26e574494f98ae8c3babae951, type: 3}
+  - {fileID: 8300000, guid: 4ccce22219a48fb47b0599e3f1cc8f99, type: 3}
+  - {fileID: 8300000, guid: 396fd4769d8385c49bba90850fe6dd6e, type: 3}
+  audioMixerGroup: {fileID: -7400113140393475869, guid: c24a5663a3daa9c4e973937bcc0ce8b2,
+    type: 2}
   Drop_Es: {fileID: 100000, guid: 351f608cb11a2b24ca73d292d0418611, type: 3}
 --- !u!54 &3151622768602976015
 Rigidbody:
@@ -23801,9 +23805,10 @@ AudioSource:
   m_GameObject: {fileID: 3903107855261561362}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 1
+  OutputAudioMixerGroup: {fileID: -7400113140393475869, guid: c24a5663a3daa9c4e973937bcc0ce8b2,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 4ccce22219a48fb47b0599e3f1cc8f99, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0

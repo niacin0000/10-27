@@ -70,6 +70,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     {
         tr = GetComponent<Transform>();
         rb = GetComponent<Rigidbody>();
+        audiosource = GetComponent<AudioSource>();
 
         if (photonView.IsMine)
         {
@@ -297,7 +298,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
-            HitSound();
+            HitSound_FireBall();
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
@@ -308,7 +309,14 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
-            HitSound();
+            if (Sw_active == true)
+            {
+                HitSound_Metal();
+            }
+            else if (St_active == true || Sh_active == true)
+            {
+                HitSound_Wood();
+            }
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
@@ -319,7 +327,14 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
-            HitSound();
+            if (Es_active == true)
+            {
+                HitSound_Metal();
+            }
+            else if (St_active == true || Sh_active == true)
+            {
+                HitSound_Wood();
+            }
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
@@ -330,12 +345,20 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
-            HitSound();
+            if (Sw_active == true || Es_active == true)
+            {
+                HitSound_Metal();
+            }
+            else if (St_active == true)
+            {
+                HitSound_Wood();
+            }
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
 
     }
+
 
     public void OnTriggerExit(Collider other)
     {
@@ -404,36 +427,28 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         Invoke("HitTimer_Originalcolor", 3f);
     }
 
-    public void HitSound()
+    public void HitSound_FireBall()
     {
-        if(Es_active == true)
-        {
-            audiosource.clip = audioClips[0];
-            audiosource.outputAudioMixerGroup = audioMixerGroup;
-            audiosource.Play();
-            audiosource.loop = false;
-        }
-        else if(Sh_active == true)
-        {
-            audiosource.clip = audioClips[1];
-            audiosource.outputAudioMixerGroup = audioMixerGroup;
-            audiosource.Play();
-            audiosource.loop = false;
-        }
-        else if(St_active == true)
-        {
-            audiosource.clip = audioClips[2];
-            audiosource.outputAudioMixerGroup = audioMixerGroup;
-            audiosource.Play();
-            audiosource.loop = false;
-        }
-        else if(Sw_active == true)
-        {
-            audiosource.clip = audioClips[3];
-            audiosource.outputAudioMixerGroup = audioMixerGroup;
-            audiosource.Play();
-            audiosource.loop = false;
-        }
+        audiosource.clip = audioClips[0];
+        audiosource.outputAudioMixerGroup = audioMixerGroup;
+        audiosource.Play();
+        audiosource.loop = false;
+    }
+
+    public void HitSound_Metal()
+    {
+        audiosource.clip = audioClips[1];
+        audiosource.outputAudioMixerGroup = audioMixerGroup;
+        audiosource.Play();
+        audiosource.loop = false;
+    }
+
+    public void HitSound_Wood()
+    {
+        audiosource.clip = audioClips[2];
+        audiosource.outputAudioMixerGroup = audioMixerGroup;
+        audiosource.Play();
+        audiosource.loop = false;
     }
 
     public void HitTimer_Originalcolor()
