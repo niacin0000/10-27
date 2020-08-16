@@ -15,6 +15,8 @@ public class FireCannon : MonoBehaviourPunCallbacks
     public bool attacking = false;
     public GameObject firevector, fireball, explosion, player;
     private GameObject fired_fireball;
+
+    public float fire_delay = 0.5f;
     
 
     // Start is called before the first frame update
@@ -89,9 +91,14 @@ public class FireCannon : MonoBehaviourPunCallbacks
     void OnIdle()
     {
         photonView.RPC("EndFire", RpcTarget.AllViaServer, null);
-        attacking = false;
-
+        Invoke("attack_false", fire_delay);
     }
+
+    void attack_false()
+    {
+        attacking = false;
+    }
+
 
     [PunRPC]
     void EndFire()
