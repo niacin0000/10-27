@@ -391,13 +391,12 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 PhotonNetwork.Instantiate("Drop_Sw", this.transform.position + Up, this.transform.rotation);
             }
 
-            photonView.RPC("Destroy_Me", RpcTarget.AllViaServer, null);
-            GameObject.Find("GameManager").GetComponent<GameMgr>().Lose_panel();
+            GameObject.Find("Main Camera").GetComponent<SmoothFollow>().Dest();
             Drop = false;
 
+            photonView.RPC("Destroy_Me", RpcTarget.AllViaServer, null);
         }
     }
-
 
 
 

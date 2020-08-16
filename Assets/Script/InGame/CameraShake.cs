@@ -108,4 +108,7 @@ public class CameraShake : MonoBehaviourPunCallbacks
             yield return new WaitForSeconds(0.1f);
         }
     }
+
+
+
 }

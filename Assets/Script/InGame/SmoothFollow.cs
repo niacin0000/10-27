@@ -65,7 +65,21 @@ namespace UnityStandardAssets.Utility
 			transform.position = new Vector3(transform.position.x ,currentHeight , transform.position.z);
 
 			// Always look at the target
+
 			transform.LookAt(target);
 		}
+
+
+		public void Dest()
+		{
+			this.transform.position = new Vector3(75, 75, 40);
+			Invoke("Lose", 3);
+		}
+
+		void Lose()
+        {
+			GameObject.Find("GameManager").GetComponent<GameMgr>().Lose_panel();
+		}
+
 	}
 }
