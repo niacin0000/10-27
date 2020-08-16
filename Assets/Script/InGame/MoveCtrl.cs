@@ -344,14 +344,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
         {
             hittime = false;
             Invoke("hittimer", 3f);
-            if (Sw_active == true || Es_active == true)
-            {
-                HitSound_Metal();
-            }
-            else if (St_active == true)
-            {
-                HitSound_Wood();
-            }
+            HitSound_Wood();
             Knockback();
             photonView.RPC("Hit_Fireball", RpcTarget.AllViaServer, null);
         }
