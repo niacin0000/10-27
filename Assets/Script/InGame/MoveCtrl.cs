@@ -83,10 +83,10 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
         nickName.text = photonView.Owner.NickName; //닉네임가져오기
 
-        Original_Color_St = Staff.GetComponent<MeshRenderer>().material.color;
-        Original_Color_Es = Espadon.GetComponent<MeshRenderer>().material.color;
-        Original_Color_Sw = Sword.GetComponent<MeshRenderer>().material.color;
-        Original_Color_Sh = Shield.GetComponent<MeshRenderer>().material.color;
+        Original_Color_St = Staff.GetComponent<SkinnedMeshRenderer>().material.color;
+        Original_Color_Es = Espadon.GetComponent<SkinnedMeshRenderer>().material.color;
+        Original_Color_Sw = Sword.GetComponent<SkinnedMeshRenderer>().material.color;
+        Original_Color_Sh = Shield.GetComponent<SkinnedMeshRenderer>().material.color;
 
     }
 
@@ -461,19 +461,19 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     {
         if(St_active)
         {
-            Staff.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+            Staff.GetComponent<SkinnedMeshRenderer>().material.color = new Color(255, 255, 255, 0);
         }
         if (Es_active)
         {
-            Espadon.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+            Espadon.GetComponent<SkinnedMeshRenderer>().material.color = new Color(255, 255, 255, 0);
         }
         if (Sw_active)
         {
-            Sword.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+            Sword.GetComponent<SkinnedMeshRenderer>().material.color = new Color(255, 255, 255, 0);
         }
         if (Sh_active)
         {
-            Shield.GetComponent<MeshRenderer>().material.color = new Color(255, 255, 255, 0);
+            Shield.GetComponent<SkinnedMeshRenderer>().material.color = new Color(255, 255, 255, 0);
         }
     }
 
@@ -482,19 +482,19 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     {
         if (St_active)
         {
-            Staff.GetComponent<MeshRenderer>().material.color = Original_Color_St;
+            Staff.GetComponent<SkinnedMeshRenderer>().material.color = Original_Color_St;
         }
         if (Es_active)
         {
-            Espadon.GetComponent<MeshRenderer>().material.color = Original_Color_Es;
+            Espadon.GetComponent<SkinnedMeshRenderer>().material.color = Original_Color_Es;
         }
         if (Sw_active)
         {
-            Sword.GetComponent<MeshRenderer>().material.color = Original_Color_Sw;
+            Sword.GetComponent<SkinnedMeshRenderer>().material.color = Original_Color_Sw;
         }
         if (Sh_active)
         {
-            Shield.GetComponent<MeshRenderer>().material.color = Original_Color_Sh;
+            Shield.GetComponent<SkinnedMeshRenderer>().material.color = Original_Color_Sh;
         }
     }
 
