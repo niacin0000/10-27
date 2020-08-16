@@ -58,6 +58,9 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     AudioSource audiosource;
     public AudioMixerGroup audioMixerGroup;
 
+    public GameObject Drop_Es;
+    private bool Drop = true;
+
     private void Awake()
     {
         //DontDestroyOnLoad(gameObject); //씬변환시 부수지않음
@@ -114,14 +117,13 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
             {
                 photonView.RPC("selfDamage", RpcTarget.AllViaServer, null);
                 Knockback();
+
             }
 
             //쥬금
             if (currHP <= 0)
             {
                 Dead();
-                photonView.RPC("Destroy_Me", RpcTarget.AllViaServer, null);
-                photonView.RPC("DeadCountUp", RpcTarget.AllViaServer, null);
             }
 
             if (start_time < 20)
@@ -196,7 +198,7 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
     [PunRPC]
     void selfDamage()
     {
-        this.currHP -= 1;
+        this.currHP -= 20;
     }
 
     [PunRPC]
@@ -346,8 +348,35 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
 
     public void Dead()
     {
-        GameObject.Find("GameManager").GetComponent<GameMgr>().Lose_panel();
+        if(Drop)
+        {
+            Vector3 Up = new Vector3(0,2,0);
+            if(St_active)
+            {
+                PhotonNetwork.Instantiate("Drop_St", this.transform.position + Up, this.transform.rotation);
+            }
+            else if (Sh_active)
+            {
+                PhotonNetwork.Instantiate("Drop_Sh", this.transform.position + Up, this.transform.rotation);
+            }
+            else if (Es_active)
+            {
+                PhotonNetwork.Instantiate("Drop_Es", this.transform.position + Up, this.transform.rotation);
+            }
+            else if (Sw_active)
+            {
+                PhotonNetwork.Instantiate("Drop_Sw", this.transform.position + Up, this.transform.rotation);
+            }
+
+            photonView.RPC("Destroy_Me", RpcTarget.AllViaServer, null);
+            GameObject.Find("GameManager").GetComponent<GameMgr>().Lose_panel();
+            Drop = false;
+
+        }
     }
+
+
+
 
     public void Win()
     {

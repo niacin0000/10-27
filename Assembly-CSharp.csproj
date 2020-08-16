@@ -95,6 +95,7 @@
     <Compile Include="Assets\Script\InGame\Buff.cs" />
     <Compile Include="Assets\Script\InGame\CameraShake.cs" />
     <Compile Include="Assets\Script\InGame\Cannon.cs" />
+    <Compile Include="Assets\Script\InGame\Drop_Sound.cs" />
     <Compile Include="Assets\Script\InGame\Explosion_Dead.cs" />
     <Compile Include="Assets\Script\InGame\FireCannon.cs" />
     <Compile Include="Assets\Script\InGame\GameMgr.cs" />

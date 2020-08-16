@@ -13,6 +13,7 @@ TagManager:
   - STAFF
   - SWORD
   - FIREBALL
+  - GROUND
   layers:
   - Default
   - TransparentFX

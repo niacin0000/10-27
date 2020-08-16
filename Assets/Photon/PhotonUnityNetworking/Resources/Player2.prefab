@@ -28275,6 +28275,9 @@ MonoBehaviour:
   Sh_active: 0
   St_active: 0
   Sw_active: 0
+  audioClips: []
+  audioMixerGroup: {fileID: 0}
+  Drop_Es: {fileID: 0}
 --- !u!54 &3151622768602976015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28462,6 +28465,7 @@ MonoBehaviour:
   fireball: {fileID: 0}
   explosion: {fileID: 0}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!114 &9199025632448717186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28640,6 +28644,7 @@ MonoBehaviour:
   fireball: {fileID: 0}
   explosion: {fileID: 0}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!114 &6824924098842071190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56830,6 +56835,7 @@ MonoBehaviour:
   fireball: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378, type: 3}
   explosion: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!114 &3974827799093322744
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -57086,6 +57092,7 @@ MonoBehaviour:
   fireball: {fileID: 0}
   explosion: {fileID: 0}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!114 &3269195347590598691
 MonoBehaviour:
   m_ObjectHideFlags: 0

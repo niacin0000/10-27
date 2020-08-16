@@ -23750,6 +23750,7 @@ MonoBehaviour:
   Sw_active: 0
   audioClips: []
   audioMixerGroup: {fileID: 0}
+  Drop_Es: {fileID: 100000, guid: 351f608cb11a2b24ca73d292d0418611, type: 3}
 --- !u!54 &3151622768602976015
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24028,6 +24029,7 @@ MonoBehaviour:
   fireball: {fileID: 0}
   explosion: {fileID: 0}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!114 &5700573120775109827
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42780,6 +42782,7 @@ MonoBehaviour:
   fireball: {fileID: 0}
   explosion: {fileID: 0}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!114 &5913626369040008997
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61780,6 +61783,7 @@ MonoBehaviour:
   fireball: {fileID: 1725317912486240, guid: e55149ba6f4d00741984987e258c3378, type: 3}
   explosion: {fileID: 1845955007268882, guid: 67a684e320da6e7439421a07e3fa265c, type: 3}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!1 &8971542967730177894
 GameObject:
   m_ObjectHideFlags: 0
@@ -62036,6 +62040,7 @@ MonoBehaviour:
   fireball: {fileID: 0}
   explosion: {fileID: 0}
   player: {fileID: 3903107855261561362}
+  fire_delay: 0.5
 --- !u!114 &8223251009841784023
 MonoBehaviour:
   m_ObjectHideFlags: 0
