@@ -37,14 +37,8 @@ public class FireCannon : MonoBehaviourPunCallbacks
             {
                 photonView.RPC("Fire", RpcTarget.AllViaServer, null);
                 attacking = true;
-                if (player.GetComponent<MoveCtrl>().St_active)
-                {
-                    Invoke("Explosion", 0.95f);
-                }
 
             }
-
-
         }
     }
 
@@ -84,6 +78,8 @@ public class FireCannon : MonoBehaviourPunCallbacks
     void OnFireBall()
     {
         Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+        Invoke("Explosion", 0.95f);
+
     }
 
 
