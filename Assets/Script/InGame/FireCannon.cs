@@ -54,7 +54,7 @@ public class FireCannon : MonoBehaviourPunCallbacks
         animator.SetBool("IsAttack", true);
         if(player.GetComponent<MoveCtrl>().St_active)
         {
-            Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+            //*nstantiate(fireball, firevector.transform.position, firevector.transform.rotation);*/
         }
 
         //Debug.Log(animator.GetBool("IsAttack"));
@@ -78,6 +78,12 @@ public class FireCannon : MonoBehaviourPunCallbacks
         audiosource.Play();
         audiosource.loop = false;
     }
+
+    void OnFireBall()
+    {
+        Instantiate(fireball, firevector.transform.position, firevector.transform.rotation);
+    }
+
 
 
     void OnIdle()

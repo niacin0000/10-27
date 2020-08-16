@@ -47,6 +47,11 @@ public class animation : MonoBehaviour
         audiosource.loop = false;
     }
 
+    void OnFireBall()
+    {
+        Debug.Log("fire");
+    }
+
     void OnIdle()
     {
         animator.SetBool("IsAttack", false);
