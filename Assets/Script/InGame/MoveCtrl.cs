@@ -127,13 +127,12 @@ public class MoveCtrl : MonoBehaviourPunCallbacks, IPunObservable
                 Dead();
             }
 
-            if (start_time < 20)
+            if (start_time < 1100)
                 start_time++;
             //이김
-            if (GameObject.FindGameObjectsWithTag("Player").Length == 1 && start_time > 15)
+            if (GameObject.FindGameObjectsWithTag("Player").Length == 1 && start_time > 1000)
             {
                 Invoke("Win", 3f);
-
             }
 
             //Debug.Log(GameObject.FindGameObjectsWithTag("Player").Length + "pla");
