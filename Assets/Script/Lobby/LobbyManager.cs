@@ -46,6 +46,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks
     public int screenSize_x = 1920;
     public int screenSize_y = 1080;
 
+    string roomname;
     private void Awake()
     {
         // photon1과 photon2로 바뀌면서 달라진점 (같은방 동기화)
@@ -74,8 +75,6 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 설정한 정보를 가지고 마스터 서버 접속 시도
         PhotonNetwork.ConnectUsingSettings();
 
-        //txtUserId.text = PlayerPrefs.GetString("USER_ID", null);
-        txtRoomName.text = PlayerPrefs.GetString("ROOM_NAME", "ROOM_Chan");
         // 룸 접속 버튼을 잠시 비활성화
         titleButton.interactable = false;
         //// 접속을 시도 중임을 텍스트로 표시
@@ -130,6 +129,9 @@ public class LobbyManager : MonoBehaviourPunCallbacks
         // 중복 접속 시도를 막기 위해, 접속 버튼 잠시 비활성화
         //titleButton.interactable = false;
 
+        roomname = PhotonNetwork.LocalPlayer.NickName + " 님의 방";
+        //txtUserId.text = PlayerPrefs.GetString("USER_ID", null);
+        txtRoomName.text = PlayerPrefs.GetString("ROOM_NAME", roomname);
         // 마스터 서버에 접속중이라면
         if (PhotonNetwork.IsConnected)
         {

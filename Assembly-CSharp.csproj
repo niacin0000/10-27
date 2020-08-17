@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\ChangeWeapon.cs" />
+    <Compile Include="Assets\Imshicode.cs" />
     <Compile Include="Assets\MouseVector.cs" />
     <Compile Include="Assets\Particle\48 Particle Effect Pack\Script\csDestroyEffect.cs" />
     <Compile Include="Assets\Particle\48 Particle Effect Pack\Script\csMouseOrbit.cs" />
@@ -323,10 +324,10 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.0f1/Editor/Data/Managed/UnityEditor.dll</HintPath>
     </Reference>
     <Reference Include="Photon3Unity3D">
-      <HintPath>D:/10시27분/10-27/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Assets/Photon/PhotonLibs/Photon3Unity3D.dll</HintPath>
     </Reference>
     <Reference Include="websocket-sharp">
-      <HintPath>D:/10시27분/10-27/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Assets/Photon/PhotonLibs/WebSocket/websocket-sharp.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.0f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -674,31 +675,31 @@
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.4.0f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.CollabProxy.Editor">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/Unity.CollabProxy.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-      <HintPath>D:/10시27분/10-27/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+      <HintPath>D:/아 존내하기싫다 씨부엉부엉/Bit/프로젝트/TestPhoton/Project/10-27/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

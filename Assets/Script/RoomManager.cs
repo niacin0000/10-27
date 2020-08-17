@@ -48,7 +48,6 @@ public class RoomManager : MonoBehaviourPunCallbacks
     {
         PhotonNetwork.Disconnect();
         SceneManager.LoadSceneAsync("Lobby");
-
     }
 
     private void NameWarnning()
